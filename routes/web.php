@@ -8,6 +8,7 @@ use App\Http\Controllers\GeoestadisticaController;
 use App\Http\Controllers\RutaController;
 use App\Http\Controllers\PlanoController;
 use App\Http\Controllers\InformacionPostesController;
+use App\Http\Controllers\DescargaController;
 
 Route::get('/login', function () {
     return view('auth.login');
@@ -51,19 +52,23 @@ Route::get('/formPlano/{id_cliente}', [PlanoController::class, 'indexPlano'])->n
 Route::post('/marcar_enviado/{id_cliente}/{seccion}', [PlanoController::class, 'marcarEnviado'])->name('marcar_enviado');
 
 
-
+//SEGUNDA PARTE
 Route::get('/informacion_postes', [InformacionPostesController::class, 'index'])->name('informacion_postes');
 
 
 
-
-
-
-
+//ADMIN: DOCUMENTO
+Route::get('/ver_cliente_documento', [DescargaController::class, 'verClientesDocumento'])->name('ver_cliente_documento');
 
 //cerrar sesion
 Route::get('/salir', 'App\Http\Controllers\Auth\LoginController@salir')->name('salir');
 
+//USUARIO: AZAEL
 //CONTRASEÑA: pAZfpMOV
 //se quitó etiqueta adjunto en la tabla ArchivoAdjunto
 
+//USUARIO:PRUEBA
+//CONTRASEÑA: sx62GN3j
+
+//USUARIO:ADMIN
+//CONTRASEÑA: mjYlKOsE

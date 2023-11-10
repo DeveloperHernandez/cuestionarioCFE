@@ -1,5 +1,4 @@
 @extends('layouts.app') <!-- Asume que tienes una plantilla Blade llamada 'layouts.app' -->
-
 @section('content')
 <div class="container d-flex justify-content-center align-items-center" style="height: 70vh;">
     <div class="login-container">

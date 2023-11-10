@@ -83,7 +83,7 @@
                         <a class="nav-link text-white" href="{{ route('eliminar_usuario') }}">Eliminar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white">Descargar Excel</a>
+                        <a class="nav-link text-white" href="{{ route('ver_cliente_documento') }}">Descargar Excel</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{{route('salir')}}">Cerrar sesión</a>
