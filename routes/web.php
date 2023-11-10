@@ -7,8 +7,13 @@ use App\Http\Controllers\InformacionController;
 use App\Http\Controllers\GeoestadisticaController;
 use App\Http\Controllers\RutaController;
 use App\Http\Controllers\PlanoController;
-use App\Http\Controllers\InformacionPostesController;
 use App\Http\Controllers\DescargaController;
+use App\Http\Controllers\InformacionPostesController;
+use App\Http\Controllers\LineaTroncalController;
+use App\Http\Controllers\LineaDistribucionController;
+use App\Http\Controllers\AccesorioController;
+use App\Http\Controllers\CronogramaController;
+use App\Http\Controllers\EtiquetaController;
 
 Route::get('/login', function () {
     return view('auth.login');
@@ -55,6 +60,16 @@ Route::post('/marcar_enviado/{id_cliente}/{seccion}', [PlanoController::class, '
 //SEGUNDA PARTE
 Route::get('/informacion_postes', [InformacionPostesController::class, 'index'])->name('informacion_postes');
 Route::get('/informacion_postes_equipo', [InformacionPostesEquipoController::class, 'index'])->name('informacion_postes_equipo');
+Route::get('/lineaTroncal', [LineaTroncalController::class, 'index'])->name('lineaTroncal');
+Route::get('/lineaDistribucion', [LineaDistribucionController::class, 'index'])->name('lineaDistribucion');
+Route::get('/accesorios', [AccesorioController::class, 'index'])->name('accesorios');
+Route::get('/cronograma', [CronogramaController::class, 'index'])->name('cronograma');
+Route::get('/etiqueta', [EtiquetaController::class, 'index'])->name('etiqueta');
+
+
+
+
+
 
 
 
@@ -62,16 +77,12 @@ Route::get('/informacion_postes_equipo', [InformacionPostesEquipoController::cla
 Route::get('/ver_cliente_documento', [DescargaController::class, 'verClientesDocumento'])->name('ver_cliente_documento');
 
 
-
-
-
-
-
-
-
-
 //cerrar sesion
 Route::get('/salir', 'App\Http\Controllers\Auth\LoginController@salir')->name('salir');
+
+
+
+
 
 //USUARIO: AZAEL
 //CONTRASEÑA: pAZfpMOV
