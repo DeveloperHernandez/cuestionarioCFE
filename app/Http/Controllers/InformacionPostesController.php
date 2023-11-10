@@ -10,4 +10,10 @@ class InformacionPostesController extends Controller
     {
         return view('InformacionPostes.infraestructura_cfe');
     }
+
+    public function guardarInfraestructuraCfe()
+    {
+
+    }
+
 }

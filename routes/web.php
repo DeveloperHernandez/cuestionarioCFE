@@ -54,11 +54,21 @@ Route::post('/marcar_enviado/{id_cliente}/{seccion}', [PlanoController::class, '
 
 //SEGUNDA PARTE
 Route::get('/informacion_postes', [InformacionPostesController::class, 'index'])->name('informacion_postes');
+Route::get('/informacion_postes_equipo', [InformacionPostesEquipoController::class, 'index'])->name('informacion_postes_equipo');
 
 
 
 //ADMIN: DOCUMENTO
 Route::get('/ver_cliente_documento', [DescargaController::class, 'verClientesDocumento'])->name('ver_cliente_documento');
+
+
+
+
+
+
+
+
+
 
 //cerrar sesion
 Route::get('/salir', 'App\Http\Controllers\Auth\LoginController@salir')->name('salir');
