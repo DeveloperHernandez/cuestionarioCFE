@@ -7,7 +7,7 @@ use App\Http\Controllers\InformacionController;
 use App\Http\Controllers\GeoestadisticaController;
 use App\Http\Controllers\RutaController;
 use App\Http\Controllers\PlanoController;
-
+use App\Http\Controllers\InformacionPostesController;
 
 Route::get('/login', function () {
     return view('auth.login');
@@ -40,13 +40,26 @@ Route::get('/darDeAlta/{id_usuario}', 'App\Http\Controllers\RegistroUsuarioContr
 Route::post('/guardar_informacion', [InformacionController::class, 'guardar'])->name('guardar_informacion');
 Route::get('/formRegistro/{id_cliente}', [InformacionController::class, 'index_geoestadistica'])->name('formRegistro');
 
-//Route::get('/formRegistro', [InformacionController::class, 'index_geoestadistica'])->name('formRegistro');
 
 Route::post('/guardar_geoestadisticas', [GeoestadisticaController::class, 'guardarGeoestadisticas'])->name('guardar_geoestadisticas');
 Route::post('/guardar_ruta', [RutaController::class, 'guardar'])->name('guardar_ruta');
 Route::get('/formRuta/{id_cliente}', [RutaController::class, 'indexRuta'])->name('formRuta');
 
+
+
 Route::get('/formPlano/{id_cliente}', [PlanoController::class, 'indexPlano'])->name('formPlano');
+Route::post('/marcar_enviado/{id_cliente}/{seccion}', [PlanoController::class, 'marcarEnviado'])->name('marcar_enviado');
+
+
+
+Route::get('/informacion_postes', [InformacionPostesController::class, 'index'])->name('informacion_postes');
+
+
+
+
+
+
+
 
 //cerrar sesion
 Route::get('/salir', 'App\Http\Controllers\Auth\LoginController@salir')->name('salir');
