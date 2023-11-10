@@ -71,11 +71,10 @@
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('registro_usuario') }}">Cuestionario tendido de
-                            fibra óptica</a>
+                        <a class="nav-link text-white" href="{{ route('registro') }}">Cuestionario tendido de fibra óptica</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('ver_usuario') }}">Información postes</a>
+                        <a class="nav-link text-white" href="{{ route('informacion_postes') }}">Información postes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{{route('salir')}}">Cerrar sesión</a>
