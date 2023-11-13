@@ -10,53 +10,54 @@
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
     <style>
-    /* Estilo para el menú lateral */
-    .menu-lateral {
-        background-color: #333;
-        height: 100%;
-        width: 250px;
-        position: fixed;
-        top: 0;
-        left: 0;
-        padding: 20px;
-        color: white;
-    }
+        /* Estilo para el menú lateral */
+        .menu-lateral {
+            background-color: #333;
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            color: white;
+        }
 
-    /* Estilo para el logotipo */
-    .logo {
-        max-width: 100px;
-        margin-bottom: 20px;
-    }
+        /* Estilo para el logotipo */
+        .logo {
+            max-width: 100px;
+            margin-bottom: 20px;
+        }
 
-    /* Estilo para los elementos del menú */
-    .nav-item {
-        padding: 10px 0;
-        text-align: center;
-        font-size: 18px;
-    }
+        /* Estilo para los elementos del menú */
+        .nav-item {
+            padding: 10px 0;
+            text-align: center;
+            font-size: 18px;
+        }
 
-    .nav-item:hover {
-        background-color: #555;
-    }
+        .nav-item:hover {
+            background-color: #555;
+        }
 
-    /* Estilo para el contenido principal */
-    .contenido-principal {
-        margin-left: 250px;
-        padding: 20px;
-    }
+        /* Estilo para el contenido principal */
+        .contenido-principal {
+            margin-left: 250px;
+            padding: 20px;
+        }
 
-    /* Estilo para la tarjeta que contiene la información del usuario */
-    .card-usuario {
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    }
+        /* Estilo para la tarjeta que contiene la información del usuario */
+        .card-usuario {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
 
-    /* Estilo para el botón "Volver a la lista de usuarios" */
-    .btn-volver {
-        margin-top: 20px;
-    }
+        /* Estilo para el botón "Volver a la lista de usuarios" */
+        .btn-volver {
+            margin-top: 20px;
+        }
+
     </style>
 </head>
 
@@ -85,42 +86,45 @@
             <!-- Formulario -->
             <div class="col-md-9 contenido-principal">
                 <h3 class="mb-4 text-center">RELACIÓN DE POSTES A UTILIZAR</h1>
-                <h5 class="mb-5 text-center">INFRAESTRUCTURA DE CFE A UTILIZAR</h5>
-                <form>
-                    <div class="section">
-                        
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>NO.POSTE</th>
-                                    <th>DESCRIPCION</th>
-                                    <th>LATITUD</th>
-                                    <th>LONGITUD</th>
-                                    <th>DISTANCIA INTERPOSTAL</th>
-                                    <th>TIPO DE FIBRA</th>
-                                    <th>REVERVA(RAQUETA)</th>
-                                    <th>Metros</th>
-                                    <th><button type="button" class="btn btn-agregar" onclick="agregarFila()">AGREGAR</button></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input type="text" class="form-control" name="no_poste[]"></td>
-                                    <td><input type="text" class="form-control" name="descripcion[]"></td>
-                                    <td><input type="text" class="form-control" name="latitud[]"></td>
-                                    <td><input type="text" class="form-control" name="longitud[]"></td>
-                                    <td><input type="text" class="form-control" name="distancia_interpostal[]"></td>
-                                    <td><input type="text" class="form-control" name="tipo_de_fibra[]"></td>
-                                    <td><input type="text" class="form-control" name="reverva[]"></td>
-                                    <td><input type="text" class="form-control" name="metros[]"></td>
-                                    <td><button type="button" class="btn btn-eliminar" onclick="eliminarFila(this)">Eliminar</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        
-                    </div>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </form>
+                    <h5 class="mb-5 text-center">INFRAESTRUCTURA DE CFE A UTILIZAR</h5>
+                    
+                    <form method="post" action="{{ route('guardar_cfe') }}">
+                        @csrf
+                        <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+                        <div class="section">
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>NO.POSTE</th>
+                                        <th>DESCRIPCION</th>
+                                        <th>LATITUD</th>
+                                        <th>LONGITUD</th>
+                                        <th>DISTANCIA INTERPOSTAL</th>
+                                        <th>TIPO DE FIBRA</th>
+                                        <th>RESERVA(RAQUETA)</th>
+                                        <th>Metros</th>
+                                        <th><button type="button" class="btn btn-agregar" onclick="agregarFila()">AGREGAR</button></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" class="form-control" name="no_poste[]"></td>
+                                        <td><input type="text" class="form-control" name="descripcion[]"></td>
+                                        <td><input type="text" class="form-control" name="latitud[]"></td>
+                                        <td><input type="text" class="form-control" name="longitud[]"></td>
+                                        <td><input type="text" class="form-control" name="distancia_interpostal[]"></td>
+                                        <td><input type="text" class="form-control" name="tipo_de_fibra[]"></td>
+                                        <td><input type="text" class="form-control" name="reserva[]"></td>
+                                        <td><input type="text" class="form-control" name="metros[]"></td>
+                                        <td><button type="button" class="btn btn-eliminar" onclick="eliminarFila(this)">Eliminar</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
             </div>
 
             <!-- Enlace a Bootstrap JS (opcional, si necesitas funcionalidades de Bootstrap) -->
@@ -149,7 +153,7 @@
                     cell6.innerHTML = '<input type="text" class="form-control" name="tipo_de_fibra[]">';
 
                     const cell7 = newRow.insertCell(6);
-                    cell7.innerHTML = '<input type="text" class="form-control" name="reverva[]">';
+                    cell7.innerHTML = '<input type="text" class="form-control" name="reserva[]">';
 
                     const cell8 = newRow.insertCell(7);
                     cell8.innerHTML = '<input type="text" class="form-control" name="metros[]">';
@@ -162,6 +166,7 @@
                     const row = button.parentNode.parentNode;
                     row.remove();
                 }
+
             </script>
         </div>
     </div>

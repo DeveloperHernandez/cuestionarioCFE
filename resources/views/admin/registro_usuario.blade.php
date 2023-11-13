@@ -165,8 +165,6 @@
     
         // Función para generar una contraseña única
         function generarContrasenaUnica() {
-            // Puedes implementar tu lógica para generar una contraseña aquí.
-            // Un ejemplo simple es generar una contraseña al azar.
             var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             var contrasena = '';
             var longitud = 8; // Longitud de la contraseña

@@ -19,7 +19,7 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login'); // Esta es la ruta para procesar el inicio de sesión POST
+Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login'); 
 
 
 Route::get('/registro_usuario', [RegistroUsuarioController::class, 'index'])->name('registro_usuario');
@@ -59,6 +59,9 @@ Route::post('/marcar_enviado/{id_cliente}/{seccion}', [PlanoController::class, '
 
 //SEGUNDA PARTE
 Route::get('/informacion_postes', [InformacionPostesController::class, 'index'])->name('informacion_postes');
+Route::post('/guardar_cfe', [InformacionPostesController::class, 'guardarInfraestructuraCfe'])->name('guardar_cfe');
+
+
 Route::get('/informacion_postes_equipo', [InformacionPostesEquipoController::class, 'index'])->name('informacion_postes_equipo');
 Route::get('/lineaTroncal', [LineaTroncalController::class, 'index'])->name('lineaTroncal');
 Route::get('/lineaDistribucion', [LineaDistribucionController::class, 'index'])->name('lineaDistribucion');
@@ -79,7 +82,6 @@ Route::get('/ver_cliente_documento', [DescargaController::class, 'verClientesDoc
 
 //cerrar sesion
 Route::get('/salir', 'App\Http\Controllers\Auth\LoginController@salir')->name('salir');
-
 
 
 

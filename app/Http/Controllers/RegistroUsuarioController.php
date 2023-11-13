@@ -42,7 +42,6 @@ class RegistroUsuarioController extends Controller
             'contrasenia' => $contraseniaHasheada, // Guarda la contraseña hasheada
             'rol' => $request->input('rol'),
         ]);
-
         return redirect()->route('registro_usuario')->with('success', 'Usuario registrado con éxito');
     }
 

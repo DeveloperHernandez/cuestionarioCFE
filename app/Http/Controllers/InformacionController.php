@@ -43,11 +43,11 @@ class InformacionController extends Controller
         return redirect()->route('formRegistro', ['id_cliente' => $clienteId]);
     }
 
+    //despues de seleccionar el boton guardar, nos vamos a la siguiente vista con el id_cliente
     public function index_geoestadistica($id_cliente)
     {
         $estados = Estado::all(); // Obtener todos los estados
         $localidades = Municipio::all(); // Obtener todas las localidades
-
         return view('geoestadisticas', compact('localidades', 'estados', 'id_cliente'));
 
     }
