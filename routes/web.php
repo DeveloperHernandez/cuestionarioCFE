@@ -9,11 +9,16 @@ use App\Http\Controllers\RutaController;
 use App\Http\Controllers\PlanoController;
 use App\Http\Controllers\DescargaController;
 use App\Http\Controllers\InformacionPostesController;
+use App\Http\Controllers\InformacionPostesEquipoController;
 use App\Http\Controllers\LineaTroncalController;
 use App\Http\Controllers\LineaDistribucionController;
 use App\Http\Controllers\AccesorioController;
 use App\Http\Controllers\CronogramaController;
 use App\Http\Controllers\EtiquetaController;
+use App\Http\Controllers\EnviadoController;
+
+
+
 
 Route::get('/login', function () {
     return view('auth.login');
@@ -52,7 +57,6 @@ Route::post('/guardar_ruta', [RutaController::class, 'guardar'])->name('guardar_
 Route::get('/formRuta/{id_cliente}', [RutaController::class, 'indexRuta'])->name('formRuta');
 
 
-
 Route::get('/formPlano/{id_cliente}', [PlanoController::class, 'indexPlano'])->name('formPlano');
 Route::post('/marcar_enviado/{id_cliente}/{seccion}', [PlanoController::class, 'marcarEnviado'])->name('marcar_enviado');
 
@@ -61,16 +65,36 @@ Route::post('/marcar_enviado/{id_cliente}/{seccion}', [PlanoController::class, '
 Route::get('/informacion_postes', [InformacionPostesController::class, 'index'])->name('informacion_postes');
 Route::post('/guardar_cfe', [InformacionPostesController::class, 'guardarInfraestructuraCfe'])->name('guardar_cfe');
 
-
-Route::get('/informacion_postes_equipo', [InformacionPostesEquipoController::class, 'index'])->name('informacion_postes_equipo');
-Route::get('/lineaTroncal', [LineaTroncalController::class, 'index'])->name('lineaTroncal');
-Route::get('/lineaDistribucion', [LineaDistribucionController::class, 'index'])->name('lineaDistribucion');
-Route::get('/accesorios', [AccesorioController::class, 'index'])->name('accesorios');
-Route::get('/cronograma', [CronogramaController::class, 'index'])->name('cronograma');
-Route::get('/etiqueta', [EtiquetaController::class, 'index'])->name('etiqueta');
+Route::get('/informacion_postes_equipo/{id_cliente}', [InformacionPostesEquipoController::class, 'index'])->name('informacion_postes_equipo');
+Route::post('/guardar_cfe_equipo', [InformacionPostesEquipoController::class, 'guardarInfraestructuraCfeEquipo'])->name('guardar_cfe_equipo');
 
 
+Route::get('/lineaTroncal/{id_cliente}', [LineaTroncalController::class, 'index'])->name('lineaTroncal');
+Route::post('/guardar_linea_troncal', [LineaTroncalController::class, 'guardarLineaTroncal'])->name('guardar_linea_troncal');
 
+
+Route::get('/lineaDistribucion/{id_cliente}', [LineaDistribucionController::class, 'index'])->name('lineaDistribucion');
+Route::post('/guardar_linea_distribucion', [LineaDistribucionController::class, 'guardarLineaDistribucion'])->name('guardar_linea_distribucion');
+
+
+
+
+Route::get('/accesorios/{id_cliente}', [AccesorioController::class, 'index'])->name('accesorios');
+Route::post('/guardar_accesorio', [AccesorioController::class, 'guardarAccesorio'])->name('guardar_accesorio');
+
+
+
+Route::get('/cronograma/{id_cliente}', [CronogramaController::class, 'index'])->name('cronograma');
+Route::post('/guardar_cronograma', [CronogramaController::class, 'guardarCronograma'])->name('guardar_cronograma');
+
+
+
+Route::get('/etiqueta/{id_cliente}', [EtiquetaController::class, 'index'])->name('etiqueta');
+
+
+
+Route::post('/marcar_enviado_plano_adjunto', [EnviadoController::class, 'guardarPlano'])->name('marcar_enviado_plano_adjunto');
+Route::post('/marcar_enviado_ficha_tecnica_adjunto', [EnviadoController::class, 'guardarFicha'])->name('marcar_enviado_ficha_tecnica_adjunto');
 
 
 

@@ -7,48 +7,56 @@
     <title>Etiqueta</title>
     <!-- Incluye los estilos de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+
     <style>
-        /* Estilo para el fondo gris del menú lateral */
-        .menu-lateral {
-            background-color: #8e8e8e; /* Cambia el color de fondo del menú */
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 250px;
-            /* Ancho del menú lateral */
-            transition: width 0.3s;
-            /* Transición para plegar/desplegar el menú */
-            z-index: 1;
-        }
+    /* Estilo para el menú lateral */
+    .menu-lateral {
+        background-color: #333;
+        height: 100%;
+        width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 20px;
+        color: white;
+    }
 
-        /* Estilo para los elementos del menú */
-        .nav-item {
-            padding: 10px;
-            text-align: center;
-            font-size: 18px; /* Aumenta el tamaño del texto */
-        }
+    /* Estilo para el logotipo */
+    .logo {
+        max-width: 100px;
+        margin-bottom: 20px;
+    }
 
-        /* Cambia el color de texto y fondo en el hover */
-        .nav-item:hover {
-            background-color: #555;
-            color: white;
-        }
+    /* Estilo para los elementos del menú */
+    .nav-item {
+        padding: 10px 0;
+        text-align: center;
+        font-size: 18px;
+    }
 
-        /* Estilo para el contenido principal */
-        .contenido-principal {
-            margin-left: 250px;
-            /* Ancho del menú lateral */
-            padding: 15px;
-        }
+    .nav-item:hover {
+        background-color: #555;
+    }
 
-        .centered-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
+    /* Estilo para el contenido principal */
+    .contenido-principal {
+        margin-left: 250px;
+        padding: 20px;
+    }
+
+    /* Estilo para la tarjeta que contiene la información del usuario */
+    .card-usuario {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    /* Estilo para el botón "Volver a la lista de usuarios" */
+    .btn-volver {
+        margin-top: 20px;
+    }
     </style>
 </head>
 
@@ -58,44 +66,44 @@
             <!-- Menú lateral -->
             <div class="col-md-3 menu-lateral">
                 <div class="text-center">
-                    <div class="d-flex align-items-center justify-content-center">
-                        <img src="img/logoRVA.png" alt="Logo de la aplicación" class="img-fluid"
-                            style="max-width: 100px;">
-                        <p class="ml-2 mb-0 text-white">Administrador</p>
-                    </div>
+                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo">
+                    <p class="text-white">Usuario</p>
                 </div>
                 <ul class="nav flex-column">
-                    <!-- Tus elementos li con efecto hover mejorado -->
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/registro_usuario">Cuestionario tendido de fibra óptica</a>
+                        <a class="nav-link text-white" href="{{ route('registro') }}">Cuestionario tendido de
+                            fibra óptica</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/editar">Información postes</a>
+                        <a class="nav-link text-white" href="{{ route('informacion_postes') }}">Información postes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/eliminar_usuario">Cerrar Sesión</a>
+                        <a class="nav-link text-white" href="{{ route('salir') }}">Cerrar sesión</a>
                     </li>
                 </ul>
             </div>
-            
             <div class="col-md-9 contenido-principal text-center">
+                <h5>ID del Cliente: {{ $id_cliente }}</h5>
                 <p>
-                    En cada estructura el cable de red de telecomunicaciones se debe identificar con etiqueta de vinilo
+                    En cada estructura, el cable de red de telecomunicaciones se debe identificar con etiqueta de vinilo
                     para exteriores de alta adhesión, del color que aluda a cada compañía y deberá llevar el nombre del
-                    prestador de telecomunicaciones. Favor de indicar los elementos o diseño de la etiqueta que utilizara para
-                    identificar su infraestructura. Incluir nombre comercial y número de contacto.
+                    prestador de telecomunicaciones. Favor de indicar los elementos o diseño de la etiqueta que
+                    utilizará para identificar su infraestructura. Incluir nombre comercial y número de contacto.
                 </p>
                 <br><br>
                 <div class="centered-image">
                     <p class="text-center"><strong>Ejemplo</strong></p>
-                    <img src="/img/etiqueta.png" alt="Descripción de la imagen" />
+                    <img src="{{ asset('img/Etiqueta.png') }}" alt="Descripción de la imagen" class="img-fluid"
+                        style="max-width: 700px; max-height: 700px; margin: 0 auto;" />
                 </div>
-            
+
                 <br>
-                <p><strong>Favor de enviar el archivo al correo</strong></p><br>
-                <p><a href="mailto:azael.hernandez@ramirezvargasabogados.com.mx">Enviar al correo: </a></p>
+                <p class="mt-3"><strong>Favor de enviar el archivo al correo</strong></p>
+                <p><a href="mailto:azael.hernandez@ramirezvargasabogados.com.mx">Enviar al correo:
+                        azael.hernandez@ramirezvargasabogados.com.mx</a></p>
             </div>
-            
+
+
 
         </div>
     </div>
@@ -106,8 +114,3 @@
 </body>
 
 </html>
-
-
-<style>
-
-</style>

@@ -71,7 +71,8 @@
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('registro') }}">Cuestionario tendido de fibra óptica</a>
+                        <a class="nav-link text-white" href="{{ route('registro') }}">Cuestionario tendido de fibra
+                            óptica</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{{ route('informacion_postes') }}">Información postes</a>
@@ -99,10 +100,10 @@
                 </p>
                 <img src="{{ asset('img/geoMap.png') }}" alt="Geo Map" class="img-fluid mx-auto d-block"
                     style="max-width: 30%; height: auto;">
-                <form action="{{ route('marcar_enviado', ['id_cliente' => $id_cliente, 'seccion' => 8]) }}"
-                    method="post">
+                <form action="{{ route('marcar_enviado_plano_adjunto') }}" method="post">
                     @csrf
-                    <button type="submit" class="btn btn-primary">Enviado </button>
+                    <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+                    <button type="submit" class="btn btn-primary" name="boton1">Enviado </button>
                 </form>
                 </p>
                 <!-- Enlace para abrir Gmail -->
@@ -120,11 +121,13 @@
                 <p class="text-center">
                     <a href="mailto:?subject=Adjuntar plano&body=Adjunto el plano solicitado.">Enviar correo</a>
                 </p>
-                <form action="{{ route('marcar_enviado', ['id_cliente' => $id_cliente, 'seccion' => 9]) }}"
-                    method="post">
+                <form action="{{ route('marcar_enviado_ficha_tecnica_adjunto') }}" method="post">
                     @csrf
-                    <button type="submit" class="btn btn-primary">Enviado</button>
+                    <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+                    <button type="submit" class="btn btn-primary" name="boton2">Enviado</button>
                 </form>
+
+        
             </div>
         </div>
     </div>

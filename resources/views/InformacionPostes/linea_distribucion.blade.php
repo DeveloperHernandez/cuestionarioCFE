@@ -4,43 +4,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linea distribución</title>
+    <title>Linea Distribucion</title>
     <!-- Incluye los estilos de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+
     <style>
-        /* Estilo para el fondo gris del menú lateral */
-        .menu-lateral {
-            background-color: #8e8e8e; /* Cambia el color de fondo del menú */
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 250px;
-            /* Ancho del menú lateral */
-            transition: width 0.3s;
-            /* Transición para plegar/desplegar el menú */
-            z-index: 1;
-        }
+    /* Estilo para el menú lateral */
+    .menu-lateral {
+        background-color: #333;
+        height: 100%;
+        width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 20px;
+        color: white;
+    }
 
-        /* Estilo para los elementos del menú */
-        .nav-item {
-            padding: 10px;
-            text-align: center;
-            font-size: 18px; /* Aumenta el tamaño del texto */
-        }
+    /* Estilo para el logotipo */
+    .logo {
+        max-width: 100px;
+        margin-bottom: 20px;
+    }
 
-        /* Cambia el color de texto y fondo en el hover */
-        .nav-item:hover {
-            background-color: #555;
-            color: white;
-        }
+    /* Estilo para los elementos del menú */
+    .nav-item {
+        padding: 10px 0;
+        text-align: center;
+        font-size: 18px;
+    }
 
-        /* Estilo para el contenido principal */
-        .contenido-principal {
-            margin-left: 250px;
-            /* Ancho del menú lateral */
-            padding: 15px;
-        }
+    .nav-item:hover {
+        background-color: #555;
+    }
+
+    /* Estilo para el contenido principal */
+    .contenido-principal {
+        margin-left: 250px;
+        padding: 20px;
+    }
+
+    /* Estilo para la tarjeta que contiene la información del usuario */
+    .card-usuario {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    /* Estilo para el botón "Volver a la lista de usuarios" */
+    .btn-volver {
+        margin-top: 20px;
+    }
     </style>
 </head>
 
@@ -50,201 +66,50 @@
             <!-- Menú lateral -->
             <div class="col-md-3 menu-lateral">
                 <div class="text-center">
-                    <div class="d-flex align-items-center justify-content-center">
-                        <img src="img/logoRVA.png" alt="Logo de la aplicación" class="img-fluid"
-                            style="max-width: 100px;">
-                        <p class="ml-2 mb-0 text-white">Usuario</p>
-                    </div>
+                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo">
+                    <p class="text-white">Usuario</p>
                 </div>
                 <ul class="nav flex-column">
-                    <!-- Tus elementos li con efecto hover mejorado -->
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/registro_usuario">Cuestionario tendido de fibra óptica</a>
+                        <a class="nav-link text-white" href="{{ route('registro') }}">Cuestionario tendido de
+                            fibra óptica</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/editar">Información postes</a>
+                        <a class="nav-link text-white" href="{{ route('informacion_postes') }}">Información postes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/eliminar_usuario">Cerrar Sesión</a>
+                        <a class="nav-link text-white" href="{{ route('salir') }}">Cerrar sesión</a>
                     </li>
                 </ul>
             </div>
-
-
-            <!-- Contenido principal -->
+            <!-- Formulario -->
             <div class="col-md-9 contenido-principal">
-                <h3 class="mt-2">CARACTERÍSTICAS DEL TENDIDO</h3>
+                <h3 class="mt-2">LINEA DISTRIBUCIÓN</h3>
+                <h5>ID del Cliente: {{ $id_cliente }}</h5>
+                    <form method="post" action="{{ route('guardar_linea_distribucion') }}">
+                        @csrf
+                        <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+                        <label for="nombre">Tipo de Elemento:</label>
+                        <select name="nombre" class="form-control" required>
+                            <option value="NUMERO DE POSTES CFE">Numero de Postes CFE</option>
+                            <option value="FLEJES (MTS)">Flejes (MTS)</option>
+                            <option value="HEBILLAS">Hebillas</option>
+                            <option value="HERRAJE D">Herraje D</option>
+                            <option value="HERRAJE J">Herraje J</option>
+                            <option value="TENSORES">Tensores</option>
+                            <option value="FIBRA ÓPTICA #HILOS">Fibra Óptica #Hilos</option>
+                        </select>
 
-                <form>
-                    <div class="section">
-                        <h5 class="mt-4">A) LÍNEA DE DISTRIBUCIÓN</h5>
-                        <div class="row">
-                            <!-- Primera columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="num_postes">NUMERO DE POSTES</label>
-                                </div>
-                            </div>
-                            <!-- Segunda columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="piezas">PIEZAS</label>
-                                    <input type="text" class="form-control" id="piezas" name="piezas">
-                                </div>
-                            </div>
-                            <!-- Tercera columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="peso_pieza">PESO/PIEZA</label>
-                                    <input type="text" class="form-control" id="peso_pieza" name="peso_pieza">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <!-- Primera columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="num_postes">FLEJES (MTS)</label>
-                                </div>
-                            </div>
-                            <!-- Segunda columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="piezas">PIEZAS</label>
-                                    <input type="text" class="form-control" id="piezas" name="piezas">
-                                </div>
-                            </div>
-                            <!-- Tercera columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="peso_pieza">PESO/PIEZA</label>
-                                    <input type="text" class="form-control" id="peso_pieza" name="peso_pieza">
-                                </div>
-                            </div>
-                        </div>
+                        <label for="piezas">Piezas:</label>
+                        <input type="number" name="piezas" class="form-control" required>
 
-                        <div class="row">
-                            <!-- Primera columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="num_postes">HEBILLAS</label>
-                                </div>
-                            </div>
-                            <!-- Segunda columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="piezas">PIEZAS</label>
-                                    <input type="text" class="form-control" id="piezas" name="piezas">
-                                </div>
-                            </div>
-                            <!-- Tercera columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="peso_pieza">PESO/PIEZA</label>
-                                    <input type="text" class="form-control" id="peso_pieza" name="peso_pieza">
-                                </div>
-                            </div>
-                        </div>
+                        <label for="peso_por_pieza">Peso por Pieza:</label>
+                        <input type="number" step="0.01" name="peso_por_pieza" class="form-control" required>
 
-                        <div class="row">
-                            <!-- Primera columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="num_postes">HERRAJE D</label>
-                                </div>
-                            </div>
-                            <!-- Segunda columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="piezas">PIEZAS</label>
-                                    <input type="text" class="form-control" id="piezas" name="piezas">
-                                </div>
-                            </div>
-                            <!-- Tercera columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="peso_pieza">PESO/PIEZA</label>
-                                    <input type="text" class="form-control" id="peso_pieza" name="peso_pieza">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <!-- Primera columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="num_postes">HERRAJE J</label>
-                                </div>
-                            </div>
-                            <!-- Segunda columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="piezas">PIEZAS</label>
-                                    <input type="text" class="form-control" id="piezas" name="piezas">
-                                </div>
-                            </div>
-                            <!-- Tercera columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="peso_pieza">PESO/PIEZA</label>
-                                    <input type="text" class="form-control" id="peso_pieza" name="peso_pieza">
-                                </div>
-                            </div>
-                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
 
 
-                        <div class="row">
-                            <!-- Primera columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="num_postes">TENSORES</label>
-                                </div>
-                            </div>
-                            <!-- Segunda columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="piezas">PIEZAS</label>
-                                    <input type="text" class="form-control" id="piezas" name="piezas">
-                                </div>
-                            </div>
-                            <!-- Tercera columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="peso_pieza">PESO/PIEZA</label>
-                                    <input type="text" class="form-control" id="peso_pieza" name="peso_pieza">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <!-- Primera columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="num_postes">FIBRA ÓPTICA #HILOS</label>
-                                </div>
-                            </div>
-                            <!-- Segunda columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="piezas">PIEZAS</label>
-                                    <input type="text" class="form-control" id="piezas" name="piezas">
-                                </div>
-                            </div>
-                            <!-- Tercera columna -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="peso_pieza">PESO/PIEZA</label>
-                                    <input type="text" class="form-control" id="peso_pieza" name="peso_pieza">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12 mt-3 d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary">GUARDAR</button>
-                        </div>
-                    </div>
-
-                </form>
             </div>
 
             <!-- Enlace a Bootstrap JS (opcional, si necesitas funcionalidades de Bootstrap) -->

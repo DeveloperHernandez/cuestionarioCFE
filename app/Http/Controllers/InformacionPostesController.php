@@ -52,7 +52,8 @@ class InformacionPostesController extends Controller
                 $registroPoste->save();
             }
         }
-        return redirect()->route('informacion_postes');
+        return redirect()->route('informacion_postes_equipo', ['id_cliente' => $id_cliente])->with('success', 'Información guardada exitosamente.');
     }
     
 }
+

@@ -7,50 +7,56 @@
     <title>Cronograma</title>
     <!-- Incluye los estilos de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+
     <style>
-        /* Estilo para el fondo gris del menú lateral */
-        .menu-lateral {
-            background-color: #8e8e8e;
-            /* Cambia el color de fondo del menú */
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 250px;
-            /* Ancho del menú lateral */
-            transition: width 0.3s;
-            /* Transición para plegar/desplegar el menú */
-            z-index: 1;
-        }
+    /* Estilo para el menú lateral */
+    .menu-lateral {
+        background-color: #333;
+        height: 100%;
+        width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 20px;
+        color: white;
+    }
 
-        /* Estilo para los elementos del menú */
-        .nav-item {
-            padding: 10px;
-            text-align: center;
-            font-size: 18px;
-            /* Aumenta el tamaño del texto */
-        }
+    /* Estilo para el logotipo */
+    .logo {
+        max-width: 100px;
+        margin-bottom: 20px;
+    }
 
-        /* Cambia el color de texto y fondo en el hover */
-        .nav-item:hover {
-            background-color: #555;
-            color: white;
-        }
+    /* Estilo para los elementos del menú */
+    .nav-item {
+        padding: 10px 0;
+        text-align: center;
+        font-size: 18px;
+    }
 
-        /* Estilo para el contenido principal */
-        .contenido-principal {
-            margin-left: 250px;
-            /* Ancho del menú lateral */
-            padding: 15px;
-        }
+    .nav-item:hover {
+        background-color: #555;
+    }
 
-        .centered-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
+    /* Estilo para el contenido principal */
+    .contenido-principal {
+        margin-left: 250px;
+        padding: 20px;
+    }
+
+    /* Estilo para la tarjeta que contiene la información del usuario */
+    .card-usuario {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    /* Estilo para el botón "Volver a la lista de usuarios" */
+    .btn-volver {
+        margin-top: 20px;
+    }
     </style>
 </head>
 
@@ -60,87 +66,82 @@
             <!-- Menú lateral -->
             <div class="col-md-3 menu-lateral">
                 <div class="text-center">
-                    <div class="d-flex align-items-center justify-content-center">
-                        <img src="img/logoRVA.png" alt="Logo de la aplicación" class="img-fluid"
-                            style="max-width: 100px;">
-                        <p class="ml-2 mb-0 text-white">Administrador</p>
-                    </div>
+                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo">
+                    <p class="text-white">Usuario</p>
                 </div>
                 <ul class="nav flex-column">
-                    <!-- Tus elementos li con efecto hover mejorado -->
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/registro_usuario">Cuestionario tendido de fibra óptica</a>
+                        <a class="nav-link text-white" href="{{ route('registro') }}">Cuestionario tendido de
+                            fibra óptica</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/editar">Información postes</a>
+                        <a class="nav-link text-white" href="{{ route('informacion_postes') }}">Información postes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="/eliminar_usuario">Cerrar Sesión</a>
+                        <a class="nav-link text-white" href="{{ route('salir') }}">Cerrar sesión</a>
                     </li>
                 </ul>
             </div>
-            <!-- Contenido principal -->
+            <!-- Formulario -->
             <div class="col-md-9 contenido-principal">
-                <form method="post">
-                    @csrf
-                    <h3 class="text-center">CRONOGRAMA DE ACTIVIDADES</h3>
-                    <p>
-                        Ingrese el cronograma de trabajo a seguir para el proyecto de tendido de fibra óptica (el tiempo
-                        estimado es a partir de su firma de contrato). **La información en color azul es un ejemplo,
-                        usted deberá llenar las tablas de acuerdo a la información de su proyecto.
-                    </p>
-                    <br>
-
-                    <!-- Contenedor para la imagen y la tabla -->
-                    <div class="centered-container">
-                        <img src="/img/cronograma.png" alt="Descripción de la imagen" />
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>PROCESO DE CONSTRUCCIÓN</th>
-                                    <th>DESCRIPCIÓN</th>
-                                    <th>FECHAS A REALIZAR (POSTERIOR A FIRMA DE CONTRATO DE ACCESO)</th>
-                                    <th>
-                                        <button type="button" class="btn btn-agregar"
-                                            onclick="agregarFila()">AGREGAR</button>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input type="text" class="form-control" name="no_poste[]"></td>
-                                    <td><input type="text" class="form-control" name="accesorio[]"></td>
-                                    <td><input type="text" class="form-control" name="latitud[]"></td>
-                                    <td>
-                                        <button type="button" class="btn btn-eliminar"
-                                            onclick="eliminarFila(this)">Eliminar</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="col-md-12 mt-3 d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary">GUARDAR</button>
-                    </div>
-                </form>
+                <h5>ID del Cliente: {{ $id_cliente }}</h5>
+                <h3 class="text-center">CRONOGRAMA DE ACTIVIDADES</h3>
+                <p>
+                    Ingrese el cronograma de trabajo a seguir para el proyecto de tendido de fibra óptica (el tiempo
+                    estimado es a partir de su firma de contrato). **La información en color azul es un ejemplo,
+                    usted deberá llenar las tablas de acuerdo a la información de su proyecto.
+                </p>
+                <br>
+                <!-- Contenedor para la imagen y la tabla -->
+                <div class="centered-container">
+                    <img src="{{ asset('img/cronograma.png') }}" alt="Descripción de la imagen" class="img-fluid mx-auto d-block" style="max-width: 700px; max-height: 700px;" />
+                    <form method="post" action="{{ route('guardar_cronograma') }}">
+                        @csrf
+                        <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+                        <div class="section">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>PROCESO DE CONSTRUCCIÓN</th>
+                                        <th>DESCRIPCIÓN</th>
+                                        <th>FECHAS A REALIZAR (POSTERIOR A FIRMA DE CONTRATO DE ACCESO)</th>
+                                        <th>
+                                            <button type="button" class="btn btn-agregar"
+                                                onclick="agregarFila()">AGREGAR</button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" class="form-control" name="proceso_construccion[]"></td>
+                                        <td><input type="text" class="form-control" name="descripcion[]"></td>
+                                        <td><input type="date" class="form-control" name="fecha[]"></td>
+                                        <td>
+                                            <button type="button" class="btn btn-eliminar"
+                                                onclick="eliminarFila(this)">Eliminar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
             </div>
-
         </div>
-    </div>
-    <script>
+        <script>
         function agregarFila() {
             const table = document.querySelector("table tbody");
             const newRow = table.insertRow(table.rows.length);
 
             const cell1 = newRow.insertCell(0);
-            cell1.innerHTML = '<input type="text" class="form-control" name="no_poste[]">';
+            cell1.innerHTML = '<input type="text" class="form-control" name="proceso_construccion[]">';
 
             const cell2 = newRow.insertCell(1);
-            cell2.innerHTML = '<input type="text" class="form-control" name="accesorio[]">';
+            cell2.innerHTML = '<input type="text" class="form-control" name="descripcion[]">';
 
             const cell3 = newRow.insertCell(2);
-            cell3.innerHTML = '<input type="text" class="form-control" name="latitud[]">';
+            cell3.innerHTML = '<input type="date" class="form-control" name="fecha[]">';
 
             const cell4 = newRow.insertCell(3);
             cell4.innerHTML =
@@ -151,11 +152,12 @@
             const row = button.parentNode.parentNode;
             row.remove();
         }
-    </script>
+        </script>
 
-    <!-- Incluye los scripts de Bootstrap y jQuery (asegúrate de tener jQuery instalado) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+        <!-- Incluye los scripts de Bootstrap y jQuery (asegúrate de tener jQuery instalado) -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    </div>
 </body>
 
 </html>

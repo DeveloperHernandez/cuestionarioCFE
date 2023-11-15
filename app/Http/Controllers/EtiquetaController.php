@@ -8,7 +8,8 @@ class EtiquetaController extends Controller
 {
     public function index()
     {
-        return view('InformacionPostes.etiqueta');
+        $id_cliente = 1;
+        return view('InformacionPostes.etiqueta',compact('id_cliente'));
     }
 
     public function guardarEtiqueta()
