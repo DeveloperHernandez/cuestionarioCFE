@@ -99,8 +99,13 @@
 
                 <br>
                 <p class="mt-3"><strong>Favor de enviar el archivo al correo</strong></p>
-                <p><a href="mailto:azael.hernandez@ramirezvargasabogados.com.mx">Enviar al correo:
-                        azael.hernandez@ramirezvargasabogados.com.mx</a></p>
+                <p><a href="mailto:azael.hernandez@ramirezvargasabogados.com.mx">Enviar al correo</a></p>
+                <form action="{{ route('marcar_enviado_etiqueta') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+                    <button type="submit" class="btn btn-primary" name="boton3">Enviado</button>
+                </form>
+
             </div>
 
 

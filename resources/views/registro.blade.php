@@ -10,56 +10,56 @@
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
     <style>
-        /* Estilo para el menú lateral */
-        .menu-lateral {
-            background-color: #333;
-            height: 100%;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            padding: 20px;
-            color: white;
-        }
+    /* Estilo para el menú lateral */
+    .menu-lateral {
+        background-color: #333;
+        height: 100%;
+        width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 20px;
+        color: white;
+    }
 
-        /* Estilo para el logotipo */
-        .logo {
-            max-width: 100px;
-            margin-bottom: 20px;
-        }
+    /* Estilo para el logotipo */
+    .logo {
+        max-width: 100px;
+        margin-bottom: 20px;
+    }
 
-        /* Estilo para los elementos del menú */
-        .nav-item {
-            padding: 10px 0;
-            text-align: center;
-            font-size: 18px;
-        }
+    /* Estilo para los elementos del menú */
+    .nav-item {
+        padding: 10px 0;
+        text-align: center;
+        font-size: 18px;
+    }
 
-        .nav-item:hover {
-            background-color: #555;
-        }
+    .nav-item:hover {
+        background-color: #555;
+    }
 
-        /* Estilo para el contenido principal */
-        .contenido-principal {
-            margin-left: 250px;
-            padding: 20px;
-        }
+    /* Estilo para el contenido principal */
+    .contenido-principal {
+        margin-left: 250px;
+        padding: 20px;
+    }
 
-        /* Estilo para la tarjeta que contiene la información del usuario */
-        .card-usuario {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        }
+    /* Estilo para la tarjeta que contiene la información del usuario */
+    .card-usuario {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
 
-        /* Estilo para el botón "Volver a la lista de usuarios" */
-        .btn-volver {
-            margin-top: 20px;
-        }
-
+    /* Estilo para el botón "Volver a la lista de usuarios" */
+    .btn-volver {
+        margin-top: 20px;
+    }
     </style>
 </head>
+
 <body>
     <div class="container-fluid" style="height: 100vh;">
         <div class="row">
@@ -71,7 +71,8 @@
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('registro') }}">Cuestionario tendido de fibra óptica</a>
+                        <a class="nav-link text-white" href="{{ route('registro') }}">Cuestionario tendido de fibra
+                            óptica</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{{ route('informacion_postes') }}">Información postes</a>
@@ -103,7 +104,8 @@
                             <div class="form-group">
                                 <label for="nombre_cliente">NOMBRE(S)</label>
                                 <input style="border: 3px solid rgb(49, 131, 49);" type="text" class="form-control"
-                                    id="nombre_cliente" name="nombre_cliente">
+                                    id="nombre_cliente" name="nombre_cliente"
+                                    value="{{ $nombre}}">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -117,7 +119,8 @@
                             <div class="form-group">
                                 <label for="correo_electronico">CORREO ELECTRÓNICO</label>
                                 <input style="border: 3px solid rgb(49, 131, 49);" type="email" class="form-control"
-                                    id="correo_electronico" name="correo_electronico">
+                                    id="correo_electronico" name="correo_electronico"
+                                    value="{{ $correo }}">
                             </div>
                         </div>
                     </div>

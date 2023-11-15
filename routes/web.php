@@ -78,7 +78,6 @@ Route::post('/guardar_linea_distribucion', [LineaDistribucionController::class, 
 
 
 
-
 Route::get('/accesorios/{id_cliente}', [AccesorioController::class, 'index'])->name('accesorios');
 Route::post('/guardar_accesorio', [AccesorioController::class, 'guardarAccesorio'])->name('guardar_accesorio');
 
@@ -95,7 +94,7 @@ Route::get('/etiqueta/{id_cliente}', [EtiquetaController::class, 'index'])->name
 
 Route::post('/marcar_enviado_plano_adjunto', [EnviadoController::class, 'guardarPlano'])->name('marcar_enviado_plano_adjunto');
 Route::post('/marcar_enviado_ficha_tecnica_adjunto', [EnviadoController::class, 'guardarFicha'])->name('marcar_enviado_ficha_tecnica_adjunto');
-
+Route::post('/marcar_enviado_etiqueta', [EnviadoController::class, 'guardarEtiqueta'])->name('marcar_enviado_etiqueta');
 
 
 
@@ -109,13 +108,13 @@ Route::get('/salir', 'App\Http\Controllers\Auth\LoginController@salir')->name('s
 
 
 
-
+//ADMIN
 //USUARIO: AZAEL
 //CONTRASEÑA: pAZfpMOV
-//se quitó etiqueta adjunto en la tabla ArchivoAdjunto
 
-//USUARIO:PRUEBA
-//CONTRASEÑA: sx62GN3j
+//CLIENTE
+//USUARIO:CLIENTE
+//CONTRASEÑA: NCjFkIvW
 
 //USUARIO:ADMIN
 //CONTRASEÑA: mjYlKOsE
