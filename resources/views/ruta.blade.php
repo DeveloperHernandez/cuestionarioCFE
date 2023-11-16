@@ -10,53 +10,53 @@
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
     <style>
-        /* Estilo para el menú lateral */
-        .menu-lateral {
-            background-color: #333;
-            height: 100%;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            padding: 20px;
-            color: white;
-        }
+    /* Estilo para el menú lateral */
+    .menu-lateral {
+        background-color: #333;
+        height: 100%;
+        width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 20px;
+        color: white;
+    }
 
-        /* Estilo para el logotipo */
-        .logo {
-            max-width: 100px;
-            margin-bottom: 20px;
-        }
+    /* Estilo para el logotipo */
+    .logo {
+        max-width: 100px;
+        margin-bottom: 20px;
+    }
 
-        /* Estilo para los elementos del menú */
-        .nav-item {
-            padding: 10px 0;
-            text-align: center;
-            font-size: 18px;
-        }
+    /* Estilo para los elementos del menú */
+    .nav-item {
+        padding: 10px 0;
+        text-align: center;
+        font-size: 18px;
+    }
 
-        .nav-item:hover {
-            background-color: #555;
-        }
+    .nav-item:hover {
+        background-color: #555;
+    }
 
-        /* Estilo para el contenido principal */
-        .contenido-principal {
-            margin-left: 250px;
-            padding: 20px;
-        }
+    /* Estilo para el contenido principal */
+    .contenido-principal {
+        margin-left: 250px;
+        padding: 20px;
+    }
 
-        /* Estilo para la tarjeta que contiene la información del usuario */
-        .card-usuario {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        }
+    /* Estilo para la tarjeta que contiene la información del usuario */
+    .card-usuario {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
 
-        /* Estilo para el botón "Volver a la lista de usuarios" */
-        .btn-volver {
-            margin-top: 20px;
-        }
+    /* Estilo para el botón "Volver a la lista de usuarios" */
+    .btn-volver {
+        margin-top: 20px;
+    }
     </style>
 </head>
 
@@ -70,7 +70,8 @@
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('registro') }}">Cuestionario tendido de fibra óptica</a>
+                        <a class="nav-link text-white" href="{{ route('registro') }}">Cuestionario tendido de fibra
+                            óptica</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{{ route('informacion_postes') }}">Información postes</a>
@@ -170,96 +171,84 @@
                             <div class="col-6">
                                 <p class="justify-content-center">Inicio</p>
                                 <div class="form-group">
-                                    <label for="calle">Calle</label>
-                                    <input type="text" class="form-control" id="calle" name="calle">
+                                    <input type="text" class="form-control" id="calle" name="calle" placeholder="Calle">
                                 </div>
 
+                                <div class="form-group mt-2">
+                                    <input type="text" class="form-control" id="num" name="num" placeholder="Número">
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <input type="text" class="form-control" id="entre_calles" name="entre_calles"
+                                        placeholder="Entre las calles">
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <input type="text" class="form-control" id="estado" name="estado"
+                                        placeholder="Estado">
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <input type="text" class="form-control" id="cp" name="cp"
+                                        placeholder="Código postal">
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <input type="text" class="form-control" id="latitud" name="latitud"
+                                        placeholder="Latitud">
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <input type="text" class="form-control" id="longitud" name="longitud"
+                                        placeholder="Longitud">
+                                </div>
                                 <div class="form-group">
-                                    <label for="num">Número</label>
-                                    <input type="text" class="form-control" id="num" name="num">
+                                    <label for="inicio">Inicio</label>
+                                    <input type="text" class="form-control" id="inicio" name="inicio" readonly>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="entre_calles">Entre las calles</label>
-                                    <input type="text" class="form-control" id="entre_calles" name="entre_calles">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="estado">Estado</label>
-                                    <input type="text" class="form-control" id="estado" name="estado">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="cp">Código postal</label>
-                                    <input type="text" class="form-control" id="cp" name="cp">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="latitud">Latitud</label>
-                                    <input type="text" class="form-control" id="latitud" name="latitud">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="longitud">Longitud</label>
-                                    <input type="text" class="form-control" id="longitud" name="longitud">
-                                </div>
-
-
                             </div>
+
                             <div class="col-6">
                                 <p>Final</p>
                                 <div class="form-group">
-                                    <label for="calle">Calle</label>
-                                    <input type="text" class="form-control" id="calle_2" name="calle_2">
+                                    <input type="text" class="form-control" id="calle_2" name="calle_2"
+                                        placeholder="Calle">
                                 </div>
 
+                                <div class="form-group mt-2">
+                                    <input type="text" class="form-control" id="num_2" name="num-2"
+                                        placeholder="Número">
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <input type="text" class="form-control" id="entre_calles_2" name="entre_calles_2"
+                                        placeholder="Entre las calles">
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <input type="text" class="form-control" id="estado_2" name="estado_2"
+                                        placeholder="Estado">
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <input type="text" class="form-control" id="cp_2" name="cp_2"
+                                        placeholder="Código postal">
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <input type="text" class="form-control" id="latitud_2" name="latitud_2"
+                                        placeholder="Latitud">
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <input type="text" class="form-control" id="longitud_2" name="longitud_2"
+                                        placeholder="Longitud">
+                                </div>
                                 <div class="form-group">
-                                    <label for="num">Número</label>
-                                    <input type="text" class="form-control" id="num_2" name="num-2">
+                                    <label for="final">Final</label>
+                                    <input type="text" class="form-control" id="final" name="final" readonly>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="entre_calles">Entre las calles</label>
-                                    <input type="text" class="form-control" id="entre_calles_2" name="entre_calles_2">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="estado">Estado</label>
-                                    <input type="text" class="form-control" id="estado_2" name="estado_2">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="cp_2">Código postal</label>
-                                    <input type="text" class="form-control" id="cp_2" name="cp_2">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="latitud_2">Latitud</label>
-                                    <input type="text" class="form-control" id="latitud_2" name="latitud_2">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="longitud_2">Longitud</label>
-                                    <input type="text" class="form-control" id="longitud_2" name="longitud_2">
-                                </div>
-
                             </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Campos "Inicio" y "Final" -->
-                    <div class="row">
-                        <div class="form-group">
-                            <label for="inicio">Inicio</label>
-                            <input type="text" class="form-control" id="inicio" name="inicio" readonly>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group">
-                            <label for="final">Final</label>
-                            <input type="text" class="form-control" id="final" name="final" readonly>
                         </div>
                     </div>
 
@@ -270,13 +259,15 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="numero_postes" name="numero_postes" placeholder="Número de postes">
+                                    <input type="text" class="form-control" id="numero_postes" name="numero_postes"
+                                        placeholder="Número de postes">
                                 </div>
                             </div>
 
                             <div class="col-6">
-                                <div class="form-group">                                    
-                                    <input type="text" class="form-control" id="totalkm_cable" name="totalkm_cable" placeholder="Total Km Cable" >
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="totalkm_cable" name="totalkm_cable"
+                                        placeholder="Total Km Cable">
                                 </div>
                             </div>
                         </div>
@@ -320,24 +311,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
     <script>
-        // Autocompletar el campo "Nombre lugar" con comas a medida que se escriben los datos
-        $('#colonia, #municipio, #codigo_postal, #localidad, #estado').on('input', function() {
-            const nombreLugar = [
-                $('#colonia').val()
-                , $('#municipio').val()
-                , $('#codigo_postal').val()
-                , $('#localidad').val()
-                , $('#estado').val()
-            ].join(', ');
+    // Autocompletar el campo "Nombre lugar" con comas a medida que se escriben los datos
+    $('#colonia, #municipio, #codigo_postal, #localidad, #estado').on('input', function() {
+        const nombreLugar = [
+            $('#colonia').val(), $('#municipio').val(), $('#codigo_postal').val(), $('#localidad').val(), $(
+                '#estado').val()
+        ].join(', ');
 
-            $('#nombre_lugar').val(nombreLugar);
-        });
+        $('#nombre_lugar').val(nombreLugar);
+    });
     </script>
 
     <!-- Añade esta línea en tu archivo Blade para incluir jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
+    <script>
     // Función para actualizar los campos de "Inicio" y "Final"
     function actualizarCamposInicioFinal() {
         var calle = $('#calle').val();
@@ -357,10 +345,12 @@
         var longitud_2 = $('#longitud_2').val();
 
         // Actualiza el campo "Inicio"
-        $('#inicio').val(calle + ', ' + num + ', ' + entre_calles + ', ' + estado + ', ' + cp + ', ' + latitud + ', '+ longitud );
+        $('#inicio').val(calle + ', ' + num + ', ' + entre_calles + ', ' + estado + ', ' + cp + ', ' + latitud + ', ' +
+            longitud);
 
         // Actualiza el campo "Final"
-        $('#final').val(calle_2 + ', ' + num_2 + ', ' + entre_calles_2 + ', ' + estado_2 + ', ' + cp_2 + ', ' + latitud_2 + ', '+ longitud_2);
+        $('#final').val(calle_2 + ', ' + num_2 + ', ' + entre_calles_2 + ', ' + estado_2 + ', ' + cp_2 + ', ' +
+            latitud_2 + ', ' + longitud_2);
     }
 
     // Agrega un controlador de eventos para los campos que deben activar la actualización
@@ -374,6 +364,7 @@
     });
     // Llama a la función inicialmente para llenar los campos "Inicio" y "Final" si es necesario
     actualizarCamposInicioFinal();
-</script>
+    </script>
 </body>
+
 </html>

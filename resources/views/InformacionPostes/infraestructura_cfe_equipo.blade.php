@@ -109,7 +109,7 @@
                                         <td><input type="text" class="form-control" name="latitud[]"></td>
                                         <td><input type="text" class="form-control" name="longitud[]"></td>
                                         <td><button type="button" class="btn btn-eliminar"
-                                                onclick="eliminarFila(this)">Eliminar</button></td>
+                                                onclick="eliminarFila(this)">ELIMINAR</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -140,7 +140,7 @@
 
                 const cell9 = newRow.insertCell(4);
                 cell9.innerHTML =
-                    '<button type="button" class="btn btn-eliminar" onclick="eliminarFila(this)">Eliminar</button>';
+                    '<button type="button" class="btn btn-eliminar" onclick="eliminarFila(this)">ELIMINAR</button>';
             }
 
             function eliminarFila(button) {

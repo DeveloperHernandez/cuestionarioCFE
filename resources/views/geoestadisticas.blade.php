@@ -102,15 +102,15 @@
                                 <td><input type="text" class="form-control" name="localidad[]"></td>
                                 <td>
                                     <select class="form-control" name="municipio[]">
-                                        @foreach ($localidades as $localidad)
-                                        <option value="{{ $localidad->id_municipio }}">{{ $localidad->nombre_municipio }}</option>
+                                        @foreach ($municipios as $municipio)
+                                        <option value="{{ $municipio->id_municipio }}">{{ $municipio->municipio }}</option>
                                         @endforeach
                                     </select>
                                 </td>
                                 <td>
                                     <select class="form-control" name="estado[]">
                                         @foreach ($estados as $estado)
-                                        <option value="{{ $estado->id_estado }}">{{ $estado->nombre_estado }}</option>
+                                        <option value="{{ $estado->id_estado }}">{{ $estado->estado }}</option>
                                         @endforeach
                                     </select>
                                 </td>
@@ -150,15 +150,15 @@
                 <td><input type="text" class="form-control" name="localidad[]"></td>
                 <td>
                     <select class="form-control" name="municipio[]">
-                        @foreach ($localidades as $localidad)
-                        <option value="{{ $localidad->id_municipio }}">{{ $localidad->nombre_municipio }}</option>
+                        @foreach ($municipios as $municipio)
+                        <option value="{{ $municipio->id_municipio }}">{{ $municipio->municipio }}</option>
                         @endforeach
                     </select>
                 </td>
                 <td>
                     <select class="form-control" name="estado[]">
                         @foreach ($estados as $estado)
-                        <option value="{{ $estado->id_estado }}">{{ $estado->nombre_estado }}</option>
+                        <option value="{{ $estado->id_estado }}">{{ $estado->estado }}</option>
                         @endforeach
                     </select>
                 </td>

@@ -12,26 +12,31 @@ class RegistroUsuarioController extends Controller
 {
     public function index()
     {
-        return view('admin.registro_usuario');
+        $userSessions = Session::get('user_sessions');
+        if (!empty($userSessions)) {
+            $ver = reset($userSessions);              
+            return view('admin.registro_usuario', compact('ver'));
+          } else {
+              return redirect()->route('login')->with('error', 'Usuario no autenticado');
+          }
     }
 
     public function index_usuario()
     {
-           // Obtén la variable $ver desde la sesión
-    $userSessions = Session::get('user_sessions');
+        // Obtén la variable $ver desde la sesión
+        $userSessions = Session::get('user_sessions');
 
-    // Asegúrate de que $userSessions no esté vacío antes de acceder a sus elementos
-    if (!empty($userSessions)) {
-        // Obtén el primer elemento del array
-        $ver = reset($userSessions);
+        // Asegúrate de que $userSessions no esté vacío antes de acceder a sus elementos
+        if (!empty($userSessions)) {
+            // Obtén el primer elemento del array
+            $ver = reset($userSessions);
 
-        // Ahora, $ver contiene la información del usuario
-        return view('registro', compact('ver'));
-    } else {
-        // Manejar la lógica si la variable no está definida
-        return redirect()->route('login')->with('error', 'Usuario no autenticado');
-    }
-
+            // Ahora, $ver contiene la información del usuario
+            return view('registro', compact('ver'));
+        } else {
+            // Manejar la lógica si la variable no está definida
+            return redirect()->route('login')->with('error', 'Usuario no autenticado');
+        }
     }   
 /*
     public function index_usuario()
@@ -53,7 +58,6 @@ class RegistroUsuarioController extends Controller
         ]);
 
         $contraseniaHasheada = bcrypt($request->input('contrasenia'));
-
         // Crea un nuevo usuario en la base de datos
         Usuario::create([
             'nombre_usuario' => $request->input('nombre_usuario'),

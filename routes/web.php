@@ -108,14 +108,4 @@ Route::get('/salir', 'App\Http\Controllers\Auth\LoginController@salir')->name('s
 
 
 
-//ADMIN
-//USUARIO: AZAEL
-//CONTRASEÑA: pAZfpMOV
-
-//CLIENTE
-//USUARIO:CLIENTE
-//CONTRASEÑA: NCjFkIvW
-
-//USUARIO:ADMIN
-//CONTRASEÑA: mjYlKOsE
 

@@ -47,8 +47,8 @@ class InformacionController extends Controller
     public function index_geoestadistica($id_cliente)
     {
         $estados = Estado::all(); // Obtener todos los estados
-        $localidades = Municipio::all(); // Obtener todas las localidades
-        return view('geoestadisticas', compact('localidades', 'estados', 'id_cliente'));
+        $municipios = Municipio::all(); // Obtener todas las municipios
+        return view('geoestadisticas', compact('municipios', 'estados', 'id_cliente'));
 
     }
 

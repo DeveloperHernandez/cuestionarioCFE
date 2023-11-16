@@ -10,56 +10,56 @@
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
     <style>
-        /* Estilo para el menú lateral */
-        .menu-lateral {
-            background-color: #333;
-            height: 100%;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            padding: 20px;
-            color: white;
-        }
+    /* Estilo para el menú lateral */
+    .menu-lateral {
+        background-color: #333;
+        height: 100%;
+        width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 20px;
+        color: white;
+    }
 
-        /* Estilo para el logotipo */
-        .logo {
-            max-width: 100px;
-            margin-bottom: 20px;
-        }
+    /* Estilo para el logotipo */
+    .logo {
+        max-width: 100px;
+        margin-bottom: 20px;
+    }
 
-        /* Estilo para los elementos del menú */
-        .nav-item {
-            padding: 10px 0;
-            text-align: center;
-            font-size: 18px;
-        }
+    /* Estilo para los elementos del menú */
+    .nav-item {
+        padding: 10px 0;
+        text-align: center;
+        font-size: 18px;
+    }
 
-        .nav-item:hover {
-            background-color: #555;
-        }
+    .nav-item:hover {
+        background-color: #555;
+    }
 
-        /* Estilo para el contenido principal */
-        .contenido-principal {
-            margin-left: 250px;
-            padding: 20px;
-        }
+    /* Estilo para el contenido principal */
+    .contenido-principal {
+        margin-left: 250px;
+        padding: 20px;
+    }
 
-        /* Estilo para la tarjeta que contiene la información del usuario */
-        .card-usuario {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        }
+    /* Estilo para la tarjeta que contiene la información del usuario */
+    .card-usuario {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
 
-        /* Estilo para el botón "Volver a la lista de usuarios" */
-        .btn-volver {
-            margin-top: 20px;
-        }
-
+    /* Estilo para el botón "Volver a la lista de usuarios" */
+    .btn-volver {
+        margin-top: 20px;
+    }
     </style>
 </head>
+
 <body>
     <div class="container-fluid" style="height: 100vh;">
         <div class="row">
@@ -103,47 +103,59 @@
                     @csrf
                     @method('PUT')
                     <!-- Usamos el método PUT para indicar que estamos actualizando el usuario -->
-
                     <!-- Agrega el campo CSRF para protección contra ataques CSRF -->
                     <div class="row">
                         <!-- Primera columna -->
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="nombre_usuario">NOMBRE(S)</label>
-                                <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" value="{{ $usuario->nombre_usuario }}">
+                                <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario"
+                                    value="{{ $usuario->nombre_usuario }}">
                             </div>
                             <div class="form-group">
                                 <label for="telefono">TELEFONO</label>
-                                <input type="tel" class="form-control" id="telefono" name="telefono" value="{{ $usuario->telefono }}">
+                                <input type="tel" class="form-control" id="telefono" name="telefono"
+                                    value="{{ $usuario->telefono }}">
                             </div>
                         </div>
                         <!-- Segunda columna -->
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="apellido_paterno">APELLIDO PATERNO</label>
-                                <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno" value="{{ $usuario->apellido_paterno }}">
+                                <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno"
+                                    value="{{ $usuario->apellido_paterno }}">
                             </div>
                             <div class="form-group">
                                 <label for="correo_electronico">CORREO ELECTRÓNICO</label>
-                                <input type="email" class="form-control" id="correo_electronico" name="correo_electronico" value="{{ $usuario->correo_electronico }}">
+                                <input type="email" class="form-control" id="correo_electronico"
+                                    name="correo_electronico" value="{{ $usuario->correo_electronico }}">
                             </div>
                         </div>
                         <!-- Tercera columna -->
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="apellido_materno">APELLIDO MATERNO</label>
-                                <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" value="{{ $usuario->apellido_materno }}">
+                                <input type="text" class="form-control" id="apellido_materno" name="apellido_materno"
+                                    value="{{ $usuario->apellido_materno }}">
                             </div>
                             <div class="form-group">
-                                <label for="rol">ROL</label>
-                                <input type="text" class="form-control" id="rol" name="rol" value="{{ $usuario->rol }}">
+                                <label for="rol">ROLES</label>
+                                <select class="form-control form-select" id="rol" name="rol">
+                                    @foreach(['USUARIO', 'ADMINISTRADOR'] as $rol)
+                                    <option value="{{ $rol }}" {{ $usuario->rol == $rol ? 'selected' : '' }}>
+                                        {{ $rol }}
+                                    </option>
+                                    @endforeach
+                                </select>
                             </div>
 
-                            <button class="btn btn-primary mt-4" id="generar-contrasena">GENERAR NUEVA CONTRASEÑA</button>
+
+                            <button class="btn btn-primary mt-4" id="generar-contrasena">GENERAR NUEVA
+                                CONTRASEÑA</button>
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="contrasenia">CONTRASEÑA GENERADA</label>
-                                    <input type="text" class="form-control" id="contrasenia", name="contrasenia">
+                                    <input type="text" class="form-control" id="contrasenia" , name="contrasenia">
                                 </div>
                             </div>
 
@@ -159,25 +171,24 @@
         </div>
     </div>
     <script>
-        document.getElementById('generar-contrasena').addEventListener('click', function() {
-            event.preventDefault(); // Previene la recarga de la página
-            var contrasenaGenerada = generarContrasenaUnica(); // Lógica para generar una contraseña única
-            document.getElementById('contrasenia').value = contrasenaGenerada;
-        });
+    document.getElementById('generar-contrasena').addEventListener('click', function() {
+        event.preventDefault(); // Previene la recarga de la página
+        var contrasenaGenerada = generarContrasenaUnica(); // Lógica para generar una contraseña única
+        document.getElementById('contrasenia').value = contrasenaGenerada;
+    });
 
-        // Función para generar una contraseña única
-        function generarContrasenaUnica() {
-            // Puedes implementar tu lógica para generar una contraseña aquí.
-            // Un ejemplo simple es generar una contraseña al azar.
-            var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            var contrasena = '';
-            var longitud = 8; // Longitud de la contraseña
-            for (var i = 0; i < longitud; i++) {
-                contrasena += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
-            }
-            return contrasena;
+    // Función para generar una contraseña única
+    function generarContrasenaUnica() {
+        // Puedes implementar tu lógica para generar una contraseña aquí.
+        // Un ejemplo simple es generar una contraseña al azar.
+        var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var contrasena = '';
+        var longitud = 8; // Longitud de la contraseña
+        for (var i = 0; i < longitud; i++) {
+            contrasena += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
         }
-
+        return contrasena;
+    }
     </script>
 
     <!-- Incluye los scripts de Bootstrap y jQuery (asegúrate de tener jQuery instalado) -->

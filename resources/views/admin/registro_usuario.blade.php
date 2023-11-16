@@ -66,7 +66,9 @@
             <!-- Menú lateral -->
             <div class="col-md-3 menu-lateral">
                 <div class="text-center">
-                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo">
+                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo"> <br>
+                    BIENVENIDO: {{ isset($ver['nombre_usuario']) ? $ver['nombre_usuario'] : 'No hay usuario' }}
+                    <br><br>
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">

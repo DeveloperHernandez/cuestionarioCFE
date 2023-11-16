@@ -117,16 +117,16 @@
                     <img src="{{ asset('img/fichaTecnica.png') }}" alt="Ficha Técnica" class="img-fluid mx-auto d-block"
                         style="max-width: 30%; height: auto;">
                 </p>
-                <p class="text-center">
-                    <a href="mailto:?subject=Adjuntar plano&body=Adjunto el plano solicitado.">Enviar correo</a>
-                </p>
+
                 <form action="{{ route('marcar_enviado_ficha_tecnica_adjunto') }}" method="post">
                     @csrf
                     <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
                     <button type="submit" class="btn btn-primary" name="boton2">Enviado</button>
                 </form>
 
-        
+                <p class="text-center">
+                    <a href="mailto:?subject=Adjuntar plano&body=Adjunto el plano solicitado.">Enviar correo</a>
+                </p>
             </div>
         </div>
     </div>

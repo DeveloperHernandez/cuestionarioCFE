@@ -43,15 +43,16 @@ class LoginController extends Controller
                 // Almacena la información del usuario en la sesión personalizada
                 $userSessions[$ver->id_usuario] = [
                     'nombre_usuario' => $ver->nombre_usuario,
+                    'correo_electronico' => $ver->correo_electronico,
                     'rol' => $ver->rol,
                     // Agrega cualquier otra información que desees almacenar
                 ];
     
                 Session::put('user_sessions', $userSessions);
     
-                if ($roles[$ver->rol] === 2) {
+                if (($roles[$ver->rol] === 2 ) && ($ver->estado === 'activo')) {
                     return redirect()->route('registro_usuario');
-                } elseif ($roles[$ver->rol] === 1) {
+                } elseif (($roles[$ver->rol] === 1)  && ($ver->estado === 'activo')) {
                     return redirect()->route('registro');
                 }
             }
