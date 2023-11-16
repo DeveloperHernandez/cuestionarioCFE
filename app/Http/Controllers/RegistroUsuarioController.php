@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Usuario;
+use App\Exports\UsuariosExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Session; // Agrega esta línea
 
 class RegistroUsuarioController extends Controller
 {
@@ -14,9 +17,28 @@ class RegistroUsuarioController extends Controller
 
     public function index_usuario()
     {
-        return view('registro');
+           // Obtén la variable $ver desde la sesión
+    $userSessions = Session::get('user_sessions');
+
+    // Asegúrate de que $userSessions no esté vacío antes de acceder a sus elementos
+    if (!empty($userSessions)) {
+        // Obtén el primer elemento del array
+        $ver = reset($userSessions);
+
+        // Ahora, $ver contiene la información del usuario
+        return view('registro', compact('ver'));
+    } else {
+        // Manejar la lógica si la variable no está definida
+        return redirect()->route('login')->with('error', 'Usuario no autenticado');
     }
 
+    }   
+/*
+    public function index_usuario()
+    {
+        return view('registro');
+    }
+*/
     public function guardar(Request $request)
     {
         // Valida los datos del formulario
@@ -112,6 +134,7 @@ class RegistroUsuarioController extends Controller
     }
 
 
+
     public function datosUsuario($id_usuario)
     {
 
@@ -130,6 +153,19 @@ class RegistroUsuarioController extends Controller
 
         return view('admin.ver_usuario_unico', compact('usuarios'));
     }
+
+    public function exportarUsuario($id_usuario)
+    {
+        $usuario = Usuario::findOrFail($id_usuario); // Obtén el usuario por su ID
+    
+        // Crear un objeto de exportación pasando un array con un solo usuario
+        $export = new UsuariosExport([$usuario]);
+    
+        // Generar y descargar el archivo Excel
+        return Excel::download($export, 'usuario.xlsx');
+    }
+    
+    
 
 
     public function eliminarUsuario($id_usuario)

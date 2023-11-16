@@ -67,7 +67,6 @@
             <div class="col-md-3 menu-lateral">
                 <div class="text-center">
                     <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo">
-                    <p class="text-white">Usuario</p>
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -96,7 +95,7 @@
                         @csrf
                         <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
                         <label for="nombre">Tipo de Elemento:</label>
-                        <select name="nombre" class="form-control" required>
+                        <select name="nombre" class="form-control form-select" required>
                             <option value="NUMERO DE POSTES CFE">Numero de Postes CFE</option>
                             <option value="FLEJES (MTS)">Flejes (MTS)</option>
                             <option value="HEBILLAS">Hebillas</option>

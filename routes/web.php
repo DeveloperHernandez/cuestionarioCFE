@@ -18,8 +18,6 @@ use App\Http\Controllers\EtiquetaController;
 use App\Http\Controllers\EnviadoController;
 
 
-
-
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
@@ -36,6 +34,8 @@ Route::post('/guardar-usuario', [RegistroUsuarioController::class, 'guardar'])->
 
 Route::get('/ver-usuario', [RegistroUsuarioController::class, 'verUsuarios'])->name('ver_usuario');
 Route::get('/detallesUsuario/{id_usuario}','App\Http\Controllers\RegistroUsuarioController@datosUsuario');
+Route::get('/exportar-usuario/{id_usuario}','App\Http\Controllers\RegistroUsuarioController@exportarUsuario');
+
 
 
 Route::get('/editar_usuario', [RegistroUsuarioController::class, 'listaUsuariosEditar'])->name('editar_usuario');
@@ -118,3 +118,4 @@ Route::get('/salir', 'App\Http\Controllers\Auth\LoginController@salir')->name('s
 
 //USUARIO:ADMIN
 //CONTRASEÑA: mjYlKOsE
+

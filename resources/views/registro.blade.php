@@ -66,8 +66,9 @@
             <!-- Menú lateral -->
             <div class="col-md-3 menu-lateral">
                 <div class="text-center">
-                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo">
-                    <p class="text-white">Usuario</p>
+                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo"><br>
+                    BIENVENIDO: {{ isset($ver['nombre_usuario']) ? $ver['nombre_usuario'] : 'No hay usuario' }}
+                    <br><br>
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -104,8 +105,7 @@
                             <div class="form-group">
                                 <label for="nombre_cliente">NOMBRE(S)</label>
                                 <input style="border: 3px solid rgb(49, 131, 49);" type="text" class="form-control"
-                                    id="nombre_cliente" name="nombre_cliente"
-                                    value="{{ $nombre}}">
+                                    id="nombre_cliente" name="nombre_cliente">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -119,8 +119,7 @@
                             <div class="form-group">
                                 <label for="correo_electronico">CORREO ELECTRÓNICO</label>
                                 <input style="border: 3px solid rgb(49, 131, 49);" type="email" class="form-control"
-                                    id="correo_electronico" name="correo_electronico"
-                                    value="{{ $correo }}">
+                                    id="correo_electronico" name="correo_electronico">
                             </div>
                         </div>
                     </div>

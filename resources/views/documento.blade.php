@@ -98,7 +98,7 @@
                             <th>Nombre</th>
                             <th>Apellido Paterno</th>
                             <th>Apellido Materno</th>
-                            <th>Enlace</th>
+                            <th>Exportar a Excel</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -108,8 +108,8 @@
                             <td>{{ $usuario->apellido_paterno }}</td>
                             <td>{{ $usuario->apellido_materno }}</td>
                             <td>
-                                <a title="Detalles" class="btn btn-warning" aria-current="page"
-                                    href="detallesUsuario/{{$usuario->id_usuario}}" type="submit"><i
+                                <a title="Detalles" class="btn btn-success" aria-current="page"
+                                    href="exportar-usuario/{{$usuario->id_usuario}}" type="submit"><i
                                         class="fa-sharp fa-solid fa-rectangle-list"></i></a>
                             </td>
                         </tr>

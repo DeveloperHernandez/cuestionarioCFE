@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session; // Agrega esta línea
 
 class LoginController extends Controller
 {
@@ -37,23 +38,35 @@ class LoginController extends Controller
         if ($ver) {
             // Verifica el rol del usuario
             if (isset($roles[$ver->rol])) {
+                $userSessions = Session::get('user_sessions');
+    
+                // Almacena la información del usuario en la sesión personalizada
+                $userSessions[$ver->id_usuario] = [
+                    'nombre_usuario' => $ver->nombre_usuario,
+                    'rol' => $ver->rol,
+                    // Agrega cualquier otra información que desees almacenar
+                ];
+    
+                Session::put('user_sessions', $userSessions);
+    
                 if ($roles[$ver->rol] === 2) {
-                    return redirect()->route('registro_usuario'); // Redirige al panel de administrador
+                    return redirect()->route('registro_usuario');
                 } elseif ($roles[$ver->rol] === 1) {
-                    return redirect()->route('registro'); // Redirige a la vista de usuario normal
+                    return redirect()->route('registro');
                 }
             }
         }
     
         // Autenticación fallida
         return redirect()->route('login')->with('error', 'Credenciales incorrectas');
+    
     }
     
     
     public function salir()
     {
-        Auth::logout(); // Cierra la sesión del usuario
-        return redirect('/login'); // Redirige al usuario a la página de inicio u otra página de tu elección
+        Auth::logout(); 
+        return redirect('/login');
     }
 
 }

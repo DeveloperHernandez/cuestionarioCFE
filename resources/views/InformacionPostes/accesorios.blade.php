@@ -67,7 +67,6 @@
             <div class="col-md-3 menu-lateral">
                 <div class="text-center">
                     <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo">
-                    <p class="text-white">Usuario</p>
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -90,7 +89,7 @@
                     @csrf
                     <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
                     <label for="nombre">Tipo de Elemento:</label>
-                    <select name="nombre" class="form-control" required>
+                    <select name="nombre" class="form-control form-select" required>
                         <option value="CAJAS DE EMPALME">Cajas de empalme</option>
                         <option value="CAJAS DE DISTRIBUCIÓN">Cajas de distribución</option>
                         <option value="RAQUETAS">Raquetas</option>

@@ -67,7 +67,6 @@
             <div class="col-md-3 menu-lateral">
                 <div class="text-center">
                     <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo">
-                    <p class="text-white">Usuario</p>
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
