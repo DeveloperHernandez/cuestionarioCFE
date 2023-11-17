@@ -97,10 +97,17 @@
                     <label for="peso_por_pieza">Peso por Pieza:</label>
                     <input type="number" step="0.01" name="peso_por_pieza" class="form-control" required>
                     <br>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <div class="row mt-3">
+                        <div class="col-md-6 d-flex justify-content-start">
+                            <button type="submit" class="btn btn-primary">GUARDAR</button>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end">
+                            <a href="{{ route('siguiente_cronograma') }}" class="btn btn-primary">SIGUIENTE</a>
+                        </div>
+                    </div>
                 </form>
             </div>
-            
+
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         </div>
     </div>

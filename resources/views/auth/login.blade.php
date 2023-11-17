@@ -4,11 +4,17 @@
 <div class="container d-flex justify-content-center align-items-center" style="height: 70vh;">
     <div class="login-container border rounded p-4" style="width: 400px;">
         <h2 class="text-center display-4">Login</h2>
+        @if(session('error'))
+            <div class="alert alert-danger" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="form-group">
                 <label for="nombre_cliente" class="small">USUARIO</label>
                 <input type="text" class="form-control form-control-lg" id="nombre_cliente" name="nombre_cliente" placeholder="Usuario" required>
+                
             </div>
 
             <div class="form-group">
@@ -21,3 +27,4 @@
     </div>
 </div>
 @endsection
+

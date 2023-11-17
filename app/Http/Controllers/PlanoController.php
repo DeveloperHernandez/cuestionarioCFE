@@ -13,9 +13,14 @@ class PlanoController extends Controller
     {
         return view('plano',compact('id_cliente'));
     }
-    public function marcarEnviado($id_cliente, $seccion)
+
+    //del botón siguiente de rua nos pasamos a plano, necesito el id_cliente actual
+    public function planoSiguiente()
     {
-      
+        $id_cliente = 1;
+        return view('plano',compact('id_cliente'));
     }
+
+    
     
 }

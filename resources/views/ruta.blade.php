@@ -296,8 +296,13 @@
 
 
                     <br>
-                    <div class="col-md-12 mt-3 d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary">GUARDAR</button>
+                    <div class="row mt-3">
+                        <div class="col-md-6 d-flex justify-content-start">
+                            <button type="submit" class="btn btn-primary">GUARDAR</button>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end">
+                            <a href="{{ route('siguiente_plano') }}" class="btn btn-primary">SIGUIENTE</a>
+                        </div>
                     </div>
 
                 </form>

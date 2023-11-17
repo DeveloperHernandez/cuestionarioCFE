@@ -82,10 +82,15 @@
                 </ul>
             </div>
             <!-- Formulario -->
+            <h5>ID del Cliente: {{ $id_cliente }}</h5>
             <div class="col-md-9 contenido-principal">
-                <h5>ID del Cliente: {{ $id_cliente }}</h5>
                 <h3 class="mb-4 text-center">RELACIÓN DE POSTES A UTILIZAR</h1>
                     <h5 class="mb-5 text-center">INFRAESTRUCTURA DE CFE A UTILIZAR CON EQUIPO</h5>
+                    <p>
+                        ESTO ES UN EJEMPLO PARA QUE SIRVA COMO GUIA DE COMO DEBE INGRESAR LA INFORMACIÓN EN LA TABLA
+                        <img src="{{ asset('img/Infraestructura_cfe_equipo.png') }}" alt="Ficha Técnica"
+                            class="img-fluid mx-auto d-block" style="max-width: 50%; height: auto;">
+                    </p>
                     <form method="post" action="{{ route('guardar_cfe_equipo') }}">
                         @csrf
                         <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
@@ -115,7 +120,14 @@
                             </table>
 
                         </div>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <div class="row mt-3">
+                            <div class="col-md-6 d-flex justify-content-start">
+                                <button type="submit" class="btn btn-primary">GUARDAR</button>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <a href="{{ route('siguiente_tendido') }}" class="btn btn-primary">SIGUIENTE</a>
+                            </div>
+                        </div>
                     </form>
             </div>
 

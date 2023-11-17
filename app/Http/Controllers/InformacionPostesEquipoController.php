@@ -35,7 +35,10 @@ class InformacionPostesEquipoController extends Controller
                 $registroPoste->save();
             }
         }
-        return redirect()->route('lineaTroncal', ['id_cliente' => $id_cliente])->with('success', 'Información guardada exitosamente.');
+        
+        //return redirect()->route('lineaTroncal', ['id_cliente' => $id_cliente])->with('success', 'Información guardada exitosamente.');
+        return redirect()->route('tendido', ['id_cliente' => $id_cliente])->with('success', 'Información guardada exitosamente.');
     }
+
 
 }

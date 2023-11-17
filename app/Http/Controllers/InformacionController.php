@@ -12,6 +12,11 @@ class InformacionController extends Controller
 {
     public function guardar(Request $request)
     {
+        $mensajes = [
+            'required' => 'El campo :attribute es obligatorio.',
+            'email' => 'El campo :attribute debe ser una dirección de correo electrónico válida.',
+        ];
+
         $request->validate([
             'nombre_cliente' => 'required',
             'domicilio' => 'required',
@@ -19,7 +24,7 @@ class InformacionController extends Controller
             'persona_autorizada' => 'required',
             'correos' => 'required',
             'telefonos' => 'required',
-        ]);
+        ],$mensajes);
 
         // Crea un registro en la tabla "PersonaAutorizada"
         $personaAutorizada = PersonaAutorizada::create([
@@ -40,7 +45,7 @@ class InformacionController extends Controller
         $clienteId = $registroPrincipal->id_cliente;
 
         // Redirige a la página "formRegistro" pasando el ID del cliente como parámetro
-        return redirect()->route('formRegistro', ['id_cliente' => $clienteId]);
+        return redirect()->route('formRegistro', ['id_cliente' => $clienteId])->withErrors($request->all());
     }
 
     //despues de seleccionar el boton guardar, nos vamos a la siguiente vista con el id_cliente
@@ -51,5 +56,4 @@ class InformacionController extends Controller
         return view('geoestadisticas', compact('municipios', 'estados', 'id_cliente'));
 
     }
-
 }

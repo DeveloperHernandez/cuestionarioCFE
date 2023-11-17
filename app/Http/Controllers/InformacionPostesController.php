@@ -28,7 +28,7 @@ class InformacionPostesController extends Controller
             'tipo_de_fibra' => 'required|array',
             'tipo_de_fibra.*' => 'required|string',
             'reserva' => 'required|array',
-            'reserva.*' => 'required|string',
+            'reserva.*' => 'required|string',            
             'metros' => 'required|array',
             'metros.*' => 'required|numeric',
             'id_cliente' => 'required|int',
@@ -48,7 +48,6 @@ class InformacionPostesController extends Controller
                 $registroPoste->tipo_fibra = $request->tipo_de_fibra[$key];
                 $registroPoste->reserva_raqueta = $request->reserva[$key];
                 $registroPoste->metros = $request->metros[$key];
-    
                 $registroPoste->save();
             }
         }

@@ -13,6 +13,14 @@ class RutaController extends Controller
         return view('ruta',compact('id_cliente'));
     }
 
+    // del boton siguiente de geostadistica pasamos a ruta, necesito el id_cliente actual
+    public function rutaSiguiente()
+    {
+        $id_cliente=1;
+        return view('ruta',compact('id_cliente'));
+    }
+
+
     public function guardar(Request $p)
     {
         $p->validate([

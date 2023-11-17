@@ -85,30 +85,36 @@
             <div class="col-md-9 contenido-principal">
                 <h3 class="mt-2">LINEA DISTRIBUCIÓN</h3>
                 <h5>ID del Cliente: {{ $id_cliente }}</h5>
-                    <form method="post" action="{{ route('guardar_linea_distribucion') }}">
-                        @csrf
-                        <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
-                        <label for="nombre">Tipo de Elemento:</label>
-                        <select name="nombre" class="form-control form-select" required>
-                            <option value="NUMERO DE POSTES CFE">Numero de Postes CFE</option>
-                            <option value="FLEJES (MTS)">Flejes (MTS)</option>
-                            <option value="HEBILLAS">Hebillas</option>
-                            <option value="HERRAJE D">Herraje D</option>
-                            <option value="HERRAJE J">Herraje J</option>
-                            <option value="TENSORES">Tensores</option>
-                            <option value="FIBRA ÓPTICA #HILOS">Fibra Óptica #Hilos</option>
-                        </select>
+                <form method="post" action="{{ route('guardar_linea_distribucion') }}">
+                    @csrf
+                    <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+                    <label for="nombre">Tipo de Elemento:</label>
+                    <select name="nombre" class="form-control form-select" required>
+                        <option value="NUMERO DE POSTES CFE">Numero de Postes CFE</option>
+                        <option value="FLEJES (MTS)">Flejes (MTS)</option>
+                        <option value="HEBILLAS">Hebillas</option>
+                        <option value="HERRAJE D">Herraje D</option>
+                        <option value="HERRAJE J">Herraje J</option>
+                        <option value="TENSORES">Tensores</option>
+                        <option value="FIBRA ÓPTICA #HILOS">Fibra Óptica #Hilos</option>
+                    </select>
 
-                        <label for="piezas">Piezas:</label>
-                        <input type="number" name="piezas" class="form-control" required>
+                    <label for="piezas">Piezas:</label>
+                    <input type="number" name="piezas" class="form-control" required>
 
-                        <label for="peso_por_pieza">Peso por Pieza:</label>
-                        <input type="number" step="0.01" name="peso_por_pieza" class="form-control" required>
+                    <label for="peso_por_pieza">Peso por Pieza:</label>
+                    <input type="number" step="0.01" name="peso_por_pieza" class="form-control" required>
 
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                    </form>
-
-
+                    <br>
+                    <div class="row mt-3">
+                        <div class="col-md-6 d-flex justify-content-start">
+                            <button type="submit" class="btn btn-primary">GUARDAR</button>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end">
+                        <a href="{{ route('siguiente_accesorio') }}" class="btn btn-primary">SIGUIENTE</a>
+                        </div>
+                    </div>
+                </form>
             </div>
 
             <!-- Enlace a Bootstrap JS (opcional, si necesitas funcionalidades de Bootstrap) -->

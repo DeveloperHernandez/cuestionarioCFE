@@ -123,7 +123,15 @@
                                 </tbody>
                             </table>
                         </div>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <br>
+                        <div class="row mt-3">
+                            <div class="col-md-6 d-flex justify-content-start">
+                                <button type="submit" class="btn btn-primary">GUARDAR</button>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <a href="{{ route('siguiente_etiqueta') }}" class="btn btn-primary">SIGUIENTE</a>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

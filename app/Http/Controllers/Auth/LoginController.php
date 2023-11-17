@@ -38,6 +38,8 @@ class LoginController extends Controller
         if ($ver) {
             // Verifica el rol del usuario
             if (isset($roles[$ver->rol])) {
+                // Limpiar la sesión antes de almacenar el nuevo usuario
+                Session::flush();  
                 $userSessions = Session::get('user_sessions');
     
                 // Almacena la información del usuario en la sesión personalizada
@@ -50,9 +52,9 @@ class LoginController extends Controller
     
                 Session::put('user_sessions', $userSessions);
     
-                if (($roles[$ver->rol] === 2 ) && ($ver->estado === 'activo')) {
+                if (($roles[$ver->rol] === 2) && ($ver->estado === 'activo')) {
                     return redirect()->route('registro_usuario');
-                } elseif (($roles[$ver->rol] === 1)  && ($ver->estado === 'activo')) {
+                } elseif (($roles[$ver->rol] === 1) && ($ver->estado === 'activo')) {
                     return redirect()->route('registro');
                 }
             }
@@ -60,9 +62,7 @@ class LoginController extends Controller
     
         // Autenticación fallida
         return redirect()->route('login')->with('error', 'Credenciales incorrectas');
-    
     }
-    
     
     public function salir()
     {

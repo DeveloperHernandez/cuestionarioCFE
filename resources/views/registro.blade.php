@@ -8,6 +8,8 @@
     <!-- Incluye los estilos de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
     <style>
     /* Estilo para el menú lateral */
@@ -68,7 +70,7 @@
                 <div class="text-center">
                     <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo"><br>
                     BIENVENIDO: {{ isset($ver['nombre_usuario']) ? $ver['nombre_usuario'] : 'No hay usuario' }}
-                    
+
                     <br><br>
                 </div>
                 <ul class="nav flex-column">
@@ -87,9 +89,10 @@
 
             <!-- Contenido principal -->
             <div class="col-md-9 contenido-principal">
+
                 <form method="POST" action="{{ route('guardar_informacion') }}">
                     @csrf
-                    <p class="text-center font-weight-bold" style="border: 1px solid #ff0000; font-weight: bold;">
+                    <p class="text-center font-weight-bold" style="border: 2px solid #ff0000; font-weight: bold;">
                         Estimado cliente, el presente cuestionario tiene la finalidad de tener la información precisa
                         para la realización correcta de la estructura del plano, que posteriormente se presentará para
                         el estudio de acceso ante Comisión Federal de Electricidad, para obtener los permisos para el
@@ -107,20 +110,33 @@
                                 <label for="nombre_cliente">NOMBRE(S)</label>
                                 <input style="border: 3px solid rgb(49, 131, 49);" type="text" class="form-control"
                                     id="nombre_cliente" name="nombre_cliente" value="{{$ver['nombre_usuario']}}">
+                                @error('nombre_cliente')
+                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                @enderror
+
                             </div>
                         </div>
+
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="domicilio">DOMICILIO</label>
                                 <input style="border: 3px solid rgb(49, 131, 49);" type="text" class="form-control"
                                     id="domicilio" name="domicilio">
+                                @error('domicilio')
+                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                @enderror
+
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="correo_electronico">CORREO ELECTRÓNICO</label>
                                 <input style="border: 3px solid rgb(49, 131, 49);" type="email" class="form-control"
-                                    id="correo_electronico" name="correo_electronico" value="{{$ver['correo_electronico']}}">
+                                    id="correo_electronico" name="correo_electronico"
+                                    value="{{$ver['correo_electronico']}}">
+                                @error('correo_electronico')
+                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -131,18 +147,29 @@
                                 <label for="persona_autorizada">PERSONA AUTORIZADA</label>
                                 <input type="text" class="form-control" id="persona_autorizada"
                                     name="persona_autorizada">
+                                @error('persona_autorizada')
+                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                @enderror
+
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="correos">CORREOS</label>
                                 <input type="text" class="form-control" id="correos" name="correos">
+                                @error('correos')
+                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                @enderror
+
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="telefonos">NÚMEROS TELEFÓNICOS</label>
                                 <input type="text" class="form-control" id="telefonos" name="telefonos">
+                                @error('telefonos')
+                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -153,7 +180,7 @@
                             <button type="submit" class="btn btn-primary">GUARDAR</button>
                         </div>
                         <div class="col-md-6 d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary">SIGUIENTE</button>
+                            <a href="{{ route('siguiente_geoestadistica') }}" class="btn btn-primary">SIGUIENTE</a>
                         </div>
                     </div>
                 </form>
