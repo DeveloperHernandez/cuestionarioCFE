@@ -129,7 +129,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Aquí se agregarán las filas dinámicamente pero si el cliente guarda mas tipo de elemento con piezas y peso por pieza nuevo, ya no se logra ver esa nueva tabla junto con el que se guardó anteriormente, lo que deseo es que -->
+                            <!-- Aquí se agregarán las filas dinámicamente -->
                         </tbody>
                     </table>
 

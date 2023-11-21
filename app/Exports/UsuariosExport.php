@@ -20,14 +20,11 @@ use App\Models\Enviado;
 
 class UsuariosExport implements FromCollection,WithHeadings
 {
-    protected $usuarios;
-    protected $clientes;
+    protected $data;
 
-
-    public function __construct($usuarios, $clientes)
+    public function __construct($data)
     {
-        $this->usuarios = $usuarios;
-        $this->clientes = $clientes;
+        $this->data = $data;
     }
 
     public function headings(): array
@@ -47,16 +44,20 @@ class UsuariosExport implements FromCollection,WithHeadings
             'id_personaAutorizada',
             'nombre_cliente',
             'domicilio',
-            'correo_electronico_cliente',
+            'correo_electronico',
         ];
 
     }
 
     public function collection()
     {
-        // Devuelve la colección de usuarios
-        return collect($this->usuarios)->concat($this->clientes);
+        // Combina las colecciones de usuarios y clientes en una sola
+        $usuarios = collect($this->data['usuarios']);
+        $clientes = collect($this->data['clientes']);
 
+        // Asegúrate de ajustar las claves según la estructura de tus tablas
+        $mergedCollection = $usuarios->merge($clientes);
+
+        return $mergedCollection;
     }
 }
-
