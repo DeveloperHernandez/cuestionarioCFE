@@ -1,24 +1,13 @@
 <?php
 namespace App\Exports;
+
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use App\Models\Usuario;
-use App\Models\Cliente;
-use App\Models\PersonaAutorizada;
-use App\Models\areaGeoestadistica;
-use App\Models\Tendido;
-use App\Models\LineaTroncal;
-use App\Models\LineaDistribucion;
-use App\Models\Accesorio;
-use App\Models\Infraestructura_cfe;
-use App\Models\Infraestructura_cfe_equipo;
-use App\Models\Cronograma;
-use App\Models\Ruta;
-use App\Models\Enviado;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-
-
-class UsuariosExport implements FromCollection,WithHeadings
+class UsuariosExport implements WithMultipleSheets
 {
     protected $data;
 
@@ -27,9 +16,31 @@ class UsuariosExport implements FromCollection,WithHeadings
         $this->data = $data;
     }
 
+    public function sheets(): array
+    {
+        $sheets = [];
+
+        // Agrega la hoja de usuarios
+        $sheets[] = new UsuariosSheet($this->data['usuarios']);
+
+        // Agrega la hoja de clientes
+        $sheets[] = new ClientesSheet($this->data['clientes']);
+
+        return $sheets;
+    }
+}
+
+class UsuariosSheet implements FromCollection, WithHeadings, ShouldAutoSize
+{
+    protected $usuarios;
+
+    public function __construct($usuarios)
+    {
+        $this->usuarios = $usuarios;
+    }
+
     public function headings(): array
     {
-        
         return [
             'id_usuario',
             'nombre_usuario',
@@ -40,24 +51,37 @@ class UsuariosExport implements FromCollection,WithHeadings
             'contrasenia',
             'rol',
             'estado',
+        ];
+    }
+
+    public function collection()
+    {
+        return collect($this->usuarios);
+    }
+}
+
+class ClientesSheet implements FromCollection, WithHeadings, ShouldAutoSize
+{
+    protected $clientes;
+
+    public function __construct($clientes)
+    {
+        $this->clientes = $clientes;
+    }
+
+    public function headings(): array
+    {
+        return [
             'id_cliente',
             'id_personaAutorizada',
             'nombre_cliente',
             'domicilio',
             'correo_electronico',
         ];
-
     }
 
     public function collection()
     {
-        // Combina las colecciones de usuarios y clientes en una sola
-        $usuarios = collect($this->data['usuarios']);
-        $clientes = collect($this->data['clientes']);
-
-        // Asegúrate de ajustar las claves según la estructura de tus tablas
-        $mergedCollection = $usuarios->merge($clientes);
-
-        return $mergedCollection;
+        return collect($this->clientes);
     }
 }

@@ -15,18 +15,18 @@ class DocumentoController extends Controller
 {
     $usuario = Usuario::findOrFail($id_usuario); // Obtén el usuario por su ID
     $clientes = Cliente::all(); // Obtén todos los clientes
-    
+
     // Combina los usuarios y clientes en un solo array
     $data = [
         'usuarios' => [$usuario],
         'clientes' => $clientes,
     ];
-    
-    // Crear un objeto de exportación pasando un array con usuarios y clientes
+
+    // Crear un objeto de exportación que incluya múltiples hojas
     $export = new UsuariosExport($data);
 
     // Generar y descargar el archivo Excel
-    return Excel::download($export, 'usuario_cliente.xlsx');
+    return Excel::download($export, 'usuarios_clientes.xlsx');
 }
 
     
