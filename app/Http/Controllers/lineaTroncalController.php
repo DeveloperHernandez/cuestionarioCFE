@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\LineaTroncal;
-
+use Illuminate\Support\Facades\Session;
 
 class lineaTroncalController extends Controller
 {
@@ -22,6 +22,13 @@ class lineaTroncalController extends Controller
             'peso_por_pieza' => 'required|numeric',
             'id_cliente' => 'required|int',
         ]);
+
+        $resultados = [
+            'Tipo de Elemento' => $request->nombre,
+            'Piezas' => $request->piezas,
+            'Peso por Pieza' => $request->peso_por_pieza,
+        ];
+
         $id_cliente = $request->id_cliente;
         
         $elemento = new LineaTroncal();
@@ -32,7 +39,9 @@ class lineaTroncalController extends Controller
 
         $elemento->save();
 
+        Session::flash('success', 'La información guardada exitosamente.');
         return redirect()->route('lineaDistribucion', ['id_cliente' => $id_cliente])->with('success', 'Información guardada exitosamente.');
+        //return response()->json(['resultados' => $resultados]);
     }
 
 }

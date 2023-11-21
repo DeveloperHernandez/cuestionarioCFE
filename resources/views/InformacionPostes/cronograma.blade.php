@@ -83,6 +83,12 @@
             </div>
             <!-- Formulario -->
             <div class="col-md-9 contenido-principal">
+                @if(Session::has('success'))
+                <div id="success-message" class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+                @endif
+
                 <h5>ID del Cliente: {{ $id_cliente }}</h5>
                 <h3 class="text-center">CRONOGRAMA DE ACTIVIDADES</h3>
                 <p>
@@ -93,7 +99,8 @@
                 <br>
                 <!-- Contenedor para la imagen y la tabla -->
                 <div class="centered-container">
-                    <img src="{{ asset('img/cronograma.png') }}" alt="Descripción de la imagen" class="img-fluid mx-auto d-block" style="max-width: 700px; max-height: 700px;" />
+                    <img src="{{ asset('img/cronograma.png') }}" alt="Descripción de la imagen"
+                        class="img-fluid mx-auto d-block" style="max-width: 700px; max-height: 700px;" />
                     <form method="post" action="{{ route('guardar_cronograma') }}">
                         @csrf
                         <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
@@ -112,9 +119,10 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><input type="text" class="form-control" name="proceso_construccion[]"></td>
-                                        <td><input type="text" class="form-control" name="descripcion[]"></td>
-                                        <td><input type="date" class="form-control" name="fecha[]"></td>
+                                        <td><input type="text" class="form-control" name="proceso_construccion[]"
+                                                required></td>
+                                        <td><input type="text" class="form-control" name="descripcion[]" required></td>
+                                        <td><input type="date" class="form-control" name="fecha[]" required></td>
                                         <td>
                                             <button type="button" class="btn btn-eliminar"
                                                 onclick="eliminarFila(this)">Eliminar</button>
@@ -161,6 +169,15 @@
         }
         </script>
 
+        <script>
+        // Espera a que el DOM esté completamente cargado
+        document.addEventListener("DOMContentLoaded", function() {
+            // Espera 5 segundos y oculta el mensaje de éxito
+            setTimeout(function() {
+                $("#success-message").fadeOut(500); // 500 milisegundos para desaparecer
+            }, 5000); // 5000 milisegundos = 5 segundos
+        });
+        </script>
         <!-- Incluye los scripts de Bootstrap y jQuery (asegúrate de tener jQuery instalado) -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>

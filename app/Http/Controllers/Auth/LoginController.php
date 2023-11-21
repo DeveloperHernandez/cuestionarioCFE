@@ -44,6 +44,7 @@ class LoginController extends Controller
     
                 // Almacena la información del usuario en la sesión personalizada
                 $userSessions[$ver->id_usuario] = [
+                    'id_usuario'=> $ver->id_usuario,
                     'nombre_usuario' => $ver->nombre_usuario,
                     'correo_electronico' => $ver->correo_electronico,
                     'rol' => $ver->rol,
@@ -71,3 +72,5 @@ class LoginController extends Controller
     }
 
 }
+
+

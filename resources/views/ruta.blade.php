@@ -84,6 +84,12 @@
 
             <!-- Formulario -->
             <div class="col-md-9 contenido-principal">
+                @if(Session::has('success'))
+                <div id="success-message" class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+                @endif
+
                 <h5>ID del Cliente: {{ $id_cliente }}</h5>
                 <form method="post" action="{{ route('guardar_ruta') }}">
                     @csrf
@@ -95,12 +101,18 @@
                             <div class="form-group">
                                 <label for="colonia">Colonia</label>
                                 <input type="text" class="form-control" id="colonia" name="colonia">
+                                @error('colonia')
+                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="localidad">Localidad</label>
                                 <input type="text" class="form-control" id="localidad" name="localidad">
+                                @error('localidad')
+                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 
@@ -108,17 +120,21 @@
                             <div class="form-group">
                                 <label for="municipio">Municipio</label>
                                 <input type="text" class="form-control" id="municipio" name="municipio">
+                                @error('municipio')
+                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-
-
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="estado">Estado</label>
                                 <input type="text" class="form-control" id="estado" name="estado">
+                                @error('estado')
+                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 
@@ -126,6 +142,9 @@
                             <div class="form-group">
                                 <label for="codigo_postal">Código Postal</label>
                                 <input type="text" class="form-control" id="codigo_postal" name="codigo_postal">
+                                @error('codigo_postal')
+                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -133,6 +152,9 @@
                     <div class="form-group">
                         <label for="nombre_lugar">Nombre lugar</label>
                         <input type="text" class="form-control" id="nombre_lugar" name="nombre_lugar" readonly>
+                        @error('nombre_lugar')
+                        <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <hr>
@@ -195,7 +217,7 @@
 
                                 <div class="form-group mt-2">
                                     <input type="text" class="form-control" id="latitud" name="latitud"
-                                        placeholder="Latitud">
+                                        placeholder="latitud">
                                 </div>
 
                                 <div class="form-group mt-2">
@@ -205,6 +227,9 @@
                                 <div class="form-group">
                                     <label for="inicio">Inicio</label>
                                     <input type="text" class="form-control" id="inicio" name="inicio" readonly>
+                                    @error('inicio')
+                                    <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -247,13 +272,14 @@
                                 <div class="form-group">
                                     <label for="final">Final</label>
                                     <input type="text" class="form-control" id="final" name="final" readonly>
+                                    @error('final')
+                                    <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <hr>
-
                     <div class="container">
                         <label for="calle">6. Indicar el número de postes y total de KM de cable a instalar</label>
                         <div class="row">
@@ -261,6 +287,9 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="numero_postes" name="numero_postes"
                                         placeholder="Número de postes">
+                                    @error('numero_postes')
+                                    <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -268,12 +297,13 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="totalkm_cable" name="totalkm_cable"
                                         placeholder="Total Km Cable">
+                                    @error('totalkm_cable')
+                                    <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
 
                     <div class="container">
                         <div class="row">
@@ -290,6 +320,9 @@
                                     su instalación.</label>
                                 <input type="text" class="form-control" id="infraestructura_cfe_tercero"
                                     name="infraestructura_cfe_tercero">
+                                @error('infraestructura_cfe_tercero')
+                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -369,6 +402,16 @@
     });
     // Llama a la función inicialmente para llenar los campos "Inicio" y "Final" si es necesario
     actualizarCamposInicioFinal();
+    </script>
+
+    <script>
+    // Espera a que el DOM esté completamente cargado
+    document.addEventListener("DOMContentLoaded", function() {
+        // Espera 5 segundos y oculta el mensaje de éxito
+        setTimeout(function() {
+            $("#success-message").fadeOut(500); // 500 milisegundos para desaparecer
+        }, 5000); // 5000 milisegundos = 5 segundos
+    });
     </script>
 </body>
 

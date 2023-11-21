@@ -84,6 +84,12 @@
             <!-- Formulario -->
             <div class="col-md-9 contenido-principal">
                 <h5>ID del Cliente: {{ $id_cliente }}</h5>
+                @if(Session::has('success'))
+                <div id="success-message" class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+                @endif
+
                 <form method="post" action="{{ route('guardar_geoestadisticas') }}">
                     @csrf
                     <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
@@ -113,6 +119,9 @@
                         <tbody>
                             <tr>
                                 <td><input type="text" class="form-control" name="localidad[]"></td>
+                                @error('localidad.')
+                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                @enderror
                                 <td>
                                     <select class="form-control form-select" name="municipio[]">
                                         @foreach ($municipios as $municipio)
@@ -142,6 +151,9 @@
                         <label for="uso_posteria">3. Indicar si ya se encuentra haciendo uso de la postería
                             solicitada</label>
                         <input type="text" class="form-control" id="uso_posteria" name="uso_posteria">
+                        @error('uso_posteria')
+                        <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                        @enderror
                     </div>
                     <br>
                     <div class="row mt-3">
@@ -158,7 +170,7 @@
     </div>
 
     <!-- Incluye los scripts de Bootstrap y jQuery (asegúrate de tener jQuery instalado) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
     <script>
@@ -196,10 +208,15 @@
         fila.remove();
     }
     </script>
-
+    <script>
+    // Espera a que el DOM esté completamente cargado
+    document.addEventListener("DOMContentLoaded", function() {
+        // Espera 5 segundos y oculta el mensaje de éxito
+        setTimeout(function() {
+            $("#success-message").fadeOut(500); // 500 milisegundos para desaparecer
+        }, 5000); // 5000 milisegundos = 5 segundos
+    });
+    </script>
 </body>
 
 </html>
-
-
-

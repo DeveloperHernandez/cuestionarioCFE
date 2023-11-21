@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\LineaDistribucion;
+use Illuminate\Support\Facades\Session;
+
 
 class lineaDistribucionController extends Controller
 {
@@ -31,7 +33,8 @@ class lineaDistribucionController extends Controller
         $elemento->id_cliente = $request->id_cliente;
 
         $elemento->save();
-
+        
+        Session::flash('success', 'La información guardada exitosamente.');
         return redirect()->route('accesorios', ['id_cliente' => $id_cliente])->with('success', 'Información guardada exitosamente.');
     }
 }

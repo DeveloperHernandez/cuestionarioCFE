@@ -83,6 +83,11 @@
             </div>
             <div class="col-md-9 contenido-principal text-center">
                 <h5>ID del Cliente: {{ $id_cliente }}</h5>
+                @if(Session::has('success'))
+                <div id="success-message" class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+                @endif
                 <p>
                     En cada estructura, el cable de red de telecomunicaciones se debe identificar con etiqueta de vinilo
                     para exteriores de alta adhesión, del color que aluda a cada compañía y deberá llevar el nombre del
@@ -102,7 +107,7 @@
                 <form action="{{ route('marcar_enviado_etiqueta') }}" method="post">
                     @csrf
                     <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
-                    <button type="submit" class="btn btn-primary" name="boton3">Enviado</button>
+                    <button type="submit" class="btn btn-primary" id="btnEtiqueta" name="boton3">Enviado</button>
                 </form>
 
             </div>
@@ -115,6 +120,27 @@
     <!-- Incluye los scripts de Bootstrap y jQuery (asegúrate de tener jQuery instalado) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+
+    <script>
+    // Espera a que el DOM esté completamente cargado
+    document.addEventListener("DOMContentLoaded", function() {
+        // Espera 5 segundos y oculta el mensaje de éxito
+        setTimeout(function() {
+            $("#success-message").fadeOut(500); // 500 milisegundos para desaparecer
+        }, 5000); // 5000 milisegundos = 5 segundos
+    });
+    </script>
+    <script>
+    // Espera a que el DOM esté completamente cargado
+    document.addEventListener("DOMContentLoaded", function() {
+        // Agrega un evento de clic al botón "Enviado" del plano
+        document.getElementById('btnEtiqueta').addEventListener('click', function() {
+            alert('Gracias por enviar el plano.');
+        });
+    });
+    </script>
+
 </body>
 
 </html>

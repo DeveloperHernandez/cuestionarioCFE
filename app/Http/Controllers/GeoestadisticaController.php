@@ -7,6 +7,8 @@ use App\Models\Geoestadistica;
 use App\Models\Cliente;
 use App\Models\Estado;
 use App\Models\Municipio;
+use Illuminate\Support\Facades\Session;
+
 
 class GeoestadisticaController extends Controller
 {
@@ -50,6 +52,7 @@ class GeoestadisticaController extends Controller
                 $cliente->geoestadisticos()->save($registroGeoestadistico);
             }
         }
+        Session::flash('success', 'La información guardada exitosamente.');
         return redirect()->route('formRuta', ['id_cliente' => $clienteId])->with('success', 'Información guardada exitosamente.');
     }
 }

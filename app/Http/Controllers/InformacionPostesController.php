@@ -3,13 +3,25 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Infraestructura_cfe;
+use Illuminate\Support\Facades\Session;
+
 
 class InformacionPostesController extends Controller
 {
+
     public function index()
     {
-        $id_cliente = 1; // Cambia esto según tu lógica para obtener o definir el id_cliente
-        return view('InformacionPostes.infraestructura_cfe', compact('id_cliente'));
+    $userSessions = Session::get('user_sessions');
+        // Verifica si hay información del usuario en la sesión
+        if (!empty($userSessions)) {
+            // Obtén la información del primer usuario en la sesión
+            $ver = reset($userSessions);
+            $id_usuario = $ver['id_usuario'];
+            // Resto de tu lógica
+            return view('InformacionPostes.infraestructura_cfe', compact('id_usuario', 'ver'));
+        } else {
+            return redirect()->route('login')->with('error', 'Usuario no autenticado');
+        }
     }
     
     public function guardarInfraestructuraCfe(Request $request)
@@ -51,6 +63,7 @@ class InformacionPostesController extends Controller
                 $registroPoste->save();
             }
         }
+        Session::flash('success', 'La información guardada exitosamente.');
         return redirect()->route('informacion_postes_equipo', ['id_cliente' => $id_cliente])->with('success', 'Información guardada exitosamente.');
     }
     

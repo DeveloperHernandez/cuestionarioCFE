@@ -7,6 +7,7 @@ use App\Models\Cliente;
 use App\Models\PersonaAutorizada;
 use App\Models\Estado;
 use App\Models\Municipio;
+use Illuminate\Support\Facades\Session;
 
 class InformacionController extends Controller
 {
@@ -44,6 +45,8 @@ class InformacionController extends Controller
         // Obtiene el ID del cliente recién creado
         $clienteId = $registroPrincipal->id_cliente;
 
+        
+        Session::flash('success', 'La información guardada exitosamente.');
         // Redirige a la página "formRegistro" pasando el ID del cliente como parámetro
         return redirect()->route('formRegistro', ['id_cliente' => $clienteId])->withErrors($request->all());
     }
@@ -51,9 +54,10 @@ class InformacionController extends Controller
     //despues de seleccionar el boton guardar, nos vamos a la siguiente vista con el id_cliente
     public function index_geoestadistica($id_cliente)
     {
-        $estados = Estado::all(); // Obtener todos los estados
-        $municipios = Municipio::all(); // Obtener todas las municipios
+        $estados = Estado::all(); 
+        $municipios = Municipio::all(); 
         return view('geoestadisticas', compact('municipios', 'estados', 'id_cliente'));
-
     }
 }
+
+

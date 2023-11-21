@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cronograma;
+use Illuminate\Support\Facades\Session; 
+
 
 class CronogramaController extends Controller
 {
@@ -32,6 +34,8 @@ class CronogramaController extends Controller
                 $registroCronograma->save();
             }
         }
+
+        Session::flash('success', 'La información guardada exitosamente.');
         return redirect()->route('etiqueta', ['id_cliente' => $id_cliente])->with('success', 'Información guardada exitosamente.');
     }
     

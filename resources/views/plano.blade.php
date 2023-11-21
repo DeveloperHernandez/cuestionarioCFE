@@ -83,6 +83,11 @@
             </div>
             <!-- Formulario -->
             <div class="col-md-9 contenido-principal">
+                @if(Session::has('success'))
+                <div id="success-message" class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+                @endif
                 <h5>ID del Cliente: {{ $id_cliente }}</h5>
                 <p>
                     8. Asimismo, se requiere que adjunte un plano del lugar expedido por el municipio correspondiente,
@@ -102,7 +107,7 @@
                 <form action="{{ route('marcar_enviado_plano_adjunto') }}" method="post">
                     @csrf
                     <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
-                    <button type="submit" class="btn btn-primary" name="boton1">Enviado </button>
+                    <button type="submit" class="btn btn-primary" id="btnPlano" name="boton1">Enviado </button>
                 </form>
                 </p>
                 <!-- Enlace para abrir Gmail -->
@@ -121,7 +126,7 @@
                 <form action="{{ route('marcar_enviado_ficha_tecnica_adjunto') }}" method="post">
                     @csrf
                     <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
-                    <button type="submit" class="btn btn-primary" name="boton2">Enviado</button>
+                    <button type="submit" class="btn btn-primary" id="btnFicha" name="boton2">Enviado</button>
                 </form>
 
                 <p class="text-center">
@@ -135,6 +140,36 @@
     <!-- Incluye los scripts de Bootstrap y jQuery (asegúrate de tener jQuery instalado) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+    // Espera a que el DOM esté completamente cargado
+    document.addEventListener("DOMContentLoaded", function() {
+        // Espera 5 segundos y oculta el mensaje de éxito
+        setTimeout(function() {
+            $("#success-message").fadeOut(500); // 500 milisegundos para desaparecer
+        }, 5000); // 5000 milisegundos = 5 segundos
+    });
+    </script>
+    <script>
+    // Espera a que el DOM esté completamente cargado
+    document.addEventListener("DOMContentLoaded", function() {
+        // Agrega un evento de clic al botón "Enviado" del plano
+        document.getElementById('btnPlano').addEventListener('click', function() {
+            alert('Gracias por enviar el plano.');
+        });
+
+        // Agrega un evento de clic al botón "Enviado" de la ficha técnica
+        document.getElementById('btnFicha').addEventListener('click', function() {
+            alert('Gracias por enviar la ficha técnica.');
+        });
+    });
+</script>
+
 </body>
 
 </html>
+
+
+
+
+
+

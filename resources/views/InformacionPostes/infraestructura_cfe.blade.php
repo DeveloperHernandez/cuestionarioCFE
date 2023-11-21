@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -5,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infraestructura CFE</title>
-
+    <!-- Incluye los estilos de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
@@ -66,8 +67,10 @@
             <!-- Menú lateral -->
             <div class="col-md-3 menu-lateral">
                 <div class="text-center">
-                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo">
-                </div>
+                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo"><br>
+                    BIENVENIDO: {{ isset($ver['nombre_usuario']) ? $ver['nombre_usuario'] : 'No hay usuario' }}
+                    USUARIO: {{ isset($ver['id_usuario']) ? $ver['id_usuario'] : 'No hay usuario' }}
+                </div><br>
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{{ route('registro') }}">Cuestionario tendido de
@@ -82,8 +85,9 @@
                 </ul>
             </div>
             <!-- Formulario -->
-            <h5>ID del Cliente: {{ $id_cliente }}</h5>
             <div class="col-md-9 contenido-principal">
+                ID de Usuario: {{ isset($ver['id_usuario']) ? $ver['id_usuario'] : 'El id no existe'}}
+
                 <h3 class="mb-4 text-center">RELACIÓN DE POSTES A UTILIZAR</h1>
                     <h5 class="mb-5 text-center">INFRAESTRUCTURA DE CFE A UTILIZAR</h5>
                     <p>
@@ -91,11 +95,19 @@
                         <img src="{{ asset('img/Infraestructura_cfe.png') }}" alt="Ficha Técnica"
                             class="img-fluid mx-auto d-block" style="max-width: 50%; height: auto;">
                     </p>
-
                     <form method="post" action="{{ route('guardar_cfe') }}">
                         @csrf
-                        <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+                        <input type="hidden" name="id_cliente" value="{{ $id_usuario }}">
                         <div class="section">
+                            @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -107,27 +119,23 @@
                                         <th>TIPO DE FIBRA</th>
                                         <th>RESERVA(RAQUETA)</th>
                                         <th>METROS</th>
-                                        <td>
-                                            <button type="button" class="btn btn-agregar btn-primary"
-                                                onclick="agregarFila()">AGREGAR</button>
-                                        </td>
+                                        <th><button type="button" class="btn btn-agregar"
+                                                onclick="agregarFila()">AGREGAR</button></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><input type="text" class="form-control" name="no_poste[]"></td>
-                                        <td><input type="text" class="form-control" name="descripcion[]"></td>
-                                        <td><input type="text" class="form-control" name="latitud[]"></td>
-                                        <td><input type="text" class="form-control" name="longitud[]"></td>
-                                        <td><input type="text" class="form-control" name="distancia_interpostal[]"></td>
-                                        <td><input type="text" class="form-control" name="tipo_de_fibra[]"></td>
-                                        <td><input type="text" class="form-control" name="reserva[]"></td>
-                                        <td><input type="text" class="form-control" name="metros[]"></td>
-                                        <td>
-                                            <button type="button" class="btn btn-eliminar btn-danger"
-                                                onclick="eliminarFila(this)">ELIMINAR</button>
-                                        </td>
+                                        <td><input type="number" class="form-control" name="no_poste[]" required></td>
+                                        <td><input type="text" class="form-control" name="descripcion[]" required></td>
+                                        <td><input type="text" class="form-control" name="latitud[]" required></td>
+                                        <td><input type="text" class="form-control" name="longitud[]" required></td>
+                                        <td><input type="text" class="form-control" name="distancia_interpostal[]"required></td>
+                                        <td><input type="text" class="form-control" name="tipo_de_fibra[]" required></td>
+                                        <td><input type="text" class="form-control" name="reserva[]" required></td>
+                                        <td><input type="text" class="form-control" name="metros[]" required></td>
+                                        <td><button type="button" class="btn btn-eliminar" onclick="eliminarFila(this)">Eliminar</button></td>
                                     </tr>
+
                                 </tbody>
                             </table>
                         </div>
@@ -142,10 +150,8 @@
                     </form>
             </div>
 
-            <!-- Incluye los scripts de Bootstrap y jQuery (asegúrate de tener jQuery instalado) -->
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-
+            <!-- Enlace a Bootstrap JS (opcional, si necesitas funcionalidades de Bootstrap) -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
             <script>
             function agregarFila() {
                 const table = document.querySelector("table tbody");
@@ -177,7 +183,7 @@
 
                 const cell9 = newRow.insertCell(8);
                 cell9.innerHTML =
-                    '<button type="button" class="btn btn-eliminar btn-danger" onclick="eliminarFila(this)">ELIMINAR</button>';
+                    '<button type="button" class="btn btn-eliminar" onclick="eliminarFila(this)">Eliminar</button>';
             }
 
             function eliminarFila(button) {

@@ -25,12 +25,10 @@ class RegistroUsuarioController extends Controller
     {
         // Obtén la variable $ver desde la sesión
         $userSessions = Session::get('user_sessions');
-
         // Asegúrate de que $userSessions no esté vacío antes de acceder a sus elementos
         if (!empty($userSessions)) {
             // Obtén el primer elemento del array
             $ver = reset($userSessions);
-
             // Ahora, $ver contiene la información del usuario
             return view('registro', compact('ver'));
         } else {

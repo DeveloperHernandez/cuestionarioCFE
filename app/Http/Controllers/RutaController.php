@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Ruta;
 use App\Models\Cliente;
+use Illuminate\Support\Facades\Session;
+
 
 class RutaController extends Controller
 {
@@ -23,6 +25,11 @@ class RutaController extends Controller
 
     public function guardar(Request $p)
     {
+        
+        $mensajes = [
+            'required' => 'El campo :attribute es obligatorio.',
+        ];
+
         $p->validate([
             'colonia' => 'required',
             'localidad' => 'required',
@@ -35,7 +42,7 @@ class RutaController extends Controller
             'final' => 'required',
             'numero_postes'=> 'required',
             'totalkm_cable'=> 'required'
-        ]);
+        ],$mensajes);
 
         $clienteId = $p->input('id_cliente');        
         
@@ -67,6 +74,7 @@ class RutaController extends Controller
             'id_cliente' => $clienteId,
         ]);
     
+        Session::flash('success', 'La información guardada exitosamente.');
         return redirect()->route('formPlano',['id_cliente' => $clienteId])->with('success', 'Información guardada exitosamente.');
     }
     

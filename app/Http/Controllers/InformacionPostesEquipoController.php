@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Infraestructura_cfe_equipo;
+use Illuminate\Support\Facades\Session;
+
 
 class InformacionPostesEquipoController extends Controller
 {
@@ -35,7 +37,7 @@ class InformacionPostesEquipoController extends Controller
                 $registroPoste->save();
             }
         }
-        
+        Session::flash('success', 'La información guardada exitosamente.');
         //return redirect()->route('lineaTroncal', ['id_cliente' => $id_cliente])->with('success', 'Información guardada exitosamente.');
         return redirect()->route('tendido', ['id_cliente' => $id_cliente])->with('success', 'Información guardada exitosamente.');
     }

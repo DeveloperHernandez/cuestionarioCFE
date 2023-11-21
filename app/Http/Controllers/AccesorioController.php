@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Accesorio;
+use Illuminate\Support\Facades\Session; 
 
 
 class AccesorioController extends Controller
@@ -29,6 +30,8 @@ class AccesorioController extends Controller
         $elemento->id_cliente = $request->id_cliente;
         $elemento->save();
 
+
+        Session::flash('success', 'La información guardada exitosamente.');
         return redirect()->route('cronograma', ['id_cliente' => $id_cliente])->with('success', 'Información guardada exitosamente.');
     }
 

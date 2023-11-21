@@ -82,8 +82,15 @@
                 </ul>
             </div>
             <!-- Formulario -->
-            <h5>ID del Cliente: {{ $id_cliente }}</h5>
+
             <div class="col-md-9 contenido-principal">
+                <h5>ID del Cliente: {{ $id_cliente }}</h5>
+                @if(Session::has('success'))
+                <div id="success-message" class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+                @endif
+
                 <h3 class="mb-4 text-center">RELACIÓN DE POSTES A UTILIZAR</h1>
                     <h5 class="mb-5 text-center">INFRAESTRUCTURA DE CFE A UTILIZAR CON EQUIPO</h5>
                     <p>
@@ -109,10 +116,10 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><input type="text" class="form-control" name="no_poste[]"></td>
-                                        <td><input type="text" class="form-control" name="accesorio[]"></td>
-                                        <td><input type="text" class="form-control" name="latitud[]"></td>
-                                        <td><input type="text" class="form-control" name="longitud[]"></td>
+                                        <td><input type="number" class="form-control" name="no_poste[]" required></td>
+                                        <td><input type="text" class="form-control" name="accesorio[]" required></td>
+                                        <td><input type="text" class="form-control" name="latitud[]" required></td>
+                                        <td><input type="text" class="form-control" name="longitud[]" required></td>
                                         <td><button type="button" class="btn btn-eliminar"
                                                 onclick="eliminarFila(this)">ELIMINAR</button></td>
                                     </tr>
@@ -132,6 +139,7 @@
             </div>
 
             <!-- Enlace a Bootstrap JS (opcional, si necesitas funcionalidades de Bootstrap) -->
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
             <script>
             function agregarFila() {
@@ -160,6 +168,16 @@
                 row.remove();
             }
             </script>
+            <script>
+            // Espera a que el DOM esté completamente cargado
+            document.addEventListener("DOMContentLoaded", function() {
+                // Espera 5 segundos y oculta el mensaje de éxito
+                setTimeout(function() {
+                    $("#success-message").fadeOut(500); // 500 milisegundos para desaparecer
+                }, 5000); // 5000 milisegundos = 5 segundos
+            });
+            </script>
+
         </div>
     </div>
 </body>

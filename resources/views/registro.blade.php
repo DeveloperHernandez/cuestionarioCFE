@@ -70,7 +70,7 @@
                 <div class="text-center">
                     <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo"><br>
                     BIENVENIDO: {{ isset($ver['nombre_usuario']) ? $ver['nombre_usuario'] : 'No hay usuario' }}
-
+                    USUARIO: {{ isset($ver['id_usuario']) ? $ver['id_usuario'] : 'No hay usuario' }}
                     <br><br>
                 </div>
                 <ul class="nav flex-column">
@@ -89,7 +89,6 @@
 
             <!-- Contenido principal -->
             <div class="col-md-9 contenido-principal">
-
                 <form method="POST" action="{{ route('guardar_informacion') }}">
                     @csrf
                     <p class="text-center font-weight-bold" style="border: 2px solid #ff0000; font-weight: bold;">

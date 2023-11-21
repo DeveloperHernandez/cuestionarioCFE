@@ -1,0 +1,69 @@
+se desea que mientras el cliente vaya escribiendo su informacion, quiero que en una tabla se muestren los resultados  para que se vaya viendo
+
+<body>
+    <div class="container-fluid" style="height: 100vh;">
+        <div class="row">
+            <!-- Menú lateral -->
+            <div class="col-md-3 menu-lateral">
+                <div class="text-center">
+                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo">
+                </div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ route('registro') }}">Cuestionario tendido de
+                            fibra óptica</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ route('informacion_postes') }}">Información postes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ route('salir') }}">Cerrar sesión</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Formulario -->
+            <div class="col-md-9 contenido-principal">
+                <h3 class="mt-2">LINEA TRONCAL</h5>
+                    <p>De acuerdo a su proyecto indicar la cantidad de materiales a utilizar en la siguiente tabla, la
+                        información debe coincidir con las fichas técnicas solicitadas en el punto anterior. En caso de
+                        que
+                        no
+                        aplique colocar la leyenda “NO APLICA”.
+                    </p>
+                    <h5>ID del Cliente: {{ $id_cliente }}</h5>
+                    <form method="post" action="{{ route('guardar_linea_troncal') }}">
+                        @csrf
+                        <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+                        <label for="nombre">Tipo de Elemento:</label>
+                        <select name="nombre" class="form-control form-select" required>
+                            <option value="NUMERO DE POSTES CFE">Numero de Postes CFE</option>
+                            <option value="FLEJES (MTS)">Flejes (MTS)</option>
+                            <option value="HEBILLAS">Hebillas</option>
+                            <option value="HERRAJE D">Herraje D</option>
+                            <option value="HERRAJE J">Herraje J</option>
+                            <option value="TENSORES">Tensores</option>
+                            <option value="FIBRA ÓPTICA #HILOS">Fibra Óptica #Hilos</option>
+                        </select>
+
+                        <label for="piezas">Piezas:</label>
+                        <input type="number" name="piezas" class="form-control" required>
+
+                        <label for="peso_por_pieza">Peso por Pieza:</label>
+                        <input type="number" step="0.01" name="peso_por_pieza" class="form-control" required>
+                        <br>
+                        <div class="row mt-3">
+                            <div class="col-md-6 d-flex justify-content-start">
+                                <button type="submit" class="btn btn-primary">GUARDAR</button>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <a href="{{ route('siguiente_distribucion') }}" class="btn btn-primary">SIGUIENTE</a>
+                            </div>
+                        </div>
+                    </form>
+            </div>
+
+            <!-- Enlace a Bootstrap JS (opcional, si necesitas funcionalidades de Bootstrap) -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </div>
+    </div>
+</body>

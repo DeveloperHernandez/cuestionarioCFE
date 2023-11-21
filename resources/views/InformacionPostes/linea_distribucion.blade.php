@@ -83,6 +83,11 @@
             </div>
             <!-- Formulario -->
             <div class="col-md-9 contenido-principal">
+                @if(Session::has('success'))
+                <div id="success-message" class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+                @endif
                 <h3 class="mt-2">LINEA DISTRIBUCIÓN</h3>
                 <h5>ID del Cliente: {{ $id_cliente }}</h5>
                 <form method="post" action="{{ route('guardar_linea_distribucion') }}">
@@ -111,14 +116,26 @@
                             <button type="submit" class="btn btn-primary">GUARDAR</button>
                         </div>
                         <div class="col-md-6 d-flex justify-content-end">
-                        <a href="{{ route('siguiente_accesorio') }}" class="btn btn-primary">SIGUIENTE</a>
+                            <a href="{{ route('siguiente_accesorio') }}" class="btn btn-primary">SIGUIENTE</a>
                         </div>
                     </div>
                 </form>
             </div>
-
+            
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
             <!-- Enlace a Bootstrap JS (opcional, si necesitas funcionalidades de Bootstrap) -->
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+            <script>
+            // Espera a que el DOM esté completamente cargado
+            document.addEventListener("DOMContentLoaded", function() {
+                // Espera 5 segundos y oculta el mensaje de éxito
+                setTimeout(function() {
+                    $("#success-message").fadeOut(500); // 500 milisegundos para desaparecer
+                }, 5000); // 5000 milisegundos = 5 segundos
+            });
+            </script>
         </div>
     </div>
 </body>

@@ -83,6 +83,11 @@
             </div>
             <!-- Formulario -->
             <div class="col-md-9 contenido-principal">
+                @if(Session::has('success'))
+                <div id="success-message" class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+                @endif
                 <h3 class="mt-2">TENDIDO</h5>
                     <p>En el siguiente formato describir los materiales a utilizar en el tendido, incluir modelo y
                         anexar ficha técnica (tabla de características del tendido)**La información en color azul es un
@@ -92,58 +97,86 @@
                     <form method="post" action="{{ route('guardar_tendido') }}">
                         @csrf
                         <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+
                         <div class="mb-3">
                             <label for="flejes" class="form-label">FLEJES</label>
                             <input type="text" class="form-control" id="flejes" name="flejes"
                                 placeholder="MODELO:WXY           FICHA TÉCNICA:  H5/8 TULIKO">
+                            @error('flejes')
+                            <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="hebillas" class="form-label">HEBILLAS</label>
                             <input type="text" class="form-control" id="hebillas" name="hebillas"
                                 placeholder="MODELO: HYN         FICHA TÉCNICA H5/8 TULIKO">
+                            @error('hebillas')
+                            <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="herraje_j" class="form-label">HERRAJE TIPO J</label>
                             <input type="text" class="form-control" id="herraje_j" name="herraje_j"
                                 placeholder="MODELO: OPHAHEJ8          FICHA TÉCNICA OPHAHEJ8-12MMPW">
+                            @error('herraje_j')
+                            <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="herraje_d" class="form-label">HERRAJE TIPO D (INCLUIR MEDIDAS)</label>
                             <input type="text" class="form-control" id="herraje_d" name="herraje_d"
                                 placeholder="MODELO: LP-SDC               FICHA TÉCNICA LP-SDC">
+                            @error('herraje_d')
+                            <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="tensor" class="form-label">TENSOR (Incluir medidas)</label>
                             <input type="text" class="form-control" id="tensor" name="tensor"
                                 placeholder="MODELO:OPHARPA  FICHA TÉCNICA OPHARPACGA18">
+                            @error('tensor')
+                            <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="fibra_optica" class="form-label">Fibra óptica (Incluir número de Hilos)</label>
                             <input type="text" class="form-control" id="fibra_optica" name="fibra_optica"
                                 placeholder="MODELO:FSTN9  FICHA TÉCNICA FSTN924">
+                            @error('fibra_optica')
+                            <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="caja_distribucion" class="form-label">Cajas de distribución</label>
                             <input type="text" class="form-control" id="caja_distribucion" name="caja_distribucion"
                                 placeholder="MODELO:FDP-42  FICHA TÉCNICA FDP-420E">
+                            @error('caja_distribucion')
+                            <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="caja_empalme" class="form-label">Cajas de empalme</label>
                             <input type="text" class="form-control" id="caja_empalme" name="caja_empalme"
                                 placeholder="MODELO:CEH192  FICHA TÉCNICA OPCEH19268HT">
+                            @error('caja_empalme')
+                            <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="raquetas" class="form-label">Raquetas</label>
                             <input type="text" class="form-control" id="raquetas" name="raquetas"
                                 placeholder="MODELO:LP-SF-S   FICHA TÉCNICA LP-SF-SC-12">
+                            @error('raquetas')
+                            <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-6 d-flex justify-content-start">
@@ -157,7 +190,18 @@
             </div>
 
             <!-- Enlace a Bootstrap JS (opcional, si necesitas funcionalidades de Bootstrap) -->
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+            <script>
+            // Espera a que el DOM esté completamente cargado
+            document.addEventListener("DOMContentLoaded", function() {
+                // Espera 5 segundos y oculta el mensaje de éxito
+                setTimeout(function() {
+                    $("#success-message").fadeOut(500); // 500 milisegundos para desaparecer
+                }, 5000); // 5000 milisegundos = 5 segundos
+            });
+            </script>
         </div>
     </div>
 </body>

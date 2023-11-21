@@ -17,7 +17,7 @@ class EnviadoController extends Controller
             'id_cliente' => $clienteId,
         ]);
 
-        return redirect()->route('formPlano',['id_cliente' => $clienteId])->with('success', 'Información guardada exitosamente.');
+        return redirect()->route('formPlano',['id_cliente' => $clienteId]);
     }
 
     public function guardarFicha(Request $p)
@@ -30,7 +30,7 @@ class EnviadoController extends Controller
             'id_cliente' => $clienteId,
         ]);
 
-        return redirect()->route('formPlano',['id_cliente' => $clienteId])->with('success', 'Información guardada exitosamente.');
+        return redirect()->route('formPlano',['id_cliente' => $clienteId]);
     }
 
     public function guardarEtiqueta(Request $p)
@@ -42,7 +42,7 @@ class EnviadoController extends Controller
             'etiqueta_adjunto' => $etiqueta_adjunto,
             'id_cliente' => $clienteId,
         ]);
-        return redirect()->route('etiqueta', ['id_cliente' => $clienteId])->with('success', 'Información guardada exitosamente.');
+        return redirect()->route('etiqueta', ['id_cliente' => $clienteId]);
     }
 }
 

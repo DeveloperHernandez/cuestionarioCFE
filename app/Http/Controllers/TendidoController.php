@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tendido;
+use Illuminate\Support\Facades\Session;
+
+
 
 class TendidoController extends Controller
 {
@@ -16,16 +19,21 @@ class TendidoController extends Controller
     public function guardarTendido(Request $p)
     {
         $p->validate([
-            'flejes' => 'required',
-            'hebillas' => 'required',
-            'herraje_j' => 'required',
-            'herraje_d' => 'required',
-            'tensor' => 'required',
-            'fibra_optica' => 'required',
-            'caja_distribucion'=> 'required',
-            'caja_empalme' => 'required',
-            'raquetas' => 'required'
+            'flejes' => 'required|string|max:255',
+            'hebillas' => 'required|string|max:255',
+            'herraje_j' => 'required|string|max:255',
+            'herraje_d' => 'required|string|max:255',
+            'tensor' => 'required|string|max:255',
+            'fibra_optica' => 'required|string|max:255',
+            'caja_distribucion' => 'required|string|max:255',
+            'caja_empalme' => 'required|string|max:255',
+            'raquetas' => 'required|string|max:255',
+        ], [
+            'required' => 'El campo :attribute es obligatorio.',
+            'string' => 'El campo :attribute debe ser una cadena de caracteres.',
+            'max' => 'El campo :attribute no debe tener más de :max caracteres.',
         ]);
+        
 
         $clienteId = $p->input('id_cliente');        
         
@@ -51,7 +59,7 @@ class TendidoController extends Controller
             'raquetas_descripcion'=> $raquetas,
             'id_cliente' => $clienteId,
         ]);
-    
+        Session::flash('success', 'La información guardada exitosamente.');
         return redirect()->route('lineaTroncal', ['id_cliente' => $clienteId])->with('success', 'Información guardada exitosamente.');
     }
     
