@@ -59,6 +59,19 @@
     .btn-volver {
         margin-top: 20px;
     }
+
+    @media (max-width: 767px) {
+
+        /* Oculta el menú lateral en tamaños de pantalla pequeños */
+        .menu-lateral {
+            display: none;
+        }
+
+        /* Ajusta el margen izquierdo del contenido principal */
+        .contenido-principal {
+            margin-left: 0;
+        }
+    }
     </style>
 </head>
 
@@ -107,34 +120,41 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="nombre_cliente">NOMBRE(S)</label>
-                                <input style="border: 3px solid rgb(49, 131, 49);" type="text" class="form-control"
+                                <input style="border: 3px solid rgb(49, 131, 49);" type="text"
+                                    class="form-control @error('nombre_cliente') is-invalid @enderror"
                                     id="nombre_cliente" name="nombre_cliente" value="{{$ver['nombre_usuario']}}">
                                 @error('nombre_cliente')
-                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
-
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="domicilio">DOMICILIO</label>
-                                <input style="border: 3px solid rgb(49, 131, 49);" type="text" class="form-control"
-                                    id="domicilio" name="domicilio">
+                                <input style="border: 3px solid rgb(49, 131, 49);" type="text"
+                                    class="form-control @error('domicilio') is-invalid @enderror" id="domicilio"
+                                    name="domicilio">
                                 @error('domicilio')
-                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
-
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="correo_electronico">CORREO ELECTRÓNICO</label>
-                                <input style="border: 3px solid rgb(49, 131, 49);" type="email" class="form-control"
+                                <input style="border: 3px solid rgb(49, 131, 49);" type="email"
+                                    class="form-control @error('correo_electronico') is-invalid @enderror"
                                     id="correo_electronico" name="correo_electronico"
                                     value="{{$ver['correo_electronico']}}">
                                 @error('correo_electronico')
-                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -144,10 +164,13 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="persona_autorizada">PERSONA AUTORIZADA</label>
-                                <input type="text" class="form-control" id="persona_autorizada"
-                                    name="persona_autorizada">
+                                <input type="text"
+                                    class="form-control @error('persona_autorizada') is-invalid @enderror"
+                                    id="persona_autorizada" name="persona_autorizada">
                                 @error('persona_autorizada')
-                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
 
                             </div>
@@ -155,33 +178,36 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="correos">CORREOS</label>
-                                <input type="text" class="form-control" id="correos" name="correos">
+                                <input type="text" class="form-control @error('correos') is-invalid @enderror"
+                                    id="correos" name="correos">
                                 @error('correos')
-                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
-
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="telefonos">NÚMEROS TELEFÓNICOS</label>
-                                <input type="text" class="form-control" id="telefonos" name="telefonos">
+                                <input type="text" class="form-control @error('telefonos') is-invalid @enderror" id="telefonos" name="telefonos">
                                 @error('telefonos')
-                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
-                    </div>
 
-                    <br>
-                    <div class="row mt-3">
-                        <div class="col-md-6 d-flex justify-content-start">
-                            <button type="submit" class="btn btn-primary">GUARDAR</button>
+                        <br>
+                        <div class="row mt-3">
+                            <div class="col-md-6 d-flex justify-content-start">
+                                <button type="submit" class="btn btn-primary">GUARDAR</button>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <a href="{{ route('siguiente_geoestadistica') }}" class="btn btn-primary">SIGUIENTE</a>
+                            </div>
                         </div>
-                        <div class="col-md-6 d-flex justify-content-end">
-                            <a href="{{ route('siguiente_geoestadistica') }}" class="btn btn-primary">SIGUIENTE</a>
-                        </div>
-                    </div>
                 </form>
             </div>
         </div>

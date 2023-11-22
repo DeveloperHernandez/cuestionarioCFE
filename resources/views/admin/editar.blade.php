@@ -97,56 +97,86 @@
                     {{ session('success') }}
                 </div>
                 @endif
-
-                <h2>Editar Usuario</h2>
+                <h2>Editar Usuario</h2> <br>
                 <form method="POST" action="{{ route('actualizar_usuario', ['id_usuario' => $usuario->id_usuario]) }}">
                     @csrf
                     @method('PUT')
-                    <!-- Usamos el método PUT para indicar que estamos actualizando el usuario -->
-                    <!-- Agrega el campo CSRF para protección contra ataques CSRF -->
                     <div class="row">
                         <!-- Primera columna -->
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="nombre_usuario">NOMBRE(S)</label>
-                                <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario"
-                                    value="{{ $usuario->nombre_usuario }}">
+                                <input type="text" class="form-control @error('nombre_usuario') is-invalid @enderror"
+                                    id="nombre_usuario" name="nombre_usuario" value="{{ $usuario->nombre_usuario }}">
+                                @error('nombre_usuario')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="telefono">TELEFONO</label>
-                                <input type="tel" class="form-control" id="telefono" name="telefono"
-                                    value="{{ $usuario->telefono }}">
+                                <input type="tel" class="form-control @error('telefono') is-invalid @enderror"
+                                    id="telefono" name="telefono" value="{{ $usuario->telefono }}">
+                                @error('telefono')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <!-- Segunda columna -->
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="apellido_paterno">APELLIDO PATERNO</label>
-                                <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno"
+                                <input type="text" class="form-control @error('apellido_paterno') is-invalid @enderror"
+                                    id="apellido_paterno" name="apellido_paterno"
                                     value="{{ $usuario->apellido_paterno }}">
+                                @error('apellido_paterno')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="correo_electronico">CORREO ELECTRÓNICO</label>
-                                <input type="email" class="form-control" id="correo_electronico"
-                                    name="correo_electronico" value="{{ $usuario->correo_electronico }}">
+                                <input type="email"
+                                    class="form-control @error('correo_electronico') is-invalid @enderror"
+                                    id="correo_electronico" name="correo_electronico"
+                                    value="{{ $usuario->correo_electronico }}">
+                                @error('correo_electronico')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <!-- Tercera columna -->
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="apellido_materno">APELLIDO MATERNO</label>
-                                <input type="text" class="form-control" id="apellido_materno" name="apellido_materno"
+                                <input type="text" class="form-control @error('apellido_materno') is-invalid @enderror" id="apellido_materno" name="apellido_materno"
                                     value="{{ $usuario->apellido_materno }}">
+                                    @error('apellido_materno')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="rol">ROLES</label>
-                                <select class="form-control form-select" id="rol" name="rol">
+                                <select class="form-control  form-select @error('rol') is-invalid @enderror" id="rol" name="rol">
                                     @foreach(['USUARIO', 'ADMINISTRADOR'] as $rol)
                                     <option value="{{ $rol }}" {{ $usuario->rol == $rol ? 'selected' : '' }}>
                                         {{ $rol }}
                                     </option>
                                     @endforeach
                                 </select>
+                                @error('rol')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
 
 
@@ -155,7 +185,12 @@
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="contrasenia">CONTRASEÑA GENERADA</label>
-                                    <input type="text" class="form-control" id="contrasenia" , name="contrasenia">
+                                    <input type="text" class="form-control @error('contrasenia') is-invalid @enderror" id="contrasenia" , name="contrasenia">
+                                    @error('contrasenia')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
 

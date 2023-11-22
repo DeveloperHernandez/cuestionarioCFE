@@ -33,16 +33,5 @@ class EnviadoController extends Controller
         return redirect()->route('formPlano',['id_cliente' => $clienteId]);
     }
 
-    public function guardarEtiqueta(Request $p)
-    {
-        $clienteId = $p->input('id_cliente');   
-        $etiqueta_adjunto = $p->has('boton3');  // Verifica si el botón "boton2" está presente
-        
-        Enviado::create([
-            'etiqueta_adjunto' => $etiqueta_adjunto,
-            'id_cliente' => $clienteId,
-        ]);
-        return redirect()->route('etiqueta', ['id_cliente' => $clienteId]);
-    }
 }
 

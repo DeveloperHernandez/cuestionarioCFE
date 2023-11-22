@@ -42,7 +42,7 @@ class TendidoController extends Controller
         $herraje_j = $p->herraje_j;
         $herraje_d = $p->herraje_d;
         $tensor = $p->tensor;
-        $fibra_optica = $p->nombre_lugar;
+        $fibra_optica = $p->fibra_optica;
         $caja_distribucion =$p->caja_distribucion;
         $caja_empalme = $p->caja_empalme;
         $raquetas = $p->raquetas;

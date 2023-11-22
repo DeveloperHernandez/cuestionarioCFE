@@ -11,13 +11,14 @@ use Illuminate\Support\Facades\Session;
 
 class InformacionController extends Controller
 {
+    
     public function guardar(Request $request)
     {
         $mensajes = [
             'required' => 'El campo :attribute es obligatorio.',
             'email' => 'El campo :attribute debe ser una dirección de correo electrónico válida.',
         ];
-
+    
         $request->validate([
             'nombre_cliente' => 'required',
             'domicilio' => 'required',
@@ -25,28 +26,47 @@ class InformacionController extends Controller
             'persona_autorizada' => 'required',
             'correos' => 'required',
             'telefonos' => 'required',
-        ],$mensajes);
-
-        // Crea un registro en la tabla "PersonaAutorizada"
-        $personaAutorizada = PersonaAutorizada::create([
-            'nombres' => $request->persona_autorizada,
-            'correos' => $request->correos,
-            'numeros_telefonicos' => $request->telefonos,
-        ]);
-
-        // Crea un registro en la tabla "Cliente" relacionado con "PersonaAutorizada"
-        $registroPrincipal = new Cliente([
-            'nombre_cliente' => $request->nombre_cliente,
-            'domicilio' => $request->domicilio,
-            'correo_electronico' => $request->correo_electronico,
-        ]);
-
-        $personaAutorizada->cliente()->save($registroPrincipal);
-        // Obtiene el ID del cliente recién creado
-        $clienteId = $registroPrincipal->id_cliente;
-
-        
-        Session::flash('success', 'La información guardada exitosamente.');
+        ], $mensajes);
+    
+        // Busca un cliente existente por correo electrónico
+        $clienteExistente = Cliente::where('correo_electronico', $request->correo_electronico)->first();
+    
+        if ($clienteExistente) {
+            // Si el cliente ya existe, actualiza la información
+            $clienteExistente->update([
+                'nombre_cliente' => $request->nombre_cliente,
+                'domicilio' => $request->domicilio,
+            ]);
+    
+            $clienteExistente->personaAutorizada()->update([
+                'nombres' => $request->persona_autorizada,
+                'correos' => $request->correos,
+                'numeros_telefonicos' => $request->telefonos,
+            ]);
+    
+            // Obtiene el ID del cliente existente
+            $clienteId = $clienteExistente->id_cliente;
+        } else {
+            // Si el cliente no existe, crea uno nuevo
+            $personaAutorizada = PersonaAutorizada::create([
+                'nombres' => $request->persona_autorizada,
+                'correos' => $request->correos,
+                'numeros_telefonicos' => $request->telefonos,
+            ]);
+    
+            $registroPrincipal = new Cliente([
+                'nombre_cliente' => $request->nombre_cliente,
+                'domicilio' => $request->domicilio,
+                'correo_electronico' => $request->correo_electronico,
+            ]);
+    
+            $personaAutorizada->cliente()->save($registroPrincipal);
+    
+            // Obtiene el ID del cliente recién creado
+            $clienteId = $registroPrincipal->id_cliente;
+        }
+    
+        Session::flash('success', 'La información se guardó exitosamente.');
         // Redirige a la página "formRegistro" pasando el ID del cliente como parámetro
         return redirect()->route('formRegistro', ['id_cliente' => $clienteId])->withErrors($request->all());
     }
@@ -59,5 +79,4 @@ class InformacionController extends Controller
         return view('geoestadisticas', compact('municipios', 'estados', 'id_cliente'));
     }
 }
-
 

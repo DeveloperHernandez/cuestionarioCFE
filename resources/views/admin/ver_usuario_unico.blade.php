@@ -89,9 +89,9 @@
                 </ul>
             </div>
             <div class="col-md-9 contenido-principal">
-                <h1>Detalles del Usuario</h1>
+                <h2>Detalles del Usuario</h2> <br>
                 @foreach($usuarios as $usuario)
-                <div class="card card-usuario">
+                <div class="">
                     <div class="card-body">
                         <p class="card-text"><strong>NOMBRE:</strong>
                             {{ $usuario->nombre_usuario ? $usuario->nombre_usuario : 'Sin nombre' }}</p>

@@ -105,10 +105,10 @@
                     </select>
 
                     <label for="piezas">Piezas:</label>
-                    <input type="number" name="piezas" class="form-control" required>
+                    <input type="number" name="piezas" class="form-control" >
 
                     <label for="peso_por_pieza">Peso por Pieza:</label>
-                    <input type="number" step="0.01" name="peso_por_pieza" class="form-control" required>
+                    <input type="number" step="0.01" name="peso_por_pieza" class="form-control" >
 
                     <br>
                     <div class="row mt-3">

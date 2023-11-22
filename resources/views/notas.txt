@@ -1,5 +1,155 @@
 pero si el cliente guarda mas tipo de elemento con piezas y peso por pieza nuevo, ya no se logra ver esa nueva tabla junto con el que se guardó anteriormente, lo que deseo es que el cliente vaya viendo los cambios que se han guardado asi para que tenga conocimiento de lo que guardó
 
+-se necesita hacer que cada hoja creada en excel tenga un nombre porque al descargar el documento me sale el nomnre
+por defecto de worksheet,worksheet1, por ejemplo el documento tiene 2 hojas una de usuario y otra de documentos entonces necesito que tengan nombre
+- me sigue saliendo el nombre de las hojas worksheet,worksheet1 y no aparecen las que yo puse
+este es mi codigo
+<?php
+namespace App\Exports;
+
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
+
+class UsuariosExport implements WithMultipleSheets
+{
+    protected $data;
+
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
+
+    public function sheets(): array
+    {
+        $sheets = [
+            new UsuariosSheet($this->data['usuarios']),
+            new ClientesSheet($this->data['clientes']),
+        ];
+
+        return $sheets;
+    }
+
+}
+
+
+class UsuariosSheet implements FromCollection, WithHeadings, ShouldAutoSize
+{
+    protected $usuarios;
+    protected $title = 'Usuarios';
+
+    public function __construct($usuarios)
+    {
+        $this->usuarios = $usuarios;
+    }
+
+    public function headings(): array
+    {
+        return [
+            'id_usuario',
+            'nombre_usuario',
+            'apellido_paterno',
+            'apellido_materno',
+            'telefono',
+            'correo_electronico',
+            'contrasenia',
+            'rol',
+            'estado',
+        ];
+    }
+
+    public function collection()
+    {
+        return collect($this->usuarios);
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+        return $this;
+    }
+    
+    public function title(): string
+    {
+        return $this->title;
+    }
+}
+
+class ClientesSheet implements FromCollection, WithHeadings, ShouldAutoSize
+{
+    protected $clientes;
+    protected $title = 'Clientes';
+
+    public function __construct($clientes)
+    {
+        $this->clientes = $clientes;
+    }
+
+    public function headings(): array
+    {
+        return [
+            'id_cliente',
+            'id_personaAutorizada',
+            'nombre_cliente',
+            'domicilio',
+            'correo_electronico',
+        ];
+    }
+
+    public function collection()
+    {
+        return collect($this->clientes);
+    }
+
+     public function setTitle(string $title): self
+     {
+         $this->title = $title;
+         return $this;
+     }
+ 
+     public function title(): string
+     {
+         return $this->title;
+     }
+}
+
+
+mi DocumentoController
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Usuario;
+use App\Models\Cliente;
+use Illuminate\Support\Facades\Session; // Agrega esta línea
+
+class DocumentoController extends Controller
+{
+    public function exportarUsuario($id_usuario)
+{
+    $usuario = Usuario::findOrFail($id_usuario); // Obtén el usuario por su ID
+    $cliente = Cliente::findOrFail($id_usuario); 
 
 
 
+    // Combina los usuarios y clientes en un solo array
+    $data = [
+        'usuarios' => [$usuario],
+        'clientes' => [$cliente],
+
+    ];
+
+    // Crear un objeto de exportación que incluya múltiples hojas
+    $export = new UsuariosExport($data);
+    // Configura los nombres de las hojas
+    $export->sheets()[0]->setTitle('Usuarios');
+    $export->sheets()[1]->setTitle('Clientes');
+    
+    // Generar y descargar el archivo Excel
+    return Excel::download($export, 'documento.xlsx');
+}
+    
+}

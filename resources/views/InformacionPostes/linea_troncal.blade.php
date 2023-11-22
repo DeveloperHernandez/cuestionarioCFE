@@ -106,10 +106,10 @@
                         </select>
 
                         <label for="piezas">Piezas:</label>
-                        <input type="number" name="piezas" class="form-control" required>
+                        <input type="number" name="piezas" class="form-control">
 
                         <label for="peso_por_pieza">Peso por Pieza:</label>
-                        <input type="number" step="0.01" name="peso_por_pieza" class="form-control" required>
+                        <input type="number" step="0.01" name="peso_por_pieza" class="form-control" >
                         <br>
                         <div class="row mt-3">
                             <div class="col-md-6 d-flex justify-content-start">
@@ -120,60 +120,12 @@
                             </div>
                         </div>
                     </form>
-                    <h5>Resultados</h5>
-                    <table class="table border" id="tablaResultados">
-                        <thead>
-                            <tr>
-                                <th scope="col">Elemento</th>
-                                <th scope="col">Valor</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Aquí se agregarán las filas dinámicamente -->
-                        </tbody>
-                    </table>
-
             </div>
 
             <!-- Enlace a Bootstrap JS (opcional, si necesitas funcionalidades de Bootstrap) -->
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-            <script>
-            $(document).ready(function() {
-                // Agrega un evento al botón de GUARDAR
-                $('form').submit(function(event) {
-                    event.preventDefault(); // Evita que se envíe el formulario automáticamente
-
-                    // Obtén los valores de los campos del formulario
-                    var tipoElemento = $('select[name="nombre"]').val();
-                    var piezas = $('input[name="piezas"]').val();
-                    var pesoPorPieza = $('input[name="peso_por_pieza"]').val();
-
-                    // Llama a la función para actualizar la tabla de resultados
-                    actualizarTabla(tipoElemento, piezas, pesoPorPieza);
-                });
-
-                // Función para actualizar la tabla de resultados
-                function actualizarTabla(tipoElemento, piezas, pesoPorPieza) {
-                    // Obtén el tbody de la tabla de resultados
-                    var tbody = $('#tablaResultados tbody');
-
-                    // Elimina las filas existentes
-                    tbody.empty();
-
-                    // Agrega nuevas filas con los resultados
-                    agregarFila(tbody, 'Tipo de Elemento', tipoElemento);
-                    agregarFila(tbody, 'Piezas', piezas);
-                    agregarFila(tbody, 'Peso por Pieza', pesoPorPieza);
-                }
-
-                // Función para agregar una fila a la tabla de resultados
-                function agregarFila(tbody, label, valor) {
-                    tbody.append('<tr><td>' + label + '</td><td>' + valor + '</td></tr>');
-                }
-            });
-            </script>
         </div>
     </div>
 </body>

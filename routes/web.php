@@ -114,7 +114,9 @@ Route::get('/siguiente_etiqueta', [EtiquetaController::class, 'index'])->name('s
 
 Route::post('/marcar_enviado_plano_adjunto', [EnviadoController::class, 'guardarPlano'])->name('marcar_enviado_plano_adjunto');
 Route::post('/marcar_enviado_ficha_tecnica_adjunto', [EnviadoController::class, 'guardarFicha'])->name('marcar_enviado_ficha_tecnica_adjunto');
-Route::post('/marcar_enviado_etiqueta', [EnviadoController::class, 'guardarEtiqueta'])->name('marcar_enviado_etiqueta');
+
+
+Route::post('/marcar_enviado_etiqueta', [EtiquetaController::class, 'guardarEtiqueta'])->name('marcar_enviado_etiqueta');
 
 
 

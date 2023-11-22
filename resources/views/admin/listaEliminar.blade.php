@@ -91,6 +91,7 @@
             </div>
             <!-- Contenido principal -->
             <div class="col-md-9 contenido-principal">
+                <h2>Eliminar Usuario</h2> <br>
                 <table class="table table-striped table-bordered">
                     <thead class="thead-dark">
                         <tr>

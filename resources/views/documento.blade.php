@@ -91,6 +91,7 @@
             </div>
             <!-- Contenido principal -->
             <div class="col-md-9 contenido-principal">
+                <h2>Descargar Documento</h2> <br>
                 <table class="table table-striped table-bordered">
                     <thead class="thead-dark">
                         <tr>
@@ -107,7 +108,7 @@
                             <td>{{ $usuario->apellido_paterno }}</td>
                             <td>{{ $usuario->apellido_materno }}</td>
                             <td>
-                                <a title="Detalles" class="btn btn-success" aria-current="page"
+                                <a title="Descargar" class="btn btn-success" aria-current="page"
                                     href="exportar-usuario/{{$usuario->id_usuario}}" type="submit"><i
                                         class="fa-sharp fa-solid fa-rectangle-list"></i></a>
                             </td>

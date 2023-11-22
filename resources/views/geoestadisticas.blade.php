@@ -57,6 +57,20 @@
     .btn-volver {
         margin-top: 20px;
     }
+
+
+    @media (max-width: 767px) {
+
+        /* Oculta el menú lateral en tamaños de pantalla pequeños */
+        .menu-lateral {
+            display: none;
+        }
+
+        /* Ajusta el margen izquierdo del contenido principal */
+        .contenido-principal {
+            margin-left: 0;
+        }
+    }
     </style>
 </head>
 
@@ -118,10 +132,10 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><input type="text" class="form-control" name="localidad[]"></td>
-                                @error('localidad.')
-                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
-                                @enderror
+                                <td><input type="text" class="form-control @error('localidad') is-invalid @enderror"
+                                        name="localidad[]" required>
+                                </td>
+
                                 <td>
                                     <select class="form-control form-select" name="municipio[]">
                                         @foreach ($municipios as $municipio)
@@ -150,9 +164,11 @@
                     <div class="form-group">
                         <label for="uso_posteria">3. Indicar si ya se encuentra haciendo uso de la postería
                             solicitada</label>
-                        <input type="text" class="form-control" id="uso_posteria" name="uso_posteria">
+                        <input type="text" class="form-control @error('uso_posteria') is-invalid @enderror" id="uso_posteria" name="uso_posteria">
                         @error('uso_posteria')
-                        <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                     <br>

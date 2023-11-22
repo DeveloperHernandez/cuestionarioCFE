@@ -7,9 +7,12 @@ use App\Models\Usuario;
 use App\Exports\UsuariosExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Session; // Agrega esta línea
+use Illuminate\Validation\ValidationException;
+
 
 class RegistroUsuarioController extends Controller
 {
+    //me lleva a la vista de registro usuario del administrador
     public function index()
     {
         $userSessions = Session::get('user_sessions');
@@ -36,38 +39,50 @@ class RegistroUsuarioController extends Controller
             return redirect()->route('login')->with('error', 'Usuario no autenticado');
         }
     }   
-/*
-    public function index_usuario()
-    {
-        return view('registro');
-    }
-*/
+
+    
+
     public function guardar(Request $request)
     {
-        // Valida los datos del formulario
-        $request->validate([
-            'nombre_usuario' => 'required',
-            'apellido_paterno' => 'required',
-            'apellido_materno' => 'required',
-            'telefono' => 'required',
-            'correo_electronico' => 'required|email',
-            'contrasenia' => 'required',
-            'rol' => 'required',
-        ]);
-
-        $contraseniaHasheada = bcrypt($request->input('contrasenia'));
-        // Crea un nuevo usuario en la base de datos
-        Usuario::create([
-            'nombre_usuario' => $request->input('nombre_usuario'),
-            'apellido_paterno' => $request->input('apellido_paterno'),
-            'apellido_materno' => $request->input('apellido_materno'),
-            'telefono' => $request->input('telefono'),
-            'correo_electronico' => $request->input('correo_electronico'),
-            'contrasenia' => $contraseniaHasheada, // Guarda la contraseña hasheada
-            'rol' => $request->input('rol'),
-        ]);
-        return redirect()->route('registro_usuario')->with('success', 'Usuario registrado con éxito');
+        try {
+            $request->validate([
+                'nombre_usuario' => 'required',
+                'apellido_paterno' => 'required',
+                'apellido_materno' => 'required',
+                'telefono' => 'required',
+                'correo_electronico' => 'required|email|unique:usuario,correo_electronico', // La regla unique verifica la unicidad en la tabla 'usuarios'
+                'contrasenia' => 'required',
+                'rol' => 'required',
+            ], [
+                'nombre_usuario.required' => 'El campo Nombre es obligatorio.',
+                'apellido_paterno.required' => 'El campo Apellido Paterno es obligatorio.',
+                'apellido_materno.required' => 'El campo Apellido Materno es obligatorio.',
+                'telefono.required' => 'El campo Teléfono es obligatorio.',
+                'correo_electronico.required' => 'El campo Correo Electrónico es obligatorio.',
+                'correo_electronico.email' => 'El campo Correo Electrónico debe ser una dirección de correo válida.',
+                'correo_electronico.unique' => 'El correo electrónico ya está registrado. Intente de nuevo',
+                'contrasenia.required' => 'El campo Contraseña es obligatorio.',
+                'rol.required' => 'El campo Rol es obligatorio.',
+            ]);
+    
+            $contraseniaHasheada = bcrypt($request->input('contrasenia'));
+            
+            // Crea un nuevo usuario en la base de datos
+            Usuario::create([
+                'nombre_usuario' => $request->input('nombre_usuario'),
+                'apellido_paterno' => $request->input('apellido_paterno'),
+                'apellido_materno' => $request->input('apellido_materno'),
+                'telefono' => $request->input('telefono'),
+                'correo_electronico' => $request->input('correo_electronico'),
+                'contrasenia' => $contraseniaHasheada, // Guarda la contraseña hasheada
+                'rol' => $request->input('rol'),
+            ]);
+            return redirect()->route('registro_usuario')->with('success', 'Usuario registrado con éxito');
+        } catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->validator->getMessageBag())->withInput();
+        }
     }
+    
 
     public function verUsuarios()
     {
@@ -101,7 +116,6 @@ class RegistroUsuarioController extends Controller
 
     public function actualizarUsuario(Request $request, $id_usuario)
     {
-        // Valida los datos del formulario
         $request->validate([
             'nombre_usuario' => 'required',
             'apellido_paterno' => 'required',
@@ -109,6 +123,14 @@ class RegistroUsuarioController extends Controller
             'telefono' => 'required',
             'correo_electronico' => 'required|email',
             'rol' => 'required',
+        ], [
+            'nombre_usuario.required' => 'El campo Nombre es obligatorio.',
+            'apellido_paterno.required' => 'El campo Apellido Paterno es obligatorio.',
+            'apellido_materno.required' => 'El campo Apellido Materno es obligatorio.',
+            'telefono.required' => 'El campo Teléfono es obligatorio.',
+            'correo_electronico.required' => 'El campo Correo Electrónico es obligatorio.',
+            'correo_electronico.email' => 'El campo Correo Electrónico debe ser una dirección de correo válida.',
+            'rol.required' => 'El campo Rol es obligatorio.',
         ]);
 
         // Obtiene el usuario existente
@@ -134,7 +156,6 @@ class RegistroUsuarioController extends Controller
 
         return redirect()->route('editar_usuario')->with('success', 'Usuario actualizado con éxito');
     }
-
 
 
     public function datosUsuario($id_usuario)

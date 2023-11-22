@@ -144,7 +144,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="fibra_optica" class="form-label">Fibra óptica (Incluir número de Hilos)</label>
+                            <label for="fibra_optica" class="form-label">FIBRA ÓPTICA (Incluir número de Hilos)</label>
                             <input type="text" class="form-control" id="fibra_optica" name="fibra_optica"
                                 placeholder="MODELO:FSTN9  FICHA TÉCNICA FSTN924">
                             @error('fibra_optica')
@@ -153,7 +153,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="caja_distribucion" class="form-label">Cajas de distribución</label>
+                            <label for="caja_distribucion" class="form-label">CAJAS DE DISTRIBUCIÓN</label>
                             <input type="text" class="form-control" id="caja_distribucion" name="caja_distribucion"
                                 placeholder="MODELO:FDP-42  FICHA TÉCNICA FDP-420E">
                             @error('caja_distribucion')
@@ -162,7 +162,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="caja_empalme" class="form-label">Cajas de empalme</label>
+                            <label for="caja_empalme" class="form-label">CAJAS DE EMPALME</label>
                             <input type="text" class="form-control" id="caja_empalme" name="caja_empalme"
                                 placeholder="MODELO:CEH192  FICHA TÉCNICA OPCEH19268HT">
                             @error('caja_empalme')
@@ -171,7 +171,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="raquetas" class="form-label">Raquetas</label>
+                            <label for="raquetas" class="form-label">RAQUETAS</label>
                             <input type="text" class="form-control" id="raquetas" name="raquetas"
                                 placeholder="MODELO:LP-SF-S   FICHA TÉCNICA LP-SF-SC-12">
                             @error('raquetas')
