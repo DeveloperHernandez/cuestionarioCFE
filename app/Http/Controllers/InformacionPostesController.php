@@ -11,19 +11,16 @@ class InformacionPostesController extends Controller
 
     public function index()
     {
-    $userSessions = Session::get('user_sessions');
+        $ver = session('user');
         // Verifica si hay información del usuario en la sesión
-        if (!empty($userSessions)) {
-            // Obtén la información del primer usuario en la sesión
-            $ver = reset($userSessions);
-            $id_usuario = $ver['id_usuario'];
-            // Resto de tu lógica
-            return view('InformacionPostes.infraestructura_cfe', compact('id_usuario', 'ver'));
+        if ($ver) {
+            return view('InformacionPostes.infraestructura_cfe', compact('ver'));
         } else {
             return redirect()->route('login')->with('error', 'Usuario no autenticado');
         }
     }
-    
+
+
     public function guardarInfraestructuraCfe(Request $request)
     {
         $request->validate([

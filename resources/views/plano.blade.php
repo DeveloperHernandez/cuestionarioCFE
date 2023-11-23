@@ -41,21 +41,28 @@
 
     /* Estilo para el contenido principal */
     .contenido-principal {
-        margin-left: 250px;
+        margin: 20px auto;
         padding: 20px;
-    }
-
-    /* Estilo para la tarjeta que contiene la información del usuario */
-    .card-usuario {
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        margin-bottom: 20px;
+        max-width: 800px;
+        /* Ajusta el ancho según tu preferencia */
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     }
 
-    /* Estilo para el botón "Volver a la lista de usuarios" */
-    .btn-volver {
+    /* Estilo para los botones de envío */
+    .btn-enviar {
         margin-top: 20px;
+    }
+
+    /* Oculta el menú lateral en tamaños de pantalla pequeños */
+    @media (max-width: 767px) {
+        .menu-lateral {
+            display: none;
+        }
+
+        .contenido-principal {
+            margin: 20px;
+            /* Ajusta el margen según tu preferencia */
+        }
     }
     </style>
 </head>
@@ -88,7 +95,8 @@
                     {{ Session::get('success') }}
                 </div>
                 @endif
-                <h5>ID del Cliente: {{ $id_cliente }}</h5>
+                <h1 class="text-center">Plano</h1>
+                <h5 class="text-center">ID del Cliente: {{ $id_cliente }}</h5>
                 <p>
                     8. Asimismo, se requiere que adjunte un plano del lugar expedido por el municipio correspondiente,
                     donde deberá indicar el nombre de las calles que pertenecen a dicho municipio. (Esto con la
@@ -97,49 +105,76 @@
                     georreferenciado utilizando la herramienta de Google Earth. Dentro del archivo KMZ, deberá indicar
                     el recorrido de la ruta. En caso de ocupar más de un tipo de fibra óptica, indíquelo en el archivo
                     KMZ con una simbología diferente. (Se le proporciona archivo ejemplo adjunto al correo).
-                    <br>
-                <p class="text-center"> <strong> NOTA: </strong>
-                    Se sugiere la aplicación UTM Geo Map para obtener las coordenadas de cada poste. Disponible solo
-                    para Android
                 </p>
-                <img src="{{ asset('img/geoMap.png') }}" alt="Geo Map" class="img-fluid mx-auto d-block"
-                    style="max-width: 30%; height: auto;">
-                <form action="{{ route('marcar_enviado_plano_adjunto') }}" method="post">
-                    @csrf
-                    <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
-                    <button type="submit" class="btn btn-primary" id="btnPlano" name="boton1">Enviado </button>
-                </form>
-                </p>
-                <!-- Enlace para abrir Gmail -->
-                <p class="text-center">
-                    <a href="mailto:?subject=Adjuntar plano&body=Adjunto el plano solicitado.">Enviar correo</a>
-                </p>
+                <div class="container mt-5">
+                    <p class="text-center">
+                        <strong>NOTA:</strong> Se sugiere la aplicación UTM Geo Map para obtener las coordenadas de cada
+                        poste.
+                        Disponible solo para Android
+                    </p>
+
+                    <div class="text-center">
+                        <img src="{{ asset('img/geoMap.png') }}" alt="Geo Map" class="img-fluid mx-auto d-block"
+                            style="max-width: 30%; height: auto;">
+                    </div>
+
+                    <p class="text-center">
+                        <a href="mailto:azael.hernandez@ramirezvargasabogados.com.mx">Favor de enviar el archivo al
+                            correo</a>
+                    </p>
+
+                    <p class="mt-3 text-center">
+                        <strong>Nota: Favor de presionar el botón Enviado después de haber enviado el correo</strong>
+                    </p>
+
+                    <form action="{{ route('marcar_enviado_plano_adjunto') }}" method="post" class="text-center">
+                        @csrf
+                        <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+                        <button type="submit" class="btn btn-primary btn-enviar" id="btnPlano"
+                            name="boton1">Enviado</button>
+                    </form>
+                </div>
+
                 <p>
                     9. El proveedor del cable de fibra óptica y materiales a utilizar para el tendido deberá
                     proporcionarle una ficha técnica con las especificaciones de los elementos, como son:
                     Su peso, número de hilos, longitud, etc. Dicha ficha técnica deberá enviarla para su revisión, ya
                     que la información contenida se utilizará para incluirla en el plano y documentos anexos.
-                    <img src="{{ asset('img/fichaTecnica.png') }}" alt="Ficha Técnica" class="img-fluid mx-auto d-block"
-                        style="max-width: 30%; height: auto;">
                 </p>
 
-                <form action="{{ route('marcar_enviado_ficha_tecnica_adjunto') }}" method="post">
-                    @csrf
-                    <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
-                    <button type="submit" class="btn btn-primary" id="btnFicha" name="boton2">Enviado</button>
-                </form>
+                <div class="container mt-5">
+                    <div class="text-center">
+                        <img src="{{ asset('img/fichaTecnica.png') }}" alt="Ficha Técnica"
+                            class="img-fluid mx-auto d-block" style="max-width: 30%; height: auto;">
+                    </div>
 
-                <p class="text-center">
-                    <a href="mailto:?subject=Adjuntar plano&body=Adjunto el plano solicitado.">Enviar correo</a>
-                </p>
+                    <p class="text-center">
+                        <a href="mailto:azael.hernandez@ramirezvargasabogados.com.mx">Favor de enviar el archivo al
+                            correo</a>
+                    </p>
+
+                    <p class="mt-3 text-center">
+                        <strong>Nota: Favor de presionar el botón Enviado después de haber enviado el correo</strong>
+                    </p>
+
+                    <form action="{{ route('marcar_enviado_ficha_tecnica_adjunto') }}" method="post"
+                        class="text-center">
+                        @csrf
+                        <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+                        <button type="submit" class="btn btn-primary btn-enviar" id="btnFicha"
+                            name="boton2">Enviado</button>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>
 
-
     <!-- Incluye los scripts de Bootstrap y jQuery (asegúrate de tener jQuery instalado) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <script>
     // Espera a que el DOM esté completamente cargado
     document.addEventListener("DOMContentLoaded", function() {
@@ -149,27 +184,52 @@
         }, 5000); // 5000 milisegundos = 5 segundos
     });
     </script>
+
     <script>
     // Espera a que el DOM esté completamente cargado
     document.addEventListener("DOMContentLoaded", function() {
+        // Espera 5 segundos y oculta el mensaje de éxito
+        setTimeout(function() {
+            $("#success-message").fadeOut(500); // 500 milisegundos para desaparecer
+        }, 5000); // 5000 milisegundos = 5 segundos
+
         // Agrega un evento de clic al botón "Enviado" del plano
-        document.getElementById('btnPlano').addEventListener('click', function() {
-            alert('Gracias por enviar el plano.');
+        document.getElementById('btnPlano').addEventListener('click', function(event) {
+            event.preventDefault(); // Previene el envío del formulario por defecto
+
+            // Muestra el mensaje de agradecimiento usando SweetAlert
+            Swal.fire({
+                icon: 'success',
+                title: 'Gracias por enviar el plano.',
+                showConfirmButton: false,
+                timer: 1500 // 1.5 segundos
+            }).then((result) => {
+                // En este punto, puedes realizar cualquier acción adicional después de que el usuario ve el mensaje.
+                // Por ejemplo, enviar el formulario utilizando JavaScript.
+                document.forms[0].submit(); // Envía el formulario manualmente
+            });
         });
 
         // Agrega un evento de clic al botón "Enviado" de la ficha técnica
-        document.getElementById('btnFicha').addEventListener('click', function() {
-            alert('Gracias por enviar la ficha técnica.');
+        document.getElementById('btnFicha').addEventListener('click', function(event) {
+            event.preventDefault(); // Previene el envío del formulario por defecto
+
+            // Muestra el mensaje de agradecimiento usando SweetAlert
+            Swal.fire({
+                icon: 'success',
+                title: 'Gracias por enviar la ficha técnica.',
+                showConfirmButton: false,
+                timer: 1500 // 1.5 segundos
+            }).then((result) => {
+                // En este punto, puedes realizar cualquier acción adicional después de que el usuario ve el mensaje.
+                // Por ejemplo, enviar el formulario utilizando JavaScript.
+                document.forms[1].submit(); // Envía el formulario manualmente
+            });
         });
     });
-</script>
+    </script>
 
 </body>
 
 </html>
-
-
-
-
-
 

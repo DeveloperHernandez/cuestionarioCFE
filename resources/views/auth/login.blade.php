@@ -3,7 +3,7 @@
 @section('content')
 <div class="container d-flex justify-content-center align-items-center" style="height: 70vh;">
     <div class="login-container border rounded p-4" style="width: 400px;">
-        <h2 class="text-center display-4">Login</h2>
+        <h4 class="text-center display-4 mb-4">Iniciar sesión</h4>
         @if(session('error'))
         <div class="alert alert-danger" role="alert">
             {{ session('error') }}
@@ -12,7 +12,6 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="form-group">
-                <label for="nombre_cliente" class="small">USUARIO</label>
                 <input type="text" class="form-control @error('nombre_cliente') is-invalid @enderror"
                     id="nombre_cliente" name="nombre_cliente" placeholder="Ingrese su usuario">
                 @error('nombre_cliente')
@@ -23,7 +22,6 @@
             </div>
 
             <div class="form-group">
-                <label for="passwords" class="small">CONTRASEÑA</label>
                 <input type="password" class="form-control @error('passwords') is-invalid @enderror" id="passwords"
                     name="passwords" placeholder="Ingrese su contraseña">
                 @error('passwords')

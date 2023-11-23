@@ -57,6 +57,19 @@
     .btn-volver {
         margin-top: 20px;
     }
+
+    @media (max-width: 767px) {
+
+        /* Oculta el menú lateral en tamaños de pantalla pequeños */
+        .menu-lateral {
+            display: none;
+        }
+
+        /* Ajusta el margen izquierdo del contenido principal */
+        .contenido-principal {
+            margin-left: 0;
+        }
+    }
     </style>
 </head>
 
@@ -100,82 +113,100 @@
 
                         <div class="mb-3">
                             <label for="flejes" class="form-label">FLEJES</label>
-                            <input type="text" class="form-control" id="flejes" name="flejes"
-                                placeholder="MODELO:WXY           FICHA TÉCNICA:  H5/8 TULIKO">
+                            <input type="text" class="form-control @error('flejes') is-invalid @enderror" id="flejes"
+                                name="flejes" placeholder="MODELO:WXY           FICHA TÉCNICA:  H5/8 TULIKO">
                             @error('flejes')
-                            <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="hebillas" class="form-label">HEBILLAS</label>
-                            <input type="text" class="form-control" id="hebillas" name="hebillas"
+                            <input type="text" class="form-control @error('hebillas') is-invalid @enderror" id="hebillas" name="hebillas"
                                 placeholder="MODELO: HYN         FICHA TÉCNICA H5/8 TULIKO">
                             @error('hebillas')
-                            <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="herraje_j" class="form-label">HERRAJE TIPO J</label>
-                            <input type="text" class="form-control" id="herraje_j" name="herraje_j"
+                            <input type="text" class="form-control @error('herraje_j') is-invalid @enderror" id="herraje_j" name="herraje_j"
                                 placeholder="MODELO: OPHAHEJ8          FICHA TÉCNICA OPHAHEJ8-12MMPW">
                             @error('herraje_j')
-                            <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="herraje_d" class="form-label">HERRAJE TIPO D (INCLUIR MEDIDAS)</label>
-                            <input type="text" class="form-control" id="herraje_d" name="herraje_d"
+                            <input type="text" class="form-control @error('herraje_d') is-invalid @enderror" id="herraje_d" name="herraje_d"
                                 placeholder="MODELO: LP-SDC               FICHA TÉCNICA LP-SDC">
                             @error('herraje_d')
-                            <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label for="tensor" class="form-label">TENSOR (Incluir medidas)</label>
-                            <input type="text" class="form-control" id="tensor" name="tensor"
+                            <label for="tensor" class="form-label">TENSOR (INCLUIR MEDIDAS)</label>
+                            <input type="text" class="form-control @error('tensor') is-invalid @enderror" id="tensor" name="tensor"
                                 placeholder="MODELO:OPHARPA  FICHA TÉCNICA OPHARPACGA18">
                             @error('tensor')
-                            <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label for="fibra_optica" class="form-label">FIBRA ÓPTICA (Incluir número de Hilos)</label>
-                            <input type="text" class="form-control" id="fibra_optica" name="fibra_optica"
+                            <label for="fibra_optica" class="form-label">FIBRA ÓPTICA (INCLUIR NÚMERO DE HILOS)</label>
+                            <input type="text" class="form-control @error('fibra_optica') is-invalid @enderror" id="fibra_optica" name="fibra_optica"
                                 placeholder="MODELO:FSTN9  FICHA TÉCNICA FSTN924">
                             @error('fibra_optica')
-                            <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="caja_distribucion" class="form-label">CAJAS DE DISTRIBUCIÓN</label>
-                            <input type="text" class="form-control" id="caja_distribucion" name="caja_distribucion"
+                            <input type="text" class="form-control @error('caja_distribucion') is-invalid @enderror" id="caja_distribucion" name="caja_distribucion"
                                 placeholder="MODELO:FDP-42  FICHA TÉCNICA FDP-420E">
                             @error('caja_distribucion')
-                            <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="caja_empalme" class="form-label">CAJAS DE EMPALME</label>
-                            <input type="text" class="form-control" id="caja_empalme" name="caja_empalme"
+                            <input type="text" class="form-control @error('caja_empalme') is-invalid @enderror" id="caja_empalme" name="caja_empalme"
                                 placeholder="MODELO:CEH192  FICHA TÉCNICA OPCEH19268HT">
                             @error('caja_empalme')
-                            <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="raquetas" class="form-label">RAQUETAS</label>
-                            <input type="text" class="form-control" id="raquetas" name="raquetas"
+                            <input type="text" class="form-control @error('raquetas') is-invalid @enderror" id="raquetas" name="raquetas"
                                 placeholder="MODELO:LP-SF-S   FICHA TÉCNICA LP-SF-SC-12">
                             @error('raquetas')
-                            <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
                         <div class="row mt-3">

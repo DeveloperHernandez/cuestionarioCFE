@@ -12,34 +12,33 @@ use Illuminate\Validation\ValidationException;
 
 class RegistroUsuarioController extends Controller
 {
-    //me lleva a la vista de registro usuario del administrador
     public function index()
     {
-        $userSessions = Session::get('user_sessions');
-        if (!empty($userSessions)) {
-            $ver = reset($userSessions);              
+        // Obtén la información del usuario desde la sesión
+        $ver = session('user');
+        // Verifica si la información del usuario está presente en la sesión
+        if ($ver) {
             return view('admin.registro_usuario', compact('ver'));
-          } else {
-              return redirect()->route('login')->with('error', 'Usuario no autenticado');
-          }
+        } else {
+            // Manejar la lógica si la variable no está definida
+            return redirect()->route('login')->with('error', 'Usuario no autenticado');
+        }
     }
+    
 
     public function index_usuario()
     {
-        // Obtén la variable $ver desde la sesión
-        $userSessions = Session::get('user_sessions');
-        // Asegúrate de que $userSessions no esté vacío antes de acceder a sus elementos
-        if (!empty($userSessions)) {
-            // Obtén el primer elemento del array
-            $ver = reset($userSessions);
-            // Ahora, $ver contiene la información del usuario
+        // Obtén la información del usuario desde la sesión
+        $ver = session('user');
+        // Verifica si la información del usuario está presente en la sesión
+        if ($ver) {
             return view('registro', compact('ver'));
         } else {
             // Manejar la lógica si la variable no está definida
             return redirect()->route('login')->with('error', 'Usuario no autenticado');
         }
-    }   
-
+    }
+    
     
 
     public function guardar(Request $request)

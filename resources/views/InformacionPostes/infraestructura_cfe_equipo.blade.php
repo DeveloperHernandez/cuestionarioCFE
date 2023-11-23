@@ -10,9 +10,13 @@
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
     <style>
+    body {
+        background-color: #f8f9fa;
+    }
+
     /* Estilo para el menú lateral */
     .menu-lateral {
-        background-color: #333;
+        background-color: #343a40;
         height: 100%;
         width: 250px;
         position: fixed;
@@ -36,7 +40,7 @@
     }
 
     .nav-item:hover {
-        background-color: #555;
+        background-color: #495057;
     }
 
     /* Estilo para el contenido principal */
@@ -51,11 +55,76 @@
         border-radius: 10px;
         margin-bottom: 20px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        padding: 20px;
     }
 
     /* Estilo para el botón "Volver a la lista de usuarios" */
     .btn-volver {
         margin-top: 20px;
+    }
+
+    /* Estilo para el formulario */
+    form {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    /* Estilo para la tabla */
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid #dee2e6;
+        padding: 10px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    /* Estilo para botones en la tabla */
+    .btn-eliminar {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    .btn-eliminar:hover {
+        background-color: #c82333;
+    }
+
+    .btn-agregar {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    .btn-agregar:hover {
+        background-color: #218838;
+    }
+
+    /* Oculta el menú lateral en tamaños de pantalla pequeños */
+    @media (max-width: 767px) {
+        .menu-lateral {
+            display: none;
+        }
+
+        .contenido-principal {
+            margin: 20px;
+            /* Ajusta el margen según tu preferencia */
+        }
     }
     </style>
 </head>
@@ -82,7 +151,6 @@
                 </ul>
             </div>
             <!-- Formulario -->
-
             <div class="col-md-9 contenido-principal">
                 <h5>ID del Cliente: {{ $id_cliente }}</h5>
                 @if(Session::has('success'))
@@ -93,8 +161,8 @@
 
                 <h3 class="mb-4 text-center">RELACIÓN DE POSTES A UTILIZAR</h1>
                     <h5 class="mb-5 text-center">INFRAESTRUCTURA DE CFE A UTILIZAR CON EQUIPO</h5>
-                    <p>
-                        ESTO ES UN EJEMPLO PARA QUE SIRVA COMO GUIA DE COMO DEBE INGRESAR LA INFORMACIÓN EN LA TABLA
+                    <p class="text-center">
+                        ESTO ES UN EJEMPLO PARA QUE SIRVA COMO GUÍA DE CÓMO DEBE INGRESAR LA INFORMACIÓN EN LA TABLA
                         <img src="{{ asset('img/Infraestructura_cfe_equipo.png') }}" alt="Ficha Técnica"
                             class="img-fluid mx-auto d-block" style="max-width: 50%; height: auto;">
                     </p>
@@ -140,7 +208,7 @@
 
             <!-- Enlace a Bootstrap JS (opcional, si necesitas funcionalidades de Bootstrap) -->
             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
             <script>
             function agregarFila() {
                 const table = document.querySelector("table tbody");
@@ -167,8 +235,7 @@
                 const row = button.parentNode.parentNode;
                 row.remove();
             }
-            </script>
-            <script>
+
             // Espera a que el DOM esté completamente cargado
             document.addEventListener("DOMContentLoaded", function() {
                 // Espera 5 segundos y oculta el mensaje de éxito
@@ -177,7 +244,6 @@
                 }, 5000); // 5000 milisegundos = 5 segundos
             });
             </script>
-
         </div>
     </div>
 </body>

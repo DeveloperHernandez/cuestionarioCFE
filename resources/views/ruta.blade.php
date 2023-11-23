@@ -57,6 +57,19 @@
     .btn-volver {
         margin-top: 20px;
     }
+
+    @media (max-width: 767px) {
+
+        /* Oculta el menú lateral en tamaños de pantalla pequeños */
+        .menu-lateral {
+            display: none;
+        }
+
+        /* Ajusta el margen izquierdo del contenido principal */
+        .contenido-principal {
+            margin-left: 0;
+        }
+    }
     </style>
 </head>
 
@@ -100,18 +113,24 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="colonia">Colonia</label>
-                                <input type="text" class="form-control" id="colonia" name="colonia">
+                                <input type="text" class="form-control @error('colonia') is-invalid @enderror"
+                                    id="colonia" name="colonia">
                                 @error('colonia')
-                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="localidad">Localidad</label>
-                                <input type="text" class="form-control" id="localidad" name="localidad">
+                                <input type="text" class="form-control @error('localidad') is-invalid @enderror"
+                                    id="localidad" name="localidad">
                                 @error('localidad')
-                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -119,9 +138,12 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="municipio">Municipio</label>
-                                <input type="text" class="form-control" id="municipio" name="municipio">
+                                <input type="text" class="form-control @error('municipio') is-invalid @enderror"
+                                    id="municipio" name="municipio">
                                 @error('municipio')
-                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -131,9 +153,12 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="estado">Estado</label>
-                                <input type="text" class="form-control" id="estado" name="estado">
+                                <input type="text" class="form-control @error('estado') is-invalid @enderror"
+                                    id="estado" name="estado">
                                 @error('estado')
-                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -141,9 +166,12 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="codigo_postal">Código Postal</label>
-                                <input type="text" class="form-control" id="codigo_postal" name="codigo_postal">
+                                <input type="text" class="form-control @error('codigo_postal') is-invalid @enderror"
+                                    id="codigo_postal" name="codigo_postal">
                                 @error('codigo_postal')
-                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -151,9 +179,12 @@
 
                     <div class="form-group">
                         <label for="nombre_lugar">Nombre lugar</label>
-                        <input type="text" class="form-control" id="nombre_lugar" name="nombre_lugar" readonly>
+                        <input type="text" class="form-control @error('nombre_lugar') is-invalid @enderror"
+                            id="nombre_lugar" name="nombre_lugar" readonly>
                         @error('nombre_lugar')
-                        <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
 
@@ -226,9 +257,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="inicio">Inicio</label>
-                                    <input type="text" class="form-control" id="inicio" name="inicio" readonly>
+                                    <input type="text" class="form-control @error('inicio') is-invalid @enderror"
+                                        id="inicio" name="inicio" readonly>
                                     @error('inicio')
-                                    <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -271,9 +305,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="final">Final</label>
-                                    <input type="text" class="form-control" id="final" name="final" readonly>
+                                    <input type="text" class="form-control @error('final') is-invalid @enderror"
+                                        id="final" name="final" readonly>
                                     @error('final')
-                                    <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -285,20 +322,24 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="numero_postes" name="numero_postes"
-                                        placeholder="Número de postes">
+                                    <input type="text" class="form-control @error('numero_postes') is-invalid @enderror"
+                                        id="numero_postes" name="numero_postes" placeholder="Número de postes">
                                     @error('numero_postes')
-                                    <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
 
                             <div class="col-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="totalkm_cable" name="totalkm_cable"
-                                        placeholder="Total Km Cable">
+                                    <input type="text" class="form-control @error('totalkm_cable') is-invalid @enderror"
+                                        id="totalkm_cable" name="totalkm_cable" placeholder="Total Km Cable">
                                     @error('totalkm_cable')
-                                    <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -318,10 +359,13 @@
                                     Telmex - un total de 500 mts, se anexan los documentos correspondientes a los
                                     permisos para
                                     su instalación.</label>
-                                <input type="text" class="form-control" id="infraestructura_cfe_tercero"
-                                    name="infraestructura_cfe_tercero">
+                                <input type="text"
+                                    class="form-control @error('infraestructura_cfe_tercero') is-invalid @enderror"
+                                    id="infraestructura_cfe_tercero" name="infraestructura_cfe_tercero">
                                 @error('infraestructura_cfe_tercero')
-                                <div class="alert alert-danger alert-sm mt-2">{{ $message }}</div>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>

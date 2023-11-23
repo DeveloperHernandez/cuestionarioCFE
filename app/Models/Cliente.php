@@ -11,7 +11,7 @@ class Cliente extends Model
     protected $table = 'Cliente';
     protected $primaryKey = 'id_cliente';
     public $timestamps = false;
-    protected $fillable = ['id_cliente','id_area','id_usuario','id_posteria','id_cronograma','id_personaAutorizada','nombre_cliente','domicilio','correo_electronico'];
+    protected $fillable = ['id_cliente','id_personaAutorizada','nombre_cliente','domicilio','correo_electronico'];
 
 
     public function personaAutorizada()

@@ -16,19 +16,22 @@ class lineaTroncalController extends Controller
 
     public function guardarLineaTroncal(Request $request)
     {
+        $mensajes = [
+            'required' => 'El campo :attribute es obligatorio.',
+            'string' => 'El campo :attribute debe ser una cadena de texto.',
+            'int' => 'El campo :attribute debe ser un número entero.',
+            'numeric' => 'El campo :attribute debe ser un número.',
+            'gt' => 'El campo :attribute debe ser mayor que cero.',
+        ];
+    
         $request->validate([
             'nombre' => 'required|string',
-            'piezas' => 'required|int',
-            'peso_por_pieza' => 'required|numeric',
+            'piezas' => 'required|int|gt:0',
+            'peso_por_pieza' => 'required|numeric|gt:0',
             'id_cliente' => 'required|int',
-        ]);
-
-        $resultados = [
-            'Tipo de Elemento' => $request->nombre,
-            'Piezas' => $request->piezas,
-            'Peso por Pieza' => $request->peso_por_pieza,
-        ];
-
+        ], $mensajes);
+    
+    
         $id_cliente = $request->id_cliente;
         
         $elemento = new LineaTroncal();
@@ -45,3 +48,4 @@ class lineaTroncalController extends Controller
     }
 
 }
+

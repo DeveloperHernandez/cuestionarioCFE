@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session; // Agrega esta línea
 
 class LoginController extends Controller
 {
+   
     public function login(Request $request)
     {
         $request->validate([
@@ -34,36 +35,27 @@ class LoginController extends Controller
             'ADMINISTRADOR' => 2,
             'USUARIO' => 1
         ];
-        
         if ($ver) {
-            // Verifica el rol del usuario
-            if (isset($roles[$ver->rol])) {
-                // Limpiar la sesión antes de almacenar el nuevo usuario
-                Session::flush();  
-                $userSessions = Session::get('user_sessions');
-    
-                // Almacena la información del usuario en la sesión personalizada
-                $userSessions[$ver->id_usuario] = [
-                    'id_usuario'=> $ver->id_usuario,
+            if ($ver && password_verify($pass, $ver->contrasenia)) {
+                // Autenticación exitosa
+                session(['user' => [
+                    'id_usuario' => $ver->id_usuario,
                     'nombre_usuario' => $ver->nombre_usuario,
                     'correo_electronico' => $ver->correo_electronico,
                     'rol' => $ver->rol,
-                    // Agrega cualquier otra información que desees almacenar
-                ];
+                ]]);
     
-                Session::put('user_sessions', $userSessions);
-    
-                if (($roles[$ver->rol] === 2) && ($ver->estado === 'activo')) {
+                if ($ver->rol === 'ADMINISTRADOR' && $ver->estado === 'activo') {
                     return redirect()->route('registro_usuario');
-                } elseif (($roles[$ver->rol] === 1) && ($ver->estado === 'activo')) {
+                } elseif ($ver->rol === 'USUARIO' && $ver->estado === 'activo') {
                     return redirect()->route('registro');
                 }
             }
         }
-    
         // Autenticación fallida
         return redirect()->route('login')->with('error', 'Credenciales incorrectas');
     }
+    
     
     public function salir()
     {

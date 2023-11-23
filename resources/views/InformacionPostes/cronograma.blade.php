@@ -57,6 +57,17 @@
     .btn-volver {
         margin-top: 20px;
     }
+
+    @media (max-width: 767px) {
+        /* Oculta el menú lateral en tamaños de pantalla pequeños */
+        .menu-lateral {
+            display: none;
+        }
+        /* Ajusta el margen izquierdo del contenido principal */
+        .contenido-principal {
+            margin-left: 0;
+        }
+    }
     </style>
 </head>
 

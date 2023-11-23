@@ -17,11 +17,20 @@ class AccesorioController extends Controller
 
     public function guardarAccesorio(Request $request)
     {
+        $mensajes = [
+            'required' => 'El campo :attribute es obligatorio.',
+            'string' => 'El campo :attribute debe ser una cadena de texto.',
+            'int' => 'El campo :attribute debe ser un número entero.',
+            'numeric' => 'El campo :attribute debe ser un número.',
+            'gt' => 'El campo :attribute debe ser mayor que cero.',
+        ];
+        
         $request->validate([
             'nombre' => 'required|string',
-            'peso_por_pieza' => 'required|numeric',
+            'peso_por_pieza' => 'required|numeric|gt:0',
             'id_cliente' => 'required|int',
-        ]);
+        ], $mensajes);
+        
         $id_cliente = $request->id_cliente;
         
         $elemento = new Accesorio();

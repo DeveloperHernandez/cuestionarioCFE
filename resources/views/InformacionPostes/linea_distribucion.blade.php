@@ -57,6 +57,19 @@
     .btn-volver {
         margin-top: 20px;
     }
+
+    @media (max-width: 767px) {
+
+        /* Oculta el menú lateral en tamaños de pantalla pequeños */
+        .menu-lateral {
+            display: none;
+        }
+
+        /* Ajusta el margen izquierdo del contenido principal */
+        .contenido-principal {
+            margin-left: 0;
+        }
+    }
     </style>
 </head>
 
@@ -94,7 +107,8 @@
                     @csrf
                     <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
                     <label for="nombre">Tipo de Elemento:</label>
-                    <select name="nombre" class="form-control form-select" required>
+                    <select name="nombre" class="form-control form-select @error('nombre') is-invalid @enderror"
+                        required>
                         <option value="NUMERO DE POSTES CFE">Numero de Postes CFE</option>
                         <option value="FLEJES (MTS)">Flejes (MTS)</option>
                         <option value="HEBILLAS">Hebillas</option>
@@ -102,14 +116,28 @@
                         <option value="HERRAJE J">Herraje J</option>
                         <option value="TENSORES">Tensores</option>
                         <option value="FIBRA ÓPTICA #HILOS">Fibra Óptica #Hilos</option>
+                        @error('nombre')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </select>
 
                     <label for="piezas">Piezas:</label>
-                    <input type="number" name="piezas" class="form-control" >
-
+                    <input type="number" name="piezas" class="form-control @error('piezas') is-invalid @enderror">
+                    @error('piezas')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                     <label for="peso_por_pieza">Peso por Pieza:</label>
-                    <input type="number" step="0.01" name="peso_por_pieza" class="form-control" >
-
+                    <input type="number" step="0.01" name="peso_por_pieza"
+                        class="form-control @error('peso_por_pieza') is-invalid @enderror">
+                    @error('peso_por_pieza')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                     <br>
                     <div class="row mt-3">
                         <div class="col-md-6 d-flex justify-content-start">
@@ -121,7 +149,7 @@
                     </div>
                 </form>
             </div>
-            
+
             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
             <!-- Enlace a Bootstrap JS (opcional, si necesitas funcionalidades de Bootstrap) -->
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
