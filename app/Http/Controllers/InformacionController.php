@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Session;
 
 class InformacionController extends Controller
 {
-    
     public function guardar(Request $request)
     {
         $mensajes = [
@@ -98,6 +97,9 @@ class InformacionController extends Controller
             return redirect()->route('login')->with('error', 'Usuario no autenticado');
         }
     }
+
+
+    
 }
 
 

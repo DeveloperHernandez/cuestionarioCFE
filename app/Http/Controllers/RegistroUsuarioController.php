@@ -20,9 +20,8 @@ class RegistroUsuarioController extends Controller
         if ($ver) {
             return view('admin.registro_usuario', compact('ver'));
         } else {
-            // Manejar la lógica si la variable no está definida
-            return view('admin.registro_usuario', compact('ver'));
-            //return redirect()->route('login')->with('error', 'Usuario no autenticado');
+        // Manejar la lógica si la variable no está definida
+            return redirect()->route('login')->with('error', 'Usuario no autenticado');
         }
     }
     
