@@ -79,7 +79,9 @@
             <!-- Menú lateral -->
             <div class="col-md-3 menu-lateral">
                 <div class="text-center">
-                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo">
+                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo"><br>
+                    BIENVENIDO: {{ isset($ver['nombre_usuario']) ? $ver['nombre_usuario'] : 'No hay usuario' }}
+                    USUARIO: {{ isset($ver['id_usuario']) ? $ver['id_usuario'] : 'No hay usuario' }}
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -97,16 +99,16 @@
 
             <!-- Formulario -->
             <div class="col-md-9 contenido-principal">
+            <h2>Ruta Formulario</h2>
+            <h5>ID del Cliente: {{ $ver['id_usuario'] }}</h5>
                 @if(Session::has('success'))
                 <div id="success-message" class="alert alert-success">
                     {{ Session::get('success') }}
                 </div>
                 @endif
-
-                <h5>ID del Cliente: {{ $id_cliente }}</h5>
                 <form method="post" action="{{ route('guardar_ruta') }}">
                     @csrf
-                    <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+                    <input type="hidden" name="id_cliente" value="{{ $ver['id_usuario'] }}">
                     <h6>4. Mencione el nombre del lugar/es que atravesará la ruta.(Colonias, localidad, municipio,
                         estado, código postal)</h6>
                     <div class="row">

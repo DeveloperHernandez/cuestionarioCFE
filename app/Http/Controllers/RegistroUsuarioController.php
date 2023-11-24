@@ -21,7 +21,8 @@ class RegistroUsuarioController extends Controller
             return view('admin.registro_usuario', compact('ver'));
         } else {
             // Manejar la lógica si la variable no está definida
-            return redirect()->route('login')->with('error', 'Usuario no autenticado');
+            return view('admin.registro_usuario', compact('ver'));
+            //return redirect()->route('login')->with('error', 'Usuario no autenticado');
         }
     }
     
@@ -48,8 +49,8 @@ class RegistroUsuarioController extends Controller
                 'nombre_usuario' => 'required',
                 'apellido_paterno' => 'required',
                 'apellido_materno' => 'required',
-                'telefono' => 'required',
-                'correo_electronico' => 'required|email|unique:usuario,correo_electronico', // La regla unique verifica la unicidad en la tabla 'usuarios'
+                'telefono' => 'required|string|max:10',
+                'correo_electronico' => 'required|email|unique:usuario,correo_electronico',
                 'contrasenia' => 'required',
                 'rol' => 'required',
             ], [
@@ -57,12 +58,15 @@ class RegistroUsuarioController extends Controller
                 'apellido_paterno.required' => 'El campo Apellido Paterno es obligatorio.',
                 'apellido_materno.required' => 'El campo Apellido Materno es obligatorio.',
                 'telefono.required' => 'El campo Teléfono es obligatorio.',
+                'telefono.string' => 'El campo Teléfono debe ser una cadena de caracteres.',
+                'telefono.max' => 'El campo Teléfono no debe tener más de 10 dígitos.',
                 'correo_electronico.required' => 'El campo Correo Electrónico es obligatorio.',
                 'correo_electronico.email' => 'El campo Correo Electrónico debe ser una dirección de correo válida.',
                 'correo_electronico.unique' => 'El correo electrónico ya está registrado. Intente de nuevo',
                 'contrasenia.required' => 'El campo Contraseña es obligatorio.',
                 'rol.required' => 'El campo Rol es obligatorio.',
             ]);
+            
     
             $contraseniaHasheada = bcrypt($request->input('contrasenia'));
             

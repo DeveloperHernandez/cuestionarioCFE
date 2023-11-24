@@ -79,7 +79,9 @@
             <!-- Menú lateral -->
             <div class="col-md-3 menu-lateral">
                 <div class="text-center">
-                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo">
+                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo"> <br>
+                    BIENVENIDO: {{ isset($ver['nombre_usuario']) ? $ver['nombre_usuario'] : 'No hay usuario' }}
+                    USUARIO: {{ isset($ver['id_usuario']) ? $ver['id_usuario'] : 'No hay usuario' }}
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -96,6 +98,12 @@
             </div>
             <!-- Formulario -->
             <div class="col-md-9 contenido-principal">
+            <h5>ID del Cliente: {{ $ver['id_usuario'] }}</h5>
+            @if(Session::has('success'))
+                <div id="success-message" class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+                @endif
                 <h3 class="mt-2">LINEA TRONCAL</h5>
                     <p>De acuerdo a su proyecto indicar la cantidad de materiales a utilizar en la siguiente tabla, la
                         información debe coincidir con las fichas técnicas solicitadas en el punto anterior. En caso de
@@ -103,10 +111,11 @@
                         no
                         aplique colocar la leyenda “NO APLICA”.
                     </p>
-                    <h5>ID del Cliente: {{ $id_cliente }}</h5>
+                    
                     <form method="post" action="{{ route('guardar_linea_troncal') }}">
                         @csrf
-                        <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+                        <input type="hidden" name="id_cliente" value="{{ $ver['id_usuario'] }}">
+
                         <label for="nombre">Tipo de Elemento:</label>
                         <select name="nombre" class="form-control form-select @error('nombre') is-invalid @enderror" required>
                             <option value="NUMERO DE POSTES CFE">Numero de Postes CFE</option>

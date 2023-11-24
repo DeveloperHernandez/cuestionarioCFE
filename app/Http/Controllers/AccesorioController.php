@@ -11,8 +11,12 @@ class AccesorioController extends Controller
 {
     public function index()
     {
-        $id_cliente = 1; //creo que este se puede recibir en el parametro
-        return view('InformacionPostes.accesorios', compact('id_cliente'));
+        $ver = session('user');
+        if ($ver) {
+            return view('InformacionPostes.accesorios', compact('ver'));
+        } else {
+            return redirect()->route('login')->with('error', 'Usuario no autenticado');
+        }
     }
 
     public function guardarAccesorio(Request $request)

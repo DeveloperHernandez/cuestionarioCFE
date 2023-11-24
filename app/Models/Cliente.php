@@ -13,17 +13,16 @@ class Cliente extends Model
     public $timestamps = false;
     protected $fillable = ['id_cliente','id_personaAutorizada','nombre_cliente','domicilio','correo_electronico'];
 
-
-    public function personaAutorizada()
-    {
-        return $this->belongsTo(PersonaAutorizada::class, 'id_personaAutorizada');
-    }
+   
     
     public function geoestadisticos()
     {
         return $this->hasMany(Geoestadistica::class, 'id_cliente');
     }
     
-
+    public function personaAutorizada()
+    {
+        return $this->hasOne(PersonaAutorizada::class, 'id_cliente');
+    }
 
 }

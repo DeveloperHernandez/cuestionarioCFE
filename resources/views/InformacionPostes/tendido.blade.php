@@ -80,6 +80,9 @@
             <div class="col-md-3 menu-lateral">
                 <div class="text-center">
                     <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo">
+                    <br>
+                    BIENVENIDO: {{ isset($ver['nombre_usuario']) ? $ver['nombre_usuario'] : 'No hay usuario' }}
+                    USUARIO: {{ isset($ver['id_usuario']) ? $ver['id_usuario'] : 'No hay usuario' }}
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -96,6 +99,7 @@
             </div>
             <!-- Formulario -->
             <div class="col-md-9 contenido-principal">
+            <h5>ID del Cliente: {{ $ver['id_usuario'] }}</h5>
                 @if(Session::has('success'))
                 <div id="success-message" class="alert alert-success">
                     {{ Session::get('success') }}
@@ -109,8 +113,7 @@
 
                     <form method="post" action="{{ route('guardar_tendido') }}">
                         @csrf
-                        <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
-
+                        <input type="hidden" name="id_cliente" value="{{ $ver['id_usuario'] }}">
                         <div class="mb-3">
                             <label for="flejes" class="form-label">FLEJES</label>
                             <input type="text" class="form-control @error('flejes') is-invalid @enderror" id="flejes"

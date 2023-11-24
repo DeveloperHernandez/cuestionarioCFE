@@ -10,8 +10,12 @@ class lineaTroncalController extends Controller
 {
     public function index()
     {
-        $id_cliente = 1; //creo que este se puede recibir en el parametro
-        return view('InformacionPostes.linea_troncal', compact('id_cliente'));
+        $ver = session('user');
+        if ($ver) {
+            return view('InformacionPostes.linea_troncal', compact('ver'));
+        } else {
+            return redirect()->route('login')->with('error', 'Usuario no autenticado');
+        }
     }
 
     public function guardarLineaTroncal(Request $request)

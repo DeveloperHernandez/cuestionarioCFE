@@ -77,7 +77,9 @@
             <!-- Menú lateral -->
             <div class="col-md-3 menu-lateral">
                 <div class="text-center">
-                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo">
+                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo"> <br>
+                    BIENVENIDO: {{ isset($ver['nombre_usuario']) ? $ver['nombre_usuario'] : 'No hay usuario' }}
+                    USUARIO: {{ isset($ver['id_usuario']) ? $ver['id_usuario'] : 'No hay usuario' }}
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -94,13 +96,12 @@
             </div>
             <!-- Formulario -->
             <div class="col-md-9 contenido-principal">
+            <h5>ID del Cliente: {{ $ver['id_usuario'] }}</h5>
                 @if(Session::has('success'))
                 <div id="success-message" class="alert alert-success">
                     {{ Session::get('success') }}
                 </div>
                 @endif
-
-                <h5>ID del Cliente: {{ $id_cliente }}</h5>
                 <h3 class="text-center">CRONOGRAMA DE ACTIVIDADES</h3>
                 <p>
                     Ingrese el cronograma de trabajo a seguir para el proyecto de tendido de fibra óptica (el tiempo
@@ -114,7 +115,7 @@
                         class="img-fluid mx-auto d-block" style="max-width: 700px; max-height: 700px;" />
                     <form method="post" action="{{ route('guardar_cronograma') }}">
                         @csrf
-                        <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+                        <input type="hidden" name="id_cliente" value="{{ $ver['id_usuario'] }}">
                         <div class="section">
                             <table class="table table-bordered">
                                 <thead>

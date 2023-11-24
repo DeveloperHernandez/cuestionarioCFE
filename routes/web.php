@@ -18,12 +18,14 @@ use App\Http\Controllers\EtiquetaController;
 use App\Http\Controllers\EnviadoController;
 use App\Http\Controllers\TendidoController;
 
+Route::redirect('/', '/login');
 
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
 Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login'); 
+
 
 
 Route::get('/registro_usuario', [RegistroUsuarioController::class, 'index'])->name('registro_usuario');
@@ -64,7 +66,7 @@ Route::get('/siguiente_ruta', [RutaController::class, 'rutaSiguiente'])->name('s
 
 
 Route::get('/formPlano/{id_cliente}', [PlanoController::class, 'indexPlano'])->name('formPlano');
-Route::post('/marcar_enviado/{id_cliente}/{seccion}', [PlanoController::class, 'marcarEnviado'])->name('marcar_enviado');
+Route::post('/marcguardar_cfear_enviado/{id_cliente}/{seccion}', [PlanoController::class, 'marcarEnviado'])->name('marcar_enviado');
 Route::get('/siguiente_plano', [PlanoController::class, 'planoSiguiente'])->name('siguiente_plano');
 
 
@@ -83,48 +85,32 @@ Route::get('/tendido/{id_cliente}', [TendidoController::class, 'indexTendido'])-
 Route::post('/guardar_tendido', [TendidoController::class, 'guardarTendido'])->name('guardar_tendido');
 Route::get('/siguiente_tendido', [TendidoController::class, 'indexTendido'])->name('siguiente_tendido');
 
-
-
 Route::get('/lineaTroncal/{id_cliente}', [LineaTroncalController::class, 'index'])->name('lineaTroncal');
 Route::post('/guardar_linea_troncal', [LineaTroncalController::class, 'guardarLineaTroncal'])->name('guardar_linea_troncal');
 Route::get('/siguiente_troncal', [LineaTroncalController::class, 'index'])->name('siguiente_troncal');
-
 
 Route::get('/lineaDistribucion/{id_cliente}', [LineaDistribucionController::class, 'index'])->name('lineaDistribucion');
 Route::post('/guardar_linea_distribucion', [LineaDistribucionController::class, 'guardarLineaDistribucion'])->name('guardar_linea_distribucion');
 Route::get('/siguiente_distribucion', [LineaDistribucionController::class, 'index'])->name('siguiente_distribucion');
 
-
-
 Route::get('/accesorios/{id_cliente}', [AccesorioController::class, 'index'])->name('accesorios');
 Route::post('/guardar_accesorio', [AccesorioController::class, 'guardarAccesorio'])->name('guardar_accesorio');
 Route::get('/siguiente_accesorio', [AccesorioController::class, 'index'])->name('siguiente_accesorio');
-
 
 Route::get('/cronograma/{id_cliente}', [CronogramaController::class, 'index'])->name('cronograma');
 Route::post('/guardar_cronograma', [CronogramaController::class, 'guardarCronograma'])->name('guardar_cronograma');
 Route::get('/siguiente_cronograma', [CronogramaController::class, 'index'])->name('siguiente_cronograma');
 
-
-
 Route::get('/etiqueta/{id_cliente}', [EtiquetaController::class, 'index'])->name('etiqueta');
 Route::get('/siguiente_etiqueta', [EtiquetaController::class, 'index'])->name('siguiente_etiqueta');
-
-
 
 Route::post('/marcar_enviado_plano_adjunto', [EnviadoController::class, 'guardarPlano'])->name('marcar_enviado_plano_adjunto');
 Route::post('/marcar_enviado_ficha_tecnica_adjunto', [EnviadoController::class, 'guardarFicha'])->name('marcar_enviado_ficha_tecnica_adjunto');
 
-
 Route::post('/marcar_enviado_etiqueta', [EtiquetaController::class, 'guardarEtiqueta'])->name('marcar_enviado_etiqueta');
-
-
-
 
 //ADMIN: DOCUMENTO
 Route::get('/ver_cliente_documento', [DescargaController::class, 'verClientesDocumento'])->name('ver_cliente_documento');
-
-
 
 //CERRAR SESION
 Route::get('/salir', 'App\Http\Controllers\Auth\LoginController@salir')->name('salir');

@@ -10,8 +10,12 @@ class InformacionPostesEquipoController extends Controller
 {
     public function index()
     {
-        $id_cliente = 1; // Cambia esto según tu lógica para obtener o definir el id_clientev
-        return view('InformacionPostes.infraestructura_cfe_equipo',compact('id_cliente'));
+        $ver = session('user');
+        if ($ver) {
+            return view('InformacionPostes.infraestructura_cfe_equipo',compact('ver'));
+        } else {
+            return redirect()->route('login')->with('error', 'Usuario no autenticado');
+        }
     }
 
     public function guardarInfraestructuraCfeEquipo(Request $request)

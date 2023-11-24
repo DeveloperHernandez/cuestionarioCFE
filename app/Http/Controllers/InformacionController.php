@@ -23,11 +23,26 @@ class InformacionController extends Controller
             'nombre_cliente' => 'required',
             'domicilio' => 'required',
             'correo_electronico' => 'required|email',
-            'persona_autorizada' => 'required',
-            'correos' => 'required',
-            'telefonos' => 'required',
+            'persona_autorizada' => 'required|array',
+            'persona_autorizada.*' => 'required',
+            'correos' => 'required|array',
+            'correos.*' => 'required',
+            'telefonos' => 'required|array',
+            'telefonos.*' => 'required',
         ], $mensajes);
-    
+
+        if ($request->no_poste) {
+            foreach ($request->no_poste as $key => $no_poste) {
+                $registroPoste = new PersonaAutorizada();
+                $registroPoste->id_personaAutorizada = $id_personaAutorizada;
+                $registroPoste->domicilio = $request->domicilio[$key];
+                $registroPoste->correo_electronico = $request->correo_electronico[$key];
+                $registroPoste->persona_autorizada = $request->persona_autorizada[$key];
+                $registroPoste->correos = $request->correos[$key];
+                $registroPoste->telefonos = $request->telefonos[$key];
+                $registroPoste->save();
+            }
+        }
         // Busca un cliente existente por correo electrónico
         $clienteExistente = Cliente::where('correo_electronico', $request->correo_electronico)->first();
     
@@ -72,11 +87,17 @@ class InformacionController extends Controller
     }
 
     //despues de seleccionar el boton guardar, nos vamos a la siguiente vista con el id_cliente
-    public function index_geoestadistica($id_cliente)
+    public function index_geoestadistica()
     {
         $estados = Estado::all(); 
-        $municipios = Municipio::all(); 
-        return view('geoestadisticas', compact('municipios', 'estados', 'id_cliente'));
+        $municipios = Municipio::all();
+        $ver = session('user');
+        if ($ver) {
+            return view('geoestadisticas', compact('municipios', 'estados', 'ver'));
+        } else {
+            return redirect()->route('login')->with('error', 'Usuario no autenticado');
+        }
     }
 }
+
 

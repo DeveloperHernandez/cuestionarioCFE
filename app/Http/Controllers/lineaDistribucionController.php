@@ -11,8 +11,12 @@ class lineaDistribucionController extends Controller
 {
     public function index()
     {
-        $id_cliente = 1; 
-        return view('InformacionPostes.linea_distribucion',compact('id_cliente'));
+        $ver = session('user');
+        if ($ver) {
+            return view('InformacionPostes.linea_distribucion',compact('ver'));
+        } else {
+            return redirect()->route('login')->with('error', 'Usuario no autenticado');
+        }
     }
 
     public function guardarLineaDistribucion(Request $request)

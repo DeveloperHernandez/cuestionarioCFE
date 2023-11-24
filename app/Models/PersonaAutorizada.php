@@ -19,4 +19,6 @@ class PersonaAutorizada extends Model
         return $this->hasOne(Cliente::class, 'id_personaAutorizada');
     }
 
+
+
 }

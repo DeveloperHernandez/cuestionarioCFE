@@ -10,10 +10,6 @@
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
     <style>
-    body {
-        background-color: #f8f9fa;
-    }
-
     /* Estilo para el menú lateral */
     .menu-lateral {
         background-color: #343a40;
@@ -135,7 +131,9 @@
             <!-- Menú lateral -->
             <div class="col-md-3 menu-lateral">
                 <div class="text-center">
-                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo">
+                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo"><br>
+                    BIENVENIDO: {{ isset($ver['nombre_usuario']) ? $ver['nombre_usuario'] : 'No hay usuario' }}
+                    USUARIO: {{ isset($ver['id_usuario']) ? $ver['id_usuario'] : 'No hay usuario' }}
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -152,7 +150,7 @@
             </div>
             <!-- Formulario -->
             <div class="col-md-9 contenido-principal">
-                <h5>ID del Cliente: {{ $id_cliente }}</h5>
+            <h5>ID del Cliente: {{ $ver['id_usuario'] }}</h5>
                 @if(Session::has('success'))
                 <div id="success-message" class="alert alert-success">
                     {{ Session::get('success') }}
@@ -168,7 +166,7 @@
                     </p>
                     <form method="post" action="{{ route('guardar_cfe_equipo') }}">
                         @csrf
-                        <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+                        <input type="hidden" name="id_cliente" value="{{ $ver['id_usuario'] }}">
                         <div class="section">
 
                             <table class="table table-bordered">

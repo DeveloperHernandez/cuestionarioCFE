@@ -9,16 +9,25 @@ use App\Models\Enviado;
 
 class PlanoController extends Controller
 {
-    public function indexPlano($id_cliente)
+    public function indexPlano()
     {
-        return view('plano',compact('id_cliente'));
+        $ver = session('user');
+        if ($ver) {
+            return view('plano',compact('ver'));
+        } else {
+            return redirect()->route('login')->with('error', 'Usuario no autenticado');
+        }
     }
 
     //del botón siguiente de rua nos pasamos a plano, necesito el id_cliente actual
     public function planoSiguiente()
     {
-        $id_cliente = 1;
-        return view('plano',compact('id_cliente'));
+        $ver = session('user');
+        if ($ver) {
+            return view('plano',compact('ver'));
+        } else {
+            return redirect()->route('login')->with('error', 'Usuario no autenticado');
+        }
     }
 
     

@@ -9,8 +9,12 @@ class EtiquetaController extends Controller
 {
     public function index()
     {
-        $id_cliente = 1;
-        return view('InformacionPostes.etiqueta',compact('id_cliente'));
+        $ver = session('user');
+        if ($ver) {
+            return view('InformacionPostes.etiqueta',compact('ver'));
+        } else {
+            return redirect()->route('login')->with('error', 'Usuario no autenticado');
+        }
     }
 
     public function guardarEtiqueta(Request $p)

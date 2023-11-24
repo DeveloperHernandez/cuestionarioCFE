@@ -10,10 +10,6 @@
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
     <style>
-        body {
-            background-color: #f8f9fa;
-        }
-
         /* Estilo para el menú lateral */
         .menu-lateral {
             background-color: #343a40;

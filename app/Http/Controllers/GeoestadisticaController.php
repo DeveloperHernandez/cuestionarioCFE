@@ -14,10 +14,14 @@ class GeoestadisticaController extends Controller
 {
     //este es del botón siguiente, contioene todos los datos a pasar para la vista geoestadistica
     public function indexGeoestadistica(){
-        $id_cliente = 1; 
         $estados = Estado::all(); 
         $municipios = Municipio::all();
-        return view('geoestadisticas', compact('municipios', 'estados', 'id_cliente'));
+        $ver = session('user');
+        if ($ver) {
+            return view('geoestadisticas', compact('municipios', 'estados', 'ver'));
+        } else {
+            return redirect()->route('login')->with('error', 'Usuario no autenticado');
+        }
     }
 
     public function guardarGeoestadisticas(Request $request)

@@ -59,7 +59,8 @@ class LoginController extends Controller
     
     public function salir()
     {
-        Auth::logout(); 
+        session(['rol' => 0]);
+        session(['user' => null]);
         return redirect('/login');
     }
 

@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
+
     <style>
     /* Estilo para el menú lateral */
     .menu-lateral {
@@ -41,27 +42,33 @@
 
     /* Estilo para el contenido principal */
     .contenido-principal {
-        margin: 20px auto;
+        margin-left: 250px;
         padding: 20px;
-        max-width: 800px;
-        /* Ajusta el ancho según tu preferencia */
+    }
+
+    /* Estilo para la tarjeta que contiene la información del usuario */
+    .card-usuario {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 20px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     }
 
-    /* Estilo para los botones de envío */
-    .btn-enviar {
+    /* Estilo para el botón "Volver a la lista de usuarios" */
+    .btn-volver {
         margin-top: 20px;
     }
 
-    /* Oculta el menú lateral en tamaños de pantalla pequeños */
     @media (max-width: 767px) {
+
+        /* Oculta el menú lateral en tamaños de pantalla pequeños */
         .menu-lateral {
             display: none;
         }
 
+        /* Ajusta el margen izquierdo del contenido principal */
         .contenido-principal {
-            margin: 20px;
-            /* Ajusta el margen según tu preferencia */
+            margin-left: 0;
         }
     }
     </style>
@@ -73,7 +80,9 @@
             <!-- Menú lateral -->
             <div class="col-md-3 menu-lateral">
                 <div class="text-center">
-                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo">
+                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo"><br>
+                    BIENVENIDO: {{ isset($ver['nombre_usuario']) ? $ver['nombre_usuario'] : 'No hay usuario' }}
+                    USUARIO: {{ isset($ver['id_usuario']) ? $ver['id_usuario'] : 'No hay usuario' }}
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -90,13 +99,13 @@
             </div>
             <!-- Formulario -->
             <div class="col-md-9 contenido-principal">
+            <h5>ID del Cliente: {{ $ver['id_usuario'] }}</h5>
                 @if(Session::has('success'))
                 <div id="success-message" class="alert alert-success">
                     {{ Session::get('success') }}
                 </div>
                 @endif
                 <h1 class="text-center">Plano</h1>
-                <h5 class="text-center">ID del Cliente: {{ $id_cliente }}</h5>
                 <p>
                     8. Asimismo, se requiere que adjunte un plano del lugar expedido por el municipio correspondiente,
                     donde deberá indicar el nombre de las calles que pertenecen a dicho municipio. (Esto con la
@@ -129,7 +138,7 @@
 
                     <form action="{{ route('marcar_enviado_plano_adjunto') }}" method="post" class="text-center">
                         @csrf
-                        <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+                        <input type="hidden" name="id_cliente" value="{{ $ver['id_usuario'] }}">
                         <button type="submit" class="btn btn-primary btn-enviar" id="btnPlano"
                             name="boton1">Enviado</button>
                     </form>
@@ -160,7 +169,7 @@
                     <form action="{{ route('marcar_enviado_ficha_tecnica_adjunto') }}" method="post"
                         class="text-center">
                         @csrf
-                        <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+                        <input type="hidden" name="id_cliente" value="{{ $ver['id_usuario'] }}">
                         <button type="submit" class="btn btn-primary btn-enviar" id="btnFicha"
                             name="boton2">Enviado</button>
                     </form>

@@ -10,66 +10,66 @@
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
     <style>
-        /* Estilo para el menú lateral */
-        .menu-lateral {
-            background-color: #333;
-            height: 100%;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            padding: 20px;
-            color: white;
-        }
+    /* Estilo para el menú lateral */
+    .menu-lateral {
+        background-color: #333;
+        height: 100%;
+        width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 20px;
+        color: white;
+    }
 
-        /* Estilo para el logotipo */
-        .logo {
-            max-width: 100px;
-            margin-bottom: 20px;
-        }
+    /* Estilo para el logotipo */
+    .logo {
+        max-width: 100px;
+        margin-bottom: 20px;
+    }
 
-        /* Estilo para los elementos del menú */
-        .nav-item {
-            padding: 10px 0;
-            text-align: center;
-            font-size: 18px;
-        }
+    /* Estilo para los elementos del menú */
+    .nav-item {
+        padding: 10px 0;
+        text-align: center;
+        font-size: 18px;
+    }
 
-        .nav-item:hover {
-            background-color: #555;
-        }
+    .nav-item:hover {
+        background-color: #555;
+    }
 
-        /* Estilo para el contenido principal */
-        .contenido-principal {
-            margin: 20px auto;
-            padding: 20px;
-            max-width: 800px; /* Ajusta el ancho según tu preferencia */
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        }
+    /* Estilo para el contenido principal */
+    .contenido-principal {
+        margin-left: 250px;
+        padding: 20px;
+    }
 
-        /* Estilo para la tarjeta que contiene la información del usuario */
-        .card-usuario {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        }
+    /* Estilo para la tarjeta que contiene la información del usuario */
+    .card-usuario {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
 
-        /* Estilo para el botón "Volver a la lista de usuarios" */
-        .btn-volver {
-            margin-top: 20px;
-        }
+    /* Estilo para el botón "Volver a la lista de usuarios" */
+    .btn-volver {
+        margin-top: 20px;
+    }
+
+    @media (max-width: 767px) {
 
         /* Oculta el menú lateral en tamaños de pantalla pequeños */
-        @media (max-width: 767px) {
-            .menu-lateral {
-                display: none;
-            }
-
-            .contenido-principal {
-                margin: 20px; /* Ajusta el margen según tu preferencia */
-            }
+        .menu-lateral {
+            display: none;
         }
+
+        /* Ajusta el margen izquierdo del contenido principal */
+        .contenido-principal {
+            margin-left: 0;
+        }
+    }
     </style>
 </head>
 
@@ -79,7 +79,9 @@
             <!-- Menú lateral -->
             <div class="col-md-3 menu-lateral">
                 <div class="text-center">
-                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo">
+                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo"><br>
+                    BIENVENIDO: {{ isset($ver['nombre_usuario']) ? $ver['nombre_usuario'] : 'No hay usuario' }}
+                    USUARIO: {{ isset($ver['id_usuario']) ? $ver['id_usuario'] : 'No hay usuario' }}
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -95,8 +97,8 @@
                 </ul>
             </div>
             <div class="col-md-9 contenido-principal text-center">
+                <h5>ID del Cliente: {{ $ver['id_usuario'] }}</h5>
                 <h1 class="mb-4">Etiqueta</h1>
-                <h5>ID del Cliente: {{ $id_cliente }}</h5>
                 @if(Session::has('success'))
                 <div id="success-message" class="alert alert-success">
                     {{ Session::get('success') }}
@@ -116,12 +118,13 @@
                 </div>
 
                 <br>
-                <p><a href="mailto:azael.hernandez@ramirezvargasabogados.com.mx">Favor de enviar el archivo al correo</a></p>
+                <p><a href="mailto:azael.hernandez@ramirezvargasabogados.com.mx">Favor de enviar el archivo al
+                        correo</a></p>
                 <p class="mt-3"><strong>Nota: Favor de presionar el botón Enviado después de haber enviado el
                         correo</strong></p>
                 <form action="{{ route('marcar_enviado_etiqueta') }}" method="post">
                     @csrf
-                    <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
+                    <input type="hidden" name="id_cliente" value="{{ $ver['id_usuario'] }}">
                     <button type="submit" class="btn btn-primary" id="btnEtiqueta" name="boton3">Enviado</button>
                 </form>
             </div>
@@ -163,9 +166,3 @@
 </body>
 
 </html>
-
-
-
-
-
-

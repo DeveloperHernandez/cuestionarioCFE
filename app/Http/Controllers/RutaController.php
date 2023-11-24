@@ -10,16 +10,25 @@ use Illuminate\Support\Facades\Session;
 
 class RutaController extends Controller
 {
-    public function indexRuta($id_cliente)
+    public function indexRuta()
     {
-        return view('ruta',compact('id_cliente'));
+        $ver = session('user');
+        if ($ver) {
+            return view('ruta',compact('ver'));
+        } else {
+            return redirect()->route('login')->with('error', 'Usuario no autenticado');
+        }
     }
 
     // del boton siguiente de geostadistica pasamos a ruta, necesito el id_cliente actual
     public function rutaSiguiente()
     {
-        $id_cliente=1;
-        return view('ruta',compact('id_cliente'));
+        $ver = session('user');
+        if ($ver) {
+            return view('ruta',compact('ver'));
+        } else {
+            return redirect()->route('login')->with('error', 'Usuario no autenticado');
+        }
     }
 
 
@@ -44,8 +53,8 @@ class RutaController extends Controller
             'totalkm_cable'=> 'required'
         ],$mensajes);
 
-        $clienteId = $p->input('id_cliente');        
-        
+        //$clienteId = $p->input('id_cliente');        
+        $clienteId = $p->id_cliente;
         $colonia = $p->colonia;
         $localidad = $p->localidad;
         $municipio = $p->municipio;

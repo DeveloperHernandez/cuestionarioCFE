@@ -12,7 +12,6 @@ class InformacionPostesController extends Controller
     public function index()
     {
         $ver = session('user');
-        // Verifica si hay información del usuario en la sesión
         if ($ver) {
             return view('InformacionPostes.infraestructura_cfe', compact('ver'));
         } else {

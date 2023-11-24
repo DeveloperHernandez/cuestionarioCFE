@@ -80,7 +80,9 @@
             <!-- Menú lateral -->
             <div class="col-md-3 menu-lateral">
                 <div class="text-center">
-                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo">
+                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo"><br>
+                    BIENVENIDO: {{ isset($ver['nombre_usuario']) ? $ver['nombre_usuario'] : 'No hay usuario' }}
+                    USUARIO: {{ isset($ver['id_usuario']) ? $ver['id_usuario'] : 'No hay usuario' }}
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -97,7 +99,8 @@
             </div>
             <!-- Formulario -->
             <div class="col-md-9 contenido-principal">
-                <h5>ID del Cliente: {{ $id_cliente }}</h5>
+            <h2>Datos de áreas geoestadisticas</h2>
+            <h5>ID del Cliente: {{ $ver['id_usuario'] }}</h5>
                 @if(Session::has('success'))
                 <div id="success-message" class="alert alert-success">
                     {{ Session::get('success') }}
@@ -106,8 +109,8 @@
 
                 <form method="post" action="{{ route('guardar_geoestadisticas') }}">
                     @csrf
-                    <input type="hidden" name="id_cliente" value="{{ $id_cliente }}">
-                    <h5>2. Datos de áreas geoestadísticas</h5>
+                    <input type="hidden" name="id_cliente" value="{{ $ver['id_usuario'] }}">
+                    
                     <p class="text-justify">Rellenar de cada una de las columnas de acuerdo con la localidad, municipio
                         y estado donde esté interesado en tender su infraestructura. <strong>Importante:</strong> Las
                         áreas señaladas deben de estar acreditadas dentro del Registro público de concesiones de IFT a

@@ -1,107 +1,98 @@
-<!DOCTYPE html>
-<html lang="es">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
-    <!-- Incluye los estilos de Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+me sale este error al hacer un registro en mi base de datos te paso todo mi codigo
 
-    <style>
-    /* Estilo para el menú lateral */
-    .menu-lateral {
-        background-color: #333;
-        height: 100%;
-        width: 250px;
-        position: fixed;
-        top: 0;
-        left: 0;
-        padding: 20px;
-        color: white;
-    }
+ErrorException
+Undefined variable: id_personaAutorizada
 
-    /* Estilo para el logotipo */
-    .logo {
-        max-width: 100px;
-        margin-bottom: 20px;
-    }
+<?php
 
-    /* Estilo para los elementos del menú */
-    .nav-item {
-        padding: 10px 0;
-        text-align: center;
-        font-size: 18px;
-    }
+namespace App\Http\Controllers;
 
-    .nav-item:hover {
-        background-color: #555;
-    }
+use Illuminate\Http\Request;
+use App\Models\PersonaAutorizada;
 
-    /* Estilo para el contenido principal */
-    .contenido-principal {
-        margin-left: 250px;
-        padding: 20px;
-    }
+use Illuminate\Support\Facades\Session;
 
-    /* Estilo para la tarjeta que contiene la información del usuario */
-    .card-usuario {
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    }
-
-    /* Estilo para el botón "Volver a la lista de usuarios" */
-    .btn-volver {
-        margin-top: 20px;
-    }
-
-    @media (max-width: 767px) {
-
-        /* Oculta el menú lateral en tamaños de pantalla pequeños */
-        .menu-lateral {
-            display: none;
+class InformacionController extends Controller
+{
+    
+    public function guardar(Request $request)
+    {
+        $mensajes = [
+            'required' => 'El campo :attribute es obligatorio.',
+            'email' => 'El campo :attribute debe ser una dirección de correo electrónico válida.',
+        ];
+    
+        $request->validate([
+            'nombre_cliente' => 'required',
+            'domicilio' => 'required',
+            'correo_electronico' => 'required|email',
+            'persona_autorizada' => 'required|array',
+            'persona_autorizada.*' => 'required',
+            'correos' => 'required|array',
+            'correos.*' => 'required',
+            'telefonos' => 'required|array',
+            'telefonos.*' => 'required',
+        ], $mensajes);
+    
+        if ($request->no_poste) {
+            foreach ($request->no_poste as $key => $no_poste) {
+                $registroPoste = new PersonaAutorizada();
+                $registroPoste->id_personaAutorizada = $id_personaAutorizada;
+                $registroPoste->domicilio = $request->domicilio[$key];
+                $registroPoste->correo_electronico = $request->correo_electronico[$key];
+                $registroPoste->persona_autorizada = $request->persona_autorizada[$key];
+                $registroPoste->correos = $request->correos[$key];
+                $registroPoste->telefonos = $request->telefonos[$key];
+                $registroPoste->save();
+            }
         }
-
-        /* Ajusta el margen izquierdo del contenido principal */
-        .contenido-principal {
-            margin-left: 0;
+        // Busca un cliente existente por correo electrónico
+        $clienteExistente = Cliente::where('correo_electronico', $request->correo_electronico)->first();
+    
+        if ($clienteExistente) {
+            // Si el cliente ya existe, actualiza la información
+            $clienteExistente->update([
+                'nombre_cliente' => $request->nombre_cliente,
+                'domicilio' => $request->domicilio,
+            ]);
+    
+            $clienteExistente->personaAutorizada()->update([
+                'nombres' => $request->persona_autorizada,
+                'correos' => $request->correos,
+                'numeros_telefonicos' => $request->telefonos,
+            ]);
+    
+            // Obtiene el ID del cliente existente
+            $clienteId = $clienteExistente->id_cliente;
+        } else {
+            // Si el cliente no existe, crea uno nuevo
+            $personaAutorizada = PersonaAutorizada::create([
+                'nombres' => $request->persona_autorizada,
+                'correos' => $request->correos,
+                'numeros_telefonicos' => $request->telefonos,
+            ]);
+    
+            $registroPrincipal = new Cliente([
+                'nombre_cliente' => $request->nombre_cliente,
+                'domicilio' => $request->domicilio,
+                'correo_electronico' => $request->correo_electronico,
+            ]);
+    
+            $personaAutorizada->cliente()->save($registroPrincipal);
+    
+            // Obtiene el ID del cliente recién creado
+            $clienteId = $registroPrincipal->id_cliente;
         }
+    
+        Session::flash('success', 'La información se guardó exitosamente.');
+        // Redirige a la página "formRegistro" pasando el ID del cliente como parámetro
+        return redirect()->route('formRegistro', ['id_cliente' => $clienteId])->withErrors($request->all());
     }
-    </style>
-</head>
 
-<body>
-    <div class="container-fluid" style="height: 100vh;">
-        <div class="row">
-            <!-- Menú lateral -->
-            <div class="col-md-3 menu-lateral">
-                <div class="text-center">
-                    <img src="{{ asset('img/logoRVA.png') }}" alt="Logo de la aplicación" class="img-fluid logo"><br>
-                    BIENVENIDO: {{ isset($ver['nombre_usuario']) ? $ver['nombre_usuario'] : 'No hay usuario' }}
-                    USUARIO: {{ isset($ver['id_usuario']) ? $ver['id_usuario'] : 'No hay usuario' }}
-                    <br><br>
-                </div>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('registro') }}">Cuestionario tendido de fibra
-                            óptica</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('informacion_postes') }}">Información postes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="{{route('salir')}}">Cerrar sesión</a>
-                    </li>
-                </ul>
-            </div>
+    este es mi vista
 
-            <!-- Contenido principal -->
-            <div class="col-md-9 contenido-principal">
+    <div class="col-md-9 contenido-principal">
                 <h5>ID del Cliente: {{ $ver['id_usuario'] }}</h5>
                 <form method="POST" action="{{ route('guardar_informacion') }}">
                     @csrf
@@ -244,6 +235,3 @@
         }
         
     </script>
-</body>
-
-</html>
